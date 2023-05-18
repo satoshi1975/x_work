@@ -1,0 +1,9 @@
+{%include 'base.html'%}
+{% comment %} {%block content%} {% endcomment %}
+{% if user.is_authenticated %}
+    <!-- Отображаемые данные для аутентифицированного пользователя -->
+    Привет, {{ user.username }}!
+{% else %}
+    suck it
+{% endif %}
+{% comment %} {%endblock%} {% endcomment %}

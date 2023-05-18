@@ -1,0 +1,63 @@
+{% include 'base.html' %}
+
+{% block content %}
+{% if user.user_type == 'company' %}
+    <div class="container justify-content-center">
+        <form>
+            <div class="mb-3">
+                <label  class="form-label">Company name</label>
+                <input class="form-control" value={{user_fields.company_name}}>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Website</label>
+                <input class="form-control" value={{user_fields.website}}>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Address</label>
+                <input class="form-control" value={{user_fields.address}}>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Phone_number</label>
+                <input class="form-control" value={{user_fields.phone_number}}>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Industry</label>
+                <input class="form-control" value={{user_fields.industry}}>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Description</label>
+                <input class="form-control" value={{user_fields.description}}>
+            </div>
+                <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                <input type="password" class="form-control">
+            </div>
+                <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Проверить меня</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+{% else %}
+<div class="container">
+    <h1>{{user.user_type}}</h1>
+    <table class="table">
+        <tr>
+            <th>Имя:</th>
+            <td>{{ user_profile.full_name }}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>{{ user_profile.email }}</td>
+        </tr>
+        <tr>
+            <th>Номер телефона:</th>
+            <td>{{ user_profile.phone_number }}</td>
+        </tr>
+        <!-- Другие поля профиля -->
+    </table>
+</div>
+{{user.user_type}}
+{% endif %}
+{% endblock %}
