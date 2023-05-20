@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from main.forms import RegistrationForm, LoginForm
-from main.services import UserService
+from main.services import UserService, UserData, UpdateUserData
 from employers.models import Employer                                                     
 from job_seekers.models import JobSeeker                                                     
 from main.models import User   
@@ -10,17 +10,13 @@ def main_page(request):
     return render(request, 'main_page.html')
 
 def profile(request):
-    user = User.objects.get(email=request.user)
-    user_type = User.objects.filter(email=request.user).values_list('user_type', flat=True)[0]
-    context = {'user': user}
-    if user_type=='jobseeker':
-        jobseeker=JobSeeker.objects.get(user=user)
-        context['user_fields']=jobseeker
-    elif user_type=='company':
-        employer=Employer.objects.get(email=user)
-        print(employer)
-        context['user_fields']=employer
-    return render(request, 'user_profile.html', context)
+    if request.method=='POST':
+        UpdateUserData().update_child_model(request)
+        context=UserData().return_context_for_user_profile(request)
+        return render(request, 'user_profile.html', context)
+    else:
+        context=UserData().return_context_for_user_profile(request)
+        return render(request, 'user_profile.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -52,3 +48,7 @@ def log_in(request):
 def log_out(request):
     UserService().logout_user(request)
     return render(request,'main_page.html')
+
+
+def geoform(request):
+    return render(request,'geoform.html')

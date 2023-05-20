@@ -1,6 +1,6 @@
 from django.db import models
 from main.models import User
-
+# from cities.models import Country, City
 
 class JobSeeker(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE, default=None)
@@ -18,3 +18,7 @@ class JobSeeker(models.Model):
 
     def __str__(self):
         return self.user
+
+
+class CV(models.Model):
+    pass

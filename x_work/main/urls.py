@@ -6,6 +6,7 @@ urlpatterns = [
     path('set_up', views.register),
     path('log_in', views.log_in),
     path('log_out', views.log_out),
-    path('profile',views.profile)
+    path('profile',views.profile),
+    path('geoform',views.geoform),
 
 ]

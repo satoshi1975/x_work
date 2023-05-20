@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from main.models import User
 from employers.models import Employer
 from job_seekers.models import JobSeeker
+from django.contrib.gis.db import models
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -12,15 +13,17 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ('email', 'password1', 'password2')
 
-class CreateEmployerForm(UserCreationForm):
+class UpdateEmployerForm(forms.ModelForm):
+    
     class Meta:
         model = Employer
-        fields = ('email', 'company_name', 'phone_number')
+        fields = ('company_name', 'description', 'industry', 'phone_number','address','website',)
 
-class CreateJobseekerForm(UserCreationForm):
+class UpdateJobseekerForm(forms.ModelForm):
+    
     class Meta:
         model = JobSeeker
-        fields = ('email', 'first_name', 'last_name','phone_number')
+        fields = ('bio', 'skills', 'experience', 'education','desired_salary','address','phone_number','first_name','last_name')
 
 
 class LoginForm(AuthenticationForm):

@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'employers',
     'job_seekers',
+    # 'cities',
     'main',
+    # 'cities',
+    # 'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +87,7 @@ WSGI_APPLICATION = 'x_work.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'x_work',
         'USER': 'x_work_admin',
         'PASSWORD': 'barselona1933',

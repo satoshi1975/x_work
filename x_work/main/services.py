@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from main.forms import RegistrationForm, LoginForm, CreateEmployerForm, CreateJobseekerForm
+from main.forms import RegistrationForm, LoginForm, UpdateEmployerForm, UpdateJobseekerForm
 from employers.models import Employer                                                     
 from job_seekers.models import JobSeeker                                                     
 from main.models import User                                                     
@@ -60,3 +60,46 @@ class UserService:
     @staticmethod
     def logout_user(request):
         logout(request)
+
+class UserData:
+    
+    @staticmethod
+    def return_context_for_user_profile(request):
+        user = User.objects.get(email=request.user)
+        user_type = User.objects.filter(email=request.user).values_list('user_type', flat=True)[0]
+        context = {'user': user}
+        if user_type=='jobseeker':
+            jobseeker=JobSeeker.objects.get(user=user)
+            context['user_fields']=jobseeker
+        elif user_type=='company':
+            employer=Employer.objects.get(email=user)
+            context['user_fields']=employer
+        form=UpdateJobseekerForm()
+        context['form']=form
+
+        return context
+
+
+class UpdateUserData:
+
+    @staticmethod
+    def update_child_model(request):
+        user_type = User.objects.filter(email=request.user).values_list('user_type', flat=True)[0]
+        if user_type=='jobseeker':
+            print('job')
+            jobSeeker=JobSeeker.objects.get(user=request.user)
+            data=UpdateJobseekerForm(request.POST, instance=jobSeeker)
+            if data.is_valid():
+                data.save()
+                return True
+        elif user_type=='company':
+            print('emp')
+            employer=Employer.objects.get(user=request.user)
+            data=UpdateEmployerForm(request.POST, instance=employer)
+            # if data.is_valid():
+
+            data.save()
+            return True
+        else:
+            print('miss')
+            return False

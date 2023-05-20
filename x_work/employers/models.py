@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from main.models import User
 
+
 class Employer(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE,default=None)
     company_name = models.CharField(max_length=255, blank=True, null=True)
@@ -19,3 +20,11 @@ class Employer(models.Model):
         return self.company_name
 
 
+class Vacancy(models.Model):
+    employer=models.ForeignKey(Employer, on_delete=models.CASCADE)
+    work=models.CharField(max_length=100, blank=True)
+    salary=models.IntegerField(blank=True)
+    description=models.TextField(blank=True)
+    experience=models.TextField(blank=True)
+    education=models.TextField(blank=True)
+    key_skills=models.TextField(blank=True)
