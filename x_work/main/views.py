@@ -50,5 +50,3 @@ def log_out(request):
     return render(request,'main_page.html')
 
 
-def geoform(request):
-    return render(request,'geoform.html')
