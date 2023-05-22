@@ -13,15 +13,16 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-# class Geol(models.Model):
-#     state_name=models.CharField(max_length=50)
-#     city_name=models.CharField(max_length=50)
-#     class Meta:
-#         managed = True
-#         # db_table = 'city'
-
-
-class City(models.Model):
+class Cities(models.Model):
+    id=models.BigAutoField(primary_key=True)
     city = models.CharField(blank=True, null=True)
     state_name = models.CharField(blank=True, null=True)
 
+    class Meta:
+        managed = False
+        db_table = 'cities'
+
+class Occupation(models.Model):
+    # id=models.AutoField(primary_key=True)
+    occupation=models.CharField(max_length=100)
+    

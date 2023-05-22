@@ -29,6 +29,12 @@
                 <label  class="form-label">Description</label>
                 <input class="form-control" name='description' value={{user_fields.description}}>
             </div>
+            <div id="autocomplete" class="autocomplete mb-3">
+                <label  class="form-label">City</label>
+                <input name="city" class="autocomplete-input" />
+                <ul class="autocomplete-result-list"></ul>
+            </div>
+            
            
             </div>
             <button type="submit" class="btn btn-primary">Отправить</button>
@@ -63,12 +69,109 @@
             <input class="form-control" name='education' value={{user_fields.education}}>
         </div>
         <div class="mb-3">
-            {{form.as_p }}
+            <label  class="form-label">Educarion</label>
+            <input class="form-control" name='education' value={{user_fields.education}}>
+        </div>
+        <div id="autocomplete" class="autocomplete mb-3">
+            <label  class="form-label">City</label>
+            <input name="city" class="autocomplete-input" />
+            <ul class="autocomplete-result-list"></ul>
         </div>
         
-        </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
+         
+        <button type="submit" class="btn btn-primary">Отправить</button> 
     </form>
 </div>
+
+<!-- <div id="autocomplete" class="autocomplete">
+    <input class="autocomplete-input" />
+    <ul class="autocomplete-result-list"></ul>
+</div> -->
+
 {% endif %}
 {% endblock %}
+<script>
+    new Autocomplete('#autocomplete',{
+    search : input => {
+        console.log(input)
+        const url = `/get_city/?search=${input}`
+        return new Promise(resolve => {
+            fetch(url)
+            .then(response=>response.json())
+            .then(data =>{
+                console.log(data.payload)
+                resolve(data.payload)
+            })
+        })
+    },
+    
+    renderResult : (result, props)=>{
+        console.log(props)
+        let group=''
+        if(result % 3 == 0){
+            group=`<li class="group">Group</li>`
+        }
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            ${group}
+            <div class="wiki-title">
+                ${result.city}
+            </div>
+        `;
+        listItem.addEventListener('click', () => {
+            const input = document.querySelector('#autocomplete input');
+            input.value = result.city;
+            closeAutocomplete(); // Закрыть список автодополнения
+        });
+        listItem.addEventListener('mouseenter', () => {
+            listItem.classList.add('highlight');
+        });
+        listItem.addEventListener('mouseleave', () => {
+            listItem.classList.remove('highlight');
+        });
+        
+        return listItem;
+    }
+});
+
+function closeAutocomplete() {
+    const autocomplete = document.querySelector('#autocomplete');
+    autocomplete.classList.remove('open'); // Скрыть список автодополнения
+}
+</script>
+
+
+<!-- //     renderResult : (result, props)=>{
+//     console.log(props)
+//     let group=''
+//     if(result % 3 == 0){
+//         group=`<li class="group">Group</li>`
+//     }
+//     const listItem = document.createElement('li');
+//     listItem.innerHTML = `
+//         ${group}
+//         <div class="wiki-title">
+//             ${result.city}
+//         </div>
+//     `;
+//     listItem.addEventListener('click', () => {
+//         const input = document.querySelector('#autocomplete input');
+//         input.value = result.city;
+//     });
+    
+//     return listItem;
+// }
+    
+    // renderResult : (result, props)=>{
+    //     console.log(props)
+    //     let group=''
+    //     if(result % 3 == 0){
+    //         group=`<li class="group">Group</li>`
+    //     }
+    //     return `${group} <li ${props}>
+    //         <div class="wiki-title">
+    //             ${result.city}
+    //         </div>
+    //     </li>`
+    
+    // } -->

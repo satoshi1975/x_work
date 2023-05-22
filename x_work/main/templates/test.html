@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"
+/>
+</head>
+<body>
+    <div id="autocomplete" class="autocomplete">
+        <input class="autocomplete-input" />
+        <ul class="autocomplete-result-list"></ul>
+      </div>
+    
+</body>
+<script>
+    new Autocomplete('#autocomplete',{
+        search : input => {
+            console.log(input)
+            const url = `/get_city/?search=${input}`
+            return new Promise(resolve => {
+                fetch(url)
+                .then(response=>response.json())
+                .then(data =>{
+                    console.log(data.payload)
+                    resolve(data.payload)
+                })
+            })
+        },
+        renderResult : (result, props)=>{
+            console.log(props)
+            let group=''
+            if(result % 3 == 0){
+                group=`<li class="group">Group</li>`
+            }
+            return `${group} <li ${props}>
+                <div class="wiki-title">
+                    ${result.city}
+                </div>
+            </li>`
+        }
+
+    })
+</script>
+</html>

@@ -139,6 +139,19 @@ form input {
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
-form li{
+/* form li{
     display: none;
+} */
+/*  */
+/* .city_form ul{
+    height: 200px;
+} */
+li.highlight {
+    background-color: #f2f2f2;
+    cursor: pointer;
+    /* Дополнительные стили для выделения */
+  }
+
+.autocomplete ul{
+    background-color: #bdbdbd;
 }

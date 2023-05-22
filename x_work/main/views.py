@@ -3,7 +3,8 @@ from main.forms import RegistrationForm, LoginForm
 from main.services import UserService, UserData, UpdateUserData
 from employers.models import Employer                                                     
 from job_seekers.models import JobSeeker                                                     
-from main.models import User   
+from main.models import User, Cities
+from django.http import JsonResponse
 
 def main_page(request):
 
@@ -44,9 +45,26 @@ def log_in(request):
         return render(request,'login.html',{'form': form})
 
 
-
+# 
 def log_out(request):
     UserService().logout_user(request)
     return render(request,'main_page.html')
 
-
+def get_city(request):
+    search=request.GET.get('search').capitalize()
+    payload=[]
+    if search:
+        objs=Cities.objects.filter(city__startswith = search)[:3]
+        
+        for obj in objs:
+            payload.append({
+                'city' : obj.city
+            })
+    return JsonResponse({
+        'status' : True,
+        'payload': payload
+    })
+# 
+def test(request):
+    return render(request, 'test.html')
+# 

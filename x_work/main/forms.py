@@ -17,13 +17,13 @@ class UpdateEmployerForm(forms.ModelForm):
     
     class Meta:
         model = Employer
-        fields = ('company_name', 'description', 'industry', 'phone_number','address','website',)
+        fields = ('company_name', 'industry', 'phone_number','city','website','company_info')
 
 class UpdateJobseekerForm(forms.ModelForm):
     
     class Meta:
         model = JobSeeker
-        fields = ('bio', 'skills', 'experience', 'education','desired_salary','address','phone_number','first_name','last_name')
+        fields = ('city','phone_number','first_name','last_name')
 
 
 class LoginForm(AuthenticationForm):
