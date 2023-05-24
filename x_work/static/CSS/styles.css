@@ -9,7 +9,7 @@
 }
 
 body{
-    height: 1000px;
+    height: 2000px;
 }
 
 .nav-item{
@@ -154,4 +154,87 @@ li.highlight {
 
 .autocomplete ul{
     background-color: #bdbdbd;
+}
+
+/* main page content */
+.main_page_top{
+    /* margin-top: 20px; */
+    width: 100%;
+    
+}
+
+/* .main_page_top ul li{
+    padding: 0px;
+    margin: 0px;
+
+} */
+.main_page_top div button{
+    background-color: #212529;
+    color: #000000;
+    border-color: #0080ff;
+    height: 40px;
+    width: 100px;
+
+}
+.main_page_top div button{
+    width: 100%;
+    background-color: #06ff6a;
+    border-color: #000000;
+
+}
+.main_page_top div button:hover{
+    background-color:#03e65e;
+
+}
+
+/* main page main content */
+.main_page_container{
+    height: 300px;
+    position: relative;
+    margin-top: 15px;
+    margin-left: 60px;
+    margin-right: 60px;
+    /* display: flex; */
+}
+
+.main_page_cv_job{
+    display: flex;
+    
+}
+
+
+.main_page_help_but{
+    padding-left: 140px;
+    height: 300px;
+
+}
+.main_page_help_but div{
+    border-radius: 10%;
+    height: 150px;
+    border-width: 7px;
+    border-color: #000000;
+
+}
+.main_page_help_but button{
+    height: 100%;
+    width: 100%;
+    font-size: larger;
+    font-style: unset;
+    background-color: white;
+    color: #000000;
+    border-width: 4px;
+    border-color:#06ff6a;
+}
+/* sec level */
+.main_page_second_level{
+    padding-top: 15px;
+    height: 700px;
+  } 
+
+.main_page_company_day{
+    width: 755.99px;
+}
+.main_page_articles{
+    display:flexbox;
+    width: 760px;
 }

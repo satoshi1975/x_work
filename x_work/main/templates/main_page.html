@@ -1,9 +1,150 @@
 {%include 'base.html'%}
 {% comment %} {%block content%} {% endcomment %}
 {% if user.is_authenticated %}
-    <!-- Отображаемые данные для аутентифицированного пользователя -->
     Привет, {{ user.username }}!
 {% else %}
-    suck it
+    <!-- suck it -->
 {% endif %}
+    <div class="main_page_top">
+        <div class="row">
+        <div class="col">
+            <button class="btn-primary">
+                <i href="#">look for a job</i>
+            </button>
+        </div>
+        <div class="col">
+            <button class="btn-primary">
+                <i href="#">look for a job</i>
+            </button>
+        </div>
+        </div>
+    </div>
+
+    <div class="main_page_container">
+        <div class="d-flex justify-content-between" style="display: flex;">
+            <div class="main_page_cv_job" style="max-width: 50%;">
+                <div class="card" style="width: 23rem;">
+                    <h5 class="card-header" style="background-color: #03e65e;">Summary of the day</h5>
+                    <div class="card-body">
+                    <h5 class="card-title">Occupation</h5>
+                    <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+                    <a href="#" class="btn btn-primary" style="background-color: #03e65e;">to CV</a>
+                    </div>
+                </div>
+                <div class="card justify-content-center" style="width: 23rem; margin-left: 20px;">
+                    <h5 class="card-header" style="background-color: #03e65e;">Job of the day</h5>
+                    <div class="card-body">
+                    <h5 class="card-title">Occupation</h5>
+                    <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+                    <a href="#" class="btn btn-primary" style="background-color: #03e65e;">to CV</a>
+                    </div>
+                </div>
+            </div>
+
+        <div class="container main_page_help_but">
+            <div class="row row-cols-2" style="max-width: 50%">
+                <div class="col" style="padding-right: 5px; padding-bottom: 5px;">
+                    <button class="btn-primary">
+                        Work from home
+                    </button>
+                </div>
+                <div class="col"  style="padding-left: 5px;  padding-bottom: 5px;">
+                    <button class="btn-primary">
+                        For students
+                    </button>
+                </div>
+                <div class="col" style="padding-right: 5px; padding-top: 5px;">
+                    <button class="btn-primary">
+                        Meetings and webinars
+                    </button>
+                </div>
+                <div class="col" style="padding-left: 5px;">
+                    <button class="btn-primary">
+                        Events and activities
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="main_page_second_level" style="position: relative;">
+            <div style="flex-direction: column;">
+                <div class="row row-cols-1 row-cols-md-1 g-4 main_page_articles" style="position: absolute;max-width: 50%">
+                    <div class="col">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Название карточки</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Название карточки</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Название карточки</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Название карточки</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+                <div class="card mb-3 main_page_company_day" style="right: 10px; position:absolute; max-width: 50%;">
+                    <h5 class="card-header text-center" style="background-color: #03e65e;">Company of the day</h5>
+                    <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="..." class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title">Company</h5>
+                        <p class="card-text">Это более широкая карта с вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту. Этот контент немного длиннее.</p>
+                        <p class="card-text"><small class="text-muted">Последнее обновление 3 мин. назад</small></p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container main_page_container">
+        <ul class="d-flex">
+            <li class="me-3">
+                <button type="button" class="btn btn-primary">
+                    <i href="#">look for a job</i>
+                </button>
+            </li>
+            <li class="me-3">
+                <button type="button" class="btn btn-primary">
+                    <i href="#">look for employees</i>
+                </button>
+            </li>
+            <li class="me-3">
+                <button type="button" class="btn btn-primary">
+                    <i href="#">look for employees</i>
+                </button>
+            </li>
+        </ul>
+    </div> -->
 {% comment %} {%endblock%} {% endcomment %}
