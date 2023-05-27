@@ -14,7 +14,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
 class Cities(models.Model):
-    id=models.BigAutoField(primary_key=True)
+    id=models.BigAutoField(primary_key=True,default=None)
     city = models.CharField(blank=True, null=True)
     state_name = models.CharField(blank=True, null=True)
 

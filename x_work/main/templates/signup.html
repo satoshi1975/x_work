@@ -36,7 +36,12 @@
                   <div class="form-group">
                     {{ form.as_p }}
                   </div>
-
+                  <div id="autocomplete" class="autocomplete mb-3">
+                    <label  class="form-label">City</label>
+                    <input name="city" class="autocomplete-input" value={{user_fields.city.city}} />
+                    <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
+                    <ul class="autocomplete-result-list"></ul>
+                </div>
                   
                   <!-- Переключатель для выбора типа пользователя -->
                     
@@ -47,24 +52,6 @@
                         </button>
                       </div> 
                 </form>
-                <script>
-                  const userTypeSelect = document.getElementById('user_type');
-                  const companyFields = document.getElementById('company-fields');
-                  const jobseekerFields = document.getElementById('jobseeker-fields');
-                
-                  userTypeSelect.addEventListener('change', function() {
-                    if (userTypeSelect.value === 'company') {
-                      companyFields.style.display = 'block';
-                      jobseekerFields.style.display = 'none';
-                    } else if (userTypeSelect.value === 'jobseeker') {
-                      companyFields.style.display = 'none';
-                      jobseekerFields.style.display = 'block';
-                    } else {
-                      companyFields.style.display = 'none';
-                      jobseekerFields.style.display = 'none';
-                    }
-                  });
-                </script>
               </div>
               <div
                 class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
@@ -82,4 +69,73 @@
     </div>
   </div>
 </section>
+<script>
+  const userTypeSelect = document.getElementById('user_type');
+  const companyFields = document.getElementById('company-fields');
+  const jobseekerFields = document.getElementById('jobseeker-fields');
+
+  userTypeSelect.addEventListener('change', function() {
+    if (userTypeSelect.value === 'company') {
+      companyFields.style.display = 'block';
+      jobseekerFields.style.display = 'none';
+    } else if (userTypeSelect.value === 'jobseeker') {
+      companyFields.style.display = 'none';
+      jobseekerFields.style.display = 'block';
+    } else {
+      companyFields.style.display = 'none';
+      jobseekerFields.style.display = 'none';
+    }
+  });
+</script>
+<script>
+  new Autocomplete('#autocomplete',{
+  search : input => {
+      console.log(input)
+      const url = `/get_city/?search=${input}`
+      return new Promise(resolve => {
+          fetch(url)
+          .then(response=>response.json())
+          .then(data =>{
+              console.log(data.payload)
+              resolve(data.payload)
+          })
+      })
+  },
+  
+  renderResult : (result, props)=>{
+      console.log(props)
+      let group=''
+      if(result % 3 == 0){
+          group=`<li class="group">Group</li>`
+      }
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `
+          ${group}
+          <div class="wiki-title">
+              ${result.state} / ${result.city}
+          </div>
+      `;
+      listItem.addEventListener('click', () => {
+          const input = document.querySelector('#autocomplete input');
+          input.value = result.city;
+          const hidden_input=document.querySelector('#autocomplete #city_id')
+          hidden_input.value = result.id
+          closeAutocomplete(); // Закрыть список автодополнения
+      });
+      listItem.addEventListener('mouseenter', () => {
+          listItem.classList.add('highlight');
+      });
+      listItem.addEventListener('mouseleave', () => {
+          listItem.classList.remove('highlight');
+      });
+      
+      return listItem;
+  }
+});
+
+function closeAutocomplete() {
+  const list = document.querySelector('#autocomplete').querySelector('ul');
+  list.classList.remove('autocomplete-result-list'); // Скрыть список автодополнения
+}
+</script>
 {% endblock %}

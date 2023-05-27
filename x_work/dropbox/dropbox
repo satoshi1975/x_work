@@ -1,0 +1,63 @@
+import dropbox
+import os
+# from dropbox.exeptions import AuthError
+
+access_token="sl.BfBy1tqBv7p6Xpbg-JfMBMtOaljIY2L7GRfbdISLNdMKfLEItaFZeMlLLPFcrUyy64SRdrBGmF_8RPyFYBze-yDXl0Elq8nlgYDL-JnIKoPKDRLil5SWMdg5H40K_G3zNXvRtig"
+file_path='/home/seksualka/PycharmProjects/x_work/x_work/dropbox/tiger.jpeg'
+dropbox_path='/employers/test.jpeg'
+def upload_file_to_dropbox(file_path, dropbox_path):
+
+    dbx = dropbox.Dropbox(access_token)
+
+    with open(file_path, 'rb') as file:
+        file_name = os.path.basename(file_path)
+        upload_path = os.path.join(dropbox_path, file_name)
+
+        dbx.files_upload(file.read(), upload_path)
+
+
+upload_file_to_dropbox(file_path, dropbox_path)
+
+
+# def upload(remote_path):
+#     dbx = dropbox.Dropbox(access_token)
+#     # remote_path = "/"
+#     try:
+#         with open(file_path, "rb") as file:
+#             dbx.files_upload(file.read(), remote_path)
+#         print("Файл успешно загружен в Dropbox.")
+#     except dropbox.exceptions.ApiError as e:
+#         print("Ошибка API Dropbox:", e)
+
+# upload('/employers/tiger.png')
+
+# access_token = "sl.BfBy1tqBv7p6Xpbg-JfMBMtOaljIY2L7GRfbdISLNdMKfLEItaFZeMlLLPFcrUyy64SRdrBGmF_8RPyFYBze-yDXl0Elq8nlgYDL-JnIKoPKDRLil5SWMdg5H40K_G3zNXvRtig"
+
+# def create_folder_in_dropbox(access_token, folder_path):
+#     dbx = dropbox.Dropbox(access_token)
+
+#     try:
+#         result = dbx.files_create_folder(folder_path)
+#         print("Папка", result.path_display, "успешно создана в Dropbox.")
+#     except dropbox.exceptions.ApiError as e:
+#         print("Ошибка API Dropbox:", e)
+
+# folder_path = "/employers"
+
+# create_folder_in_dropbox(access_token, folder_path)
+# def list_files_in_dropbox(access_token, path):
+#     dbx = dropbox.Dropbox(access_token)
+
+#     try:
+#         result = dbx.files_list_folder(path)
+#         print("Содержимое папки", path, ":")
+
+#         for entry in result.entries:
+#             print(entry.path_display)
+#     except dropbox.exceptions.ApiError as e:
+#         print("Ошибка API Dropbox:", e)
+
+# access_token = "sl.BfBy1tqBv7p6Xpbg-JfMBMtOaljIY2L7GRfbdISLNdMKfLEItaFZeMlLLPFcrUyy64SRdrBGmF_8RPyFYBze-yDXl0Elq8nlgYDL-JnIKoPKDRLil5SWMdg5H40K_G3zNXvRtig"
+# path = ""
+
+# list_files_in_dropbox(access_token, path)

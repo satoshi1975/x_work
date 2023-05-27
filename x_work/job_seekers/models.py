@@ -1,14 +1,19 @@
 from django.db import models
+from uuid import uuid4
 from main.models import User,Cities,Occupation
 
 class JobSeeker(models.Model):
+    def image_upload_to(instance, filename):
+    # Генерация уникального имени файла
+        ext = filename.split('.')[-1]
+        filename = f'{uuid4()}.{ext}'
+        # Возвращение пути сохранения файла
+        return f'job_seekers_photos/{filename}'
+    
+    profile_photo=models.ImageField(upload_to=image_upload_to, default=None)
     user=models.OneToOneField(User, on_delete=models.CASCADE, default=None)
-    username=models.CharField(max_length=50,blank=True)
     first_name=models.CharField(max_length=50, blank=True)
     last_name=models.CharField(max_length=50,blank=True)
-    # bio = models.TextField(blank=True, null=True)
-    # experience = models.TextField(blank=True, null=True)
-    # education = models.TextField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     city=models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, default=None)
     email=models.EmailField(max_length=255,default=None)

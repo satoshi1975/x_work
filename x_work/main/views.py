@@ -12,6 +12,7 @@ def main_page(request):
 
 def profile(request):
     if request.method=='POST':
+        # print(request.POST,'adadad')
         UpdateUserData().update_child_model(request)
         context=UserData().return_context_for_user_profile(request)
         return render(request, 'user_profile.html', context)
@@ -58,7 +59,9 @@ def get_city(request):
         
         for obj in objs:
             payload.append({
-                'city' : obj.city
+                'city' : obj.city,
+                'state': obj.state_name,
+                'id':obj.id
             })
     return JsonResponse({
         'status' : True,
