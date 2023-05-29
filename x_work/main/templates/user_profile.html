@@ -6,13 +6,13 @@
         <form method='post' enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
-                <img src="/x_work/media/employers_photos/SKULL.png" alt="">
+                <img src="{{user_fields.profile_photo.url}}" alt="">
                 <label  class="form-label">Profile photo</label>
                 <input type="file" class="form-control" name='profile_photo' accept="image/" value={{user_fields.profile_photo}}>
             </div>
             <div class="mb-3">
                 <label  class="form-label">Company name</label>
-                <input class="form-control" name='company_name' value={{user_fields.profile_photo.url}}>
+                <input class="form-control" name='company_name' value={{user_fields.company_name}}>
             </div>
             <div class="mb-3">
                 <label  class="form-label">Website</label>
@@ -49,6 +49,7 @@
     <form method='post' enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
+            <img src="{{user_fields.profile_photo.url}}" alt="">
             <label  class="form-label">Profile photo</label>
             <input type="file" class="form-control" name='profile_photo' accept="image/" value={{user_fields.profile_photo}}>
         </div>
@@ -98,7 +99,6 @@
     <ul class="autocomplete-result-list"></ul>
 </div> -->
 {% endif %}
-<img src="/media/employers_photos/SKULL.png" alt="">
 {% endblock %}
 <script>
     new Autocomplete('#autocomplete',{

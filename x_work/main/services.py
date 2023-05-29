@@ -19,6 +19,7 @@ class UserService:
                                             phone_number=data['phone_number'],
                                             email=data['email'],
                                             city=city)
+            employer.profile_photo='employers_photos/default_profile_img.jpg'
             employer.save()
         elif data['user_type'] == 'jobseeker':
             jobseeker = JobSeeker.objects.create(user=user,
@@ -27,6 +28,7 @@ class UserService:
                                                 phone_number=data['phone_number'],
                                                 email=data['email'],
                                                 city=city)
+            jobseeker.profile_photo='job_seekers_photos/default_profile_img.jpg'
             jobseeker.save()
         print('complete')
         return True

@@ -1,0 +1,235 @@
+{%include 'base.html'%}
+{% load static %}
+<link
+href="{%static 'CSS/styles_cv.css'%}"
+type="text/css"
+rel="stylesheet"
+/>
+{%block content%}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <!-- <div class="mb-3">
+          <label for="occupation" class="form-label">Occupation</label>
+          <input type="text" class="form-control" id="occupation" name="occupation" aria-describedby="emailHelp">
+        </div> -->
+        <div class="mb-3">
+            <div class="autocomplete">
+                <label for="occupation-input">Enter name of occupation</label>
+                <input id="occupation-input" name="occupation" class="form-control" type="text" autocomplete="off" required>
+                <ul id="occupation-list"></ul>
+              </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="bio">Bio</label>
+            <textarea name="bio" id="bio"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="education" class="form-label">Education</label>
+            <select class="form-select" name="education" id="education">
+                <option selected value="none">Without education</option>
+                <option value="bachelor">Bachelor's Degree</option>
+                <option value="master">Master's Degree</option>
+                <option value="doctorate">Doctorate Degree</option>
+                <option value="license">Professional Certification/License</option>
+                <option value="courses">Courses/Training</option>
+                <option value="hight">hight school</option>
+              </select>
+         </div>
+
+        <div class="mb-3">
+            <button id="addFieldsButton" class="btn-primary">Add institution</button>
+            <div id="inputFieldsContainer"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="schedule">Work schedule</label>
+            <select class="form-select" name="schedule" id="schedule" >
+                <option selected value="none">Doesn't matter</option>
+                <option value="full">full-time</option>
+                <option value="flex">flexible</option>
+                <option value="shift">shift</option>
+                <option value="part">part-time</option>
+                <option value="seasonal">seasonal</option>
+                <option value="hybrid">hybrid</option>
+              </select>
+         </div>
+         <div class="mb-3">
+             <label for="work_place" class="form-label">Work place</label>
+            <select class="form-select" name="work_place" id="work_place">
+                <option selected value="none">Doesn't matter </option>
+                <option value="full">Full-time</option>
+                <option value="flex">flexability</option>
+                <option value="home">from home</option>
+            </select>
+        </div>
+        <div class="mb-3">
+        <label for="work-button" class="form-label">Work experience</label>
+         <div id="work-experience-fields"></div>
+        <button type="button" id="work-button" class="btn-primary" onclick="addWorkExperienceFields()">Добавить запись</button>
+        </div>
+          
+
+
+        <div class="mb-3">
+            <label for="salary" class="form-label">Desired salary</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="salary" name="salary" value="0">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="key_skills_input">Key skills</label>
+            <textarea class="form-control" name="key_skills" id="key_skills_input" style="height: 100px"></textarea>
+        </div>
+        
+        
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script>
+    // Функция для закрытия списка автодополнения
+    function closeAutocomplete() {
+      const occupationList = document.querySelector('#occupation-list');
+      occupationList.innerHTML = '';
+    }
+
+    // Функция для обработки выбора профессии из списка
+    function handleSelection(occupation) {
+      const occupationInput = document.querySelector('#occupation-input');
+      occupationInput.value = occupation;
+      closeAutocomplete();
+    }
+
+    // Обработчик ввода в поле автодополнения
+    function handleInput() {
+      const input = document.querySelector('#occupation-input').value;
+      const url = `/get_occupation/?search=${input}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const occupationList = document.querySelector('#occupation-list');
+          occupationList.innerHTML = '';
+
+          if (data.status) {
+            const payload = data.payload;
+            payload.forEach(occupation => {
+              const listItem = document.createElement('li');
+              listItem.textContent = occupation.occupation;
+              listItem.addEventListener('click', () => handleSelection(occupation.occupation));
+              occupationList.appendChild(listItem);
+            });
+          }
+        })
+        .catch(error => {
+          console.log('Произошла ошибка:', error);
+        });
+    }
+
+    // Добавление обработчика события ввода в поле автодополнения
+    const occupationInput = document.querySelector('#occupation-input');
+    occupationInput.addEventListener('input', handleInput);
+  </script>
+
+
+<script>
+  function addWorkExperienceFields() {
+  var workExperienceFields = document.getElementById('work-experience-fields');
+
+  // Проверка, что все предыдущие поля заполнены
+  var previousFields = workExperienceFields.querySelectorAll('input');
+  var isPreviousFieldsFilled = true;
+  previousFields.forEach(function(field) {
+    if (field.value.trim() === '') {
+      isPreviousFieldsFilled = false;
+    }
+  });
+
+  if (isPreviousFieldsFilled) {
+    // Создание новых полей "компания", "должность", "начало работы" и "конец работы"
+    var companyInput = document.createElement('input');
+    companyInput.type = 'text';
+    companyInput.name = 'company[]';
+    companyInput.placeholder = 'Компания';
+
+    var positionInput = document.createElement('input');
+    positionInput.type = 'text';
+    positionInput.name = 'position[]';
+    positionInput.placeholder = 'Должность';
+
+    var startDateInput = document.createElement('input');
+    startDateInput.type = 'date';
+    startDateInput.name = 'start_date[]';
+    startDateInput.placeholder = 'Начало работы';
+
+    var endDateInput = document.createElement('input');
+    endDateInput.type = 'date';
+    endDateInput.name = 'end_date[]';
+    endDateInput.placeholder = 'Конец работы';
+
+    workExperienceFields.appendChild(companyInput);
+    workExperienceFields.appendChild(positionInput);
+    workExperienceFields.appendChild(startDateInput);
+    workExperienceFields.appendChild(endDateInput);
+  }
+}
+
+</script>
+<script>
+   window.addEventListener('DOMContentLoaded', (event) => {
+  const addFieldsButton = document.getElementById('addFieldsButton');
+  const inputFieldsContainer = document.getElementById('inputFieldsContainer');
+
+  let fieldCounter = 0;
+
+  addFieldsButton.addEventListener('click', (event) => {
+    event.preventDefault(); // Предотвращаем отправку формы
+
+    if (fieldCounter < 2 || (fieldCounter >= 2 && arePreviousFieldsFilled())) {
+      fieldCounter++;
+      const fieldsWrapper = document.createElement('div');
+      fieldsWrapper.classList.add('fields-wrapper');
+
+      const educationalInstitutionInput = document.createElement('input');
+      educationalInstitutionInput.type = 'text';
+      educationalInstitutionInput.name='institution'
+      educationalInstitutionInput.placeholder = 'Учебное заведение';
+
+      const startDateInput = document.createElement('input');
+      startDateInput.type = "date" ;
+      startDateInput.name='study_start'
+      startDateInput.placeholder = 'Начало обучения';
+
+      const endDateInput = document.createElement('input');
+      endDateInput.type = "date" ;
+      endDateInput.name='study_end'
+      endDateInput.placeholder = 'Конец обучения';
+      endDateInput.style='padding-top: 10px;'
+
+      fieldsWrapper.appendChild(educationalInstitutionInput);
+      fieldsWrapper.appendChild(startDateInput);
+      fieldsWrapper.appendChild(endDateInput);
+      inputFieldsContainer.appendChild(fieldsWrapper);
+    }
+  });
+
+  function arePreviousFieldsFilled() {
+    const previousFields = Array.from(inputFieldsContainer.getElementsByClassName('fields-wrapper'));
+    const lastFieldsWrapper = previousFields[previousFields.length - 1];
+    const educationalInstitutionInput = lastFieldsWrapper.querySelector('input:nth-child(1)');
+    const startDateInput = lastFieldsWrapper.querySelector('input:nth-child(2)');
+    const endDateInput = lastFieldsWrapper.querySelector('input:nth-child(3)');
+    
+    return educationalInstitutionInput.value !== '' && startDateInput.value !== '' && endDateInput.value !== '';
+  }
+});
+
+
+</script>
+
+{%endblock%}

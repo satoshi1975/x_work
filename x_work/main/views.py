@@ -3,8 +3,9 @@ from main.forms import RegistrationForm, LoginForm
 from main.services import UserService, UserData, UpdateUserData
 from employers.models import Employer                                                     
 from job_seekers.models import JobSeeker                                                     
-from main.models import User, Cities
+from main.models import User, Cities, Occupation
 from django.http import JsonResponse
+from django.db.models import Q
 
 def main_page(request):
 
@@ -67,7 +68,19 @@ def get_city(request):
         'status' : True,
         'payload': payload
     })
-# 
-def test(request):
-    return render(request, 'test.html')
-# 
+
+def get_occupation(request):
+    search=request.GET.get('search').capitalize()
+    payload=[]
+    if search:
+        objs=Occupation.objects.filter(Q(occupation__startswith = search) | Q(occupation__contains = search))[:3]
+        
+        for obj in objs:
+            payload.append({
+                'id' : obj.id,
+                'occupation': obj.occupation
+            })
+    return JsonResponse({
+        'status' : True,
+        'payload': payload
+    })
