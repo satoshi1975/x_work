@@ -13,7 +13,7 @@ def cv_list(request, user_id):
     # cv = get_object_or_404(CV, user_id=user_id)
 
     context = {
-        'cv_list': cv,
+        'cv_list': list_of_cv ,
         'is_owner': is_owner,
     }
     return render(request, 'cv_list.html', context)
@@ -22,11 +22,13 @@ def cv_list(request, user_id):
 @login_required
 def create_cv(request, user_id):
     if request.method=='POST':
-        # print(request.POST)
-        services.CreateCV().create_cv(request)
+        print(len(request.POST.getlist('institution')))
+        print(request.POST.getlist('institution')[0])
+
+        services.CVEditor().create_cv(request)
         return render(request, 'create_cv.html')
     else:
-        # form=forms.CVForm()
-        return render(request, 'create_cv.html')
+        form=forms.CVForm()
+        return render(request, 'create_cv.html', {'form':form})
 
 

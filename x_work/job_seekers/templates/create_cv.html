@@ -154,22 +154,22 @@ rel="stylesheet"
     // Создание новых полей "компания", "должность", "начало работы" и "конец работы"
     var companyInput = document.createElement('input');
     companyInput.type = 'text';
-    companyInput.name = 'company[]';
+    companyInput.name = 'company';
     companyInput.placeholder = 'Компания';
 
     var positionInput = document.createElement('input');
     positionInput.type = 'text';
-    positionInput.name = 'position[]';
+    positionInput.name = 'position';
     positionInput.placeholder = 'Должность';
 
     var startDateInput = document.createElement('input');
     startDateInput.type = 'date';
-    startDateInput.name = 'start_date[]';
+    startDateInput.name = 'work_start';
     startDateInput.placeholder = 'Начало работы';
 
     var endDateInput = document.createElement('input');
     endDateInput.type = 'date';
-    endDateInput.name = 'end_date[]';
+    endDateInput.name = 'work_end';
     endDateInput.placeholder = 'Конец работы';
 
     workExperienceFields.appendChild(companyInput);
