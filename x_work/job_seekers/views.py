@@ -1,22 +1,23 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import CV
 from django.http import JsonResponse
 from main.models import Occupation
-from . import services, forms
+from job_seekers import services, forms
 
 
 @login_required
 def cv_list(request, user_id):
-    list_of_cv=services.get_cv_list(user_id)
-    is_owner = (request.user.id == user_id)
-    # cv = get_object_or_404(CV, user_id=user_id)
-
-    context = {
-        'cv_list': list_of_cv ,
-        'is_owner': is_owner,
-    }
-    return render(request, 'cv_list.html', context)
+    if request.method == 'POST':
+        services.CVEditor().delete_cv(request)
+        return redirect(request.path)
+    else:
+        list_of_cv=services.CVShow().get_context_user_cv_list(user_id)
+        context = {
+            'cv_list': list_of_cv 
+        }
+        print(list_of_cv)
+        return render(request, 'cv_list.html', context=context)
 
 
 @login_required
@@ -31,4 +32,25 @@ def create_cv(request, user_id):
         form=forms.CVForm()
         return render(request, 'create_cv.html', {'form':form})
 
+
+@login_required
+def edit_cv(request, cv_id):
+    if request.method=='POST':
+        # print(request.POST)
+        services.CVEditor().edit_cv(request,cv_id)
+        context= services.CVShow().get_context_user_cv_show(cv_id)
+    
+        return render(request, 'edit_cv.html', context=context)
+    else:
+        context= services.CVShow().get_context_user_cv_show(cv_id)
+    
+        return render(request, 'edit_cv.html', context=context)
+    
+
+@login_required
+def show_cv(request, cv_id):
+    context=services.CVShow().get_context_user_cv_show(cv_id)
+    
+    return render(request, 'show_cv.html', context=context)
+    
 

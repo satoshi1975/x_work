@@ -5,7 +5,7 @@ href="{%static 'CSS/styles_cv.css'%}"
 type="text/css"
 rel="stylesheet"
 />
-{%block content%}
+{%block content %}
 <div class="container">
     <form method="post">
         {% csrf_token %}
@@ -16,79 +16,102 @@ rel="stylesheet"
         <div class="mb-3">
             <div class="autocomplete">
                 <label for="occupation-input">Enter name of occupation</label>
-                <input id="occupation-input" name="occupation" class="form-control" type="text" autocomplete="off" required>
+                <input id="occupation-input" value={{cv.occupation}} name="occupation" class="form-control" type="text" autocomplete="off" required>
                 <ul id="occupation-list"></ul>
               </div>
         </div>
         
         <div class="mb-3">
             <label for="bio">Bio</label>
-            <textarea name="bio" id="bio"></textarea>
+            <textarea name="bio" id="bio">{{cv.bio}}</textarea>
         </div>
 
         <div class="mb-3">
             <label for="education" class="form-label">Education</label>
             <select class="form-select" name="education" id="education">
-                <option selected value="none">Without education</option>
-                <option value="bachelor">Bachelor's Degree</option>
-                <option value="master">Master's Degree</option>
-                <option value="doctorate">Doctorate Degree</option>
-                <option value="license">Professional Certification/License</option>
-                <option value="courses">Courses/Training</option>
-                <option value="hight">hight school</option>
+                <option value="none" {% if cv.education ==  "none" %}selected{% endif %}>Without education</option>
+                <option value="bachelor" {% if cv.education ==  "bachelor" %}selected{% endif %}>Bachelor's Degree</option>
+                <option value="master" {% if cv.education ==  "master" %}selected{% endif %}>Master's Degree</option>
+                <option value="doctorate" {% if cv.education ==  "doctorate" %}selected{% endif %}>Doctorate Degree</option>
+                <option value="license" {% if cv.education ==  "license" %}selected{% endif %}>Professional Certification/License</option>
+                <option value="courses" {% if cv.education ==  "courses" %}selected{% endif %}>Courses/Training</option>
+                <option value="hight" {% if cv.education ==  "hight" %}selected{% endif %}>hight school</option>
               </select>
          </div>
 
         <div class="mb-3">
-            <button id="addFieldsButton" class="btn-primary">Add institution</button>
-            <div id="inputFieldsContainer"></div>
+          <button id="addFieldsButton" class="btn-primary">Add institution</button>
+          <div id="inputFieldsContainer"></div>
+    {% for el in cv.cv_education.all %}
+        <div class="education-row">
+            <input type="text" name="institution" value="{{ el.institution }}">
+            <input type="date" name="study_start" value="{{ el.study_start|date:'Y-m-d' }}">
+            <input type="date" name="study_end" value="{{ el.study_end|date:'Y-m-d' }}">
+            <button class="delete-button" onclick="removeEducationRow(this)">Удалить</button>
         </div>
+    {% endfor %}
+</div>
+
 
         <div class="mb-3">
-            <label class="form-label" for="schedule">Work schedule</label>
+            <label class="form-label" for="schedule" id="work_schedule">Work schedule</label>
             <select class="form-select" name="schedule" id="schedule" >
-                <option selected value="none">Doesn't matter</option>
-                <option value="full">full-time</option>
-                <option value="flex">flexible</option>
-                <option value="shift">shift</option>
-                <option value="part">part-time</option>
-                <option value="seasonal">seasonal</option>
-                <option value="hybrid">hybrid</option>
+                <option value="none"{% if cv.schedule ==  "none" %}selected{% endif %}>Doesn't matter</option>
+                <option value="full"{% if cv.schedule ==  "full" %}selected{% endif %}>full-time</option>
+                <option value="flex"{% if cv.schedule ==  "flex" %}selected{% endif %}>flexible</option>
+                <option value="shift"{% if cv.schedule ==  "shift" %}selected{% endif %}>shift</option>
+                <option value="part"{% if cv.schedule ==  "part" %}selected{% endif %}>part-time</option>
+                <option value="seasonal"{% if cv.schedule ==  "seasonal" %}selected{% endif %}>seasonal</option>
+                <option value="hybrid"{% if cv.schedule ==  "hybrid" %}selected{% endif %}>hybrid</option>
               </select>
          </div>
+       
          <div class="mb-3">
              <label for="work_place" class="form-label">Work place</label>
             <select class="form-select" name="work_place" id="work_place">
-                <option selected value="none">Doesn't matter </option>
-                <option value="full">Full-time</option>
-                <option value="flex">flexability</option>
-                <option value="home">from home</option>
+                <option selected value="none"{% if cv.work_place ==  "none" %}selected{% endif %}>Doesn't matter </option>
+                <option value="full"{% if cv.work_place ==  "full" %}selected{% endif %}>Full-time</option>
+                <option value="flex"{% if cv.work_place ==  "flex" %}selected{% endif %}>flexability</option>
+                <option value="home"{% if cv.work_place ==  "home" %}selected{% endif %}>from home</option>
             </select>
         </div>
         <div class="mb-3">
-          <!-- <label for="work-button" class="form-label">Work experience</label> -->
           <button type="button" id="work-button" class="btn-primary" onclick="addWorkExperienceFields()">Add work experience</button>
           <div id="work-experience-fields"></div>
+          {% for el in cv.cv_experience.all %}
+        <div class="education-row">
+            <input type="text" name="company" value="{{ el.company}}">
+            <input type="text" name="position" value="{{ el.occupation}}">
+            <input type="date" name="work_start" value="{{ el.start_work|date:'Y-m-d' }}">
+            <input type="date" name="work_end"value="{{ el.end_work|date:'Y-m-d' }}">
+            <button class="delete-button" onclick="removeEducationRow(this)">Удалить</button>
+        </div>
+      {% endfor %}
       </div>
-        <!-- <div class="mb-3">
-        <label for="work-button" class="form-label">Work experience</label>
-         <div id="work-experience-fields"></div>
-        <button type="button" id="work-button" class="btn-primary" onclick="addWorkExperienceFields()">Добавить запись</button>
-        </div> -->
           
-
+      <!-- <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div> -->
+      
 
         <div class="mb-3">
             <label for="salary" class="form-label">Desired salary</label>
             <div class="input-group">
                 <span class="input-group-text">$</span>
-                <input type="number" class="form-control" id="salary" name="salary" value="0">
+                <input type="number" class="form-control" id="salary" name="salary" value={{cv.salary}}>
             </div>
         </div>
 
         <div class="mb-3">
             <label for="key_skills_input">Key skills</label>
-            <textarea class="form-control" name="key_skills" id="key_skills_input" style="height: 100px"></textarea>
+            <textarea class="form-control" name="key_skills" id="key_skills_input" style="height: 100px">{{cv.key_skills}}</textarea>
         </div>
         
         
@@ -96,6 +119,15 @@ rel="stylesheet"
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+<!-- <script>
+  document.getElementById("work_schedule").value = {cv.schedule};
+</script> -->
+<script>
+  function removeEducationRow(button) {
+      var row = button.parentNode;
+      row.parentNode.removeChild(row);
+  }
+</script>
 <script>
     // Функция для закрытия списка автодополнения
     function closeAutocomplete() {
@@ -140,6 +172,7 @@ rel="stylesheet"
     const occupationInput = document.querySelector('#occupation-input');
     occupationInput.addEventListener('input', handleInput);
   </script>
+
 
 <script>
   function addWorkExperienceFields() {
@@ -195,49 +228,6 @@ rel="stylesheet"
       }
   }
 </script>
-<!-- <script>
-  function addWorkExperienceFields() {
-  var workExperienceFields = document.getElementById('work-experience-fields');
-
-  // Проверка, что все предыдущие поля заполнены
-  var previousFields = workExperienceFields.querySelectorAll('input');
-  var isPreviousFieldsFilled = true;
-  previousFields.forEach(function(field) {
-    if (field.value.trim() === '') {
-      isPreviousFieldsFilled = false;
-    }
-  });
-
-  if (isPreviousFieldsFilled) {
-    // Создание новых полей "компания", "должность", "начало работы" и "конец работы"
-    var companyInput = document.createElement('input');
-    companyInput.type = 'text';
-    companyInput.name = 'company';
-    companyInput.placeholder = 'Компания';
-
-    var positionInput = document.createElement('input');
-    positionInput.type = 'text';
-    positionInput.name = 'position';
-    positionInput.placeholder = 'Должность';
-
-    var startDateInput = document.createElement('input');
-    startDateInput.type = 'date';
-    startDateInput.name = 'work_start';
-    startDateInput.placeholder = 'Начало работы';
-
-    var endDateInput = document.createElement('input');
-    endDateInput.type = 'date';
-    endDateInput.name = 'work_end';
-    endDateInput.placeholder = 'Конец работы';
-
-    workExperienceFields.appendChild(companyInput);
-    workExperienceFields.appendChild(positionInput);
-    workExperienceFields.appendChild(startDateInput);
-    workExperienceFields.appendChild(endDateInput);
-  }
-}
-
-</script> -->
 <script>
   window.addEventListener('DOMContentLoaded', (event) => {
       const addFieldsButton = document.getElementById('addFieldsButton');

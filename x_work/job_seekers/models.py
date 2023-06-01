@@ -59,6 +59,7 @@ class CV(models.Model):
     salary=models.IntegerField(blank=True,default=None, null=True)
     key_skills=models.TextField(blank=True,default=None, null=True)
     work_place=models.CharField(max_length=4, choices=WORK_PLACE, default=None, null=True)
+    experience=models.IntegerField(blank=True, default=None, null=True)
     # city=models.ForeignKey(Cities, on_delete=models.CASCADE,default=None, blank=True)
 
     def __str__(self):
@@ -68,8 +69,8 @@ class Experience(models.Model):
     cv = models.ForeignKey(CV, on_delete=models.CASCADE,related_name='cv_experience',default=None)
     occupation = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
-    start_work = models.DateField(default=None)
-    end_work = models.DateField(default=None)
+    start_work = models.DateField(default=None, null=True)
+    end_work = models.DateField(default=None, null=True)
 
     class Meta:
         default_related_name = 'cv_experience'

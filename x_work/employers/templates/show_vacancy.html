@@ -1,0 +1,99 @@
+{% include 'base.html' %}
+{% load static %}
+<link
+href="{%static 'CSS/styles_job.css'%}"
+type="text/css"
+rel="stylesheet"
+/>
+{% block  content %}
+<div class="container">
+    <div class="container mt-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Occupation</h5>
+            <hr>
+            <p class="card-text">{{vacancy.occupation}}</p>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Job description</h5>
+            <hr>
+            <p class="card-text">{{vacancy.job_description}}</p>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Working condition</h5>
+            <hr>
+              <div class="card card-body">
+                <div class="d-flex ">
+                  <h5 class="card-title" style="vertical-align: middle;">Schedule</h5>
+                  <div class="vr"></div>
+                  <p class="card-text">{{vacancy.schedule}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="card card-body">
+                <div class="d-flex ">
+                  <h5 class="card-title" style="vertical-align: middle;">Work place</h5>
+                  <div class="vr"></div>
+                  <p class="card-text">{{vacancy.work_place}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Salary</h5>
+            <hr>
+            <p class="card-text">{{vacancy.salary}}$</p>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <hr>
+            <p class="card-text">{{vacancy.education}}</p>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Experience</h5>
+            <hr>
+            <p class="card-text">{{vacancy.experience}}$</p>
+          </div>
+        </div>
+        
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Key skills</h5>
+            <hr>
+            <p class="card-text">{{vacancy.key_skills}}</p>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">City</h5>
+            <hr>
+            <p class="card-text">{{vacancy.city}}</p>
+          </div>
+        </div>
+        
+
+          
+    </div>
+            
+            
+            
+            {% if user_id == request.user.id%}
+            <a href= "/JOB/{{vacancy.id}}/edit">Edit vacancy</a>
+            {%endif%}
+      <!-- </div> -->
+  </div>    
+ </div> 
+
+
+{%endblock%}

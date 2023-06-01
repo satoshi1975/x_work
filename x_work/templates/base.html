@@ -28,6 +28,7 @@
 
   <body>
     <script src="{%static 'JS/bootstrap.js'%}"></script>
+    <!-- <script src="{%static 'JS/bootstrap.bundle.js'%}"></script> -->
     <div class="help-zone">
       <ul>
         <li>
@@ -63,6 +64,12 @@
             <li class="nav-item">
               <a class="nav-link nav-sub" href="#">Link</a>
             </li>
+
+            
+
+
+
+
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle nav-sub"
@@ -87,20 +94,22 @@
             </li>
             {% if user.user_type == 'company' %}
             <li class="nav-item">
-              <a class="nav-sub nav-link" href="#">My vacancies</a>
+              <a class="nav-sub nav-link" href="/JOB/{{user.id}}/vacancy_list">My vacancies</a>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-sub nav-link" href="CV_list/{{user.id}}">My CV</a>
+              <a class="nav-sub nav-link" href="/CV/cv_list/{{user.id}}">My CV</a>
             </li>
             {% endif %}
 
+            
             <form class="d-flex searchform" role="search">
               <input
                 class="form-control me-2 searchinput"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                id="searchinputfield"
               />
               <button
                 class="btn btn-outline-success searchbutton"
@@ -149,5 +158,53 @@
 </html>
 
 
+<!-- <script>
+  const searchIcon = document.querySelector('.search-icon');
+const searchInput = document.querySelector('#searchinputfield');
+
+searchIcon.addEventListener('click', () => {
+  searchInput.style.display = 'block';
+  searchInput.focus();
+});
+
+searchInput.addEventListener('blur', () => {
+  if (!searchInput.value.trim()) {
+    searchInput.style.display = 'none';
+  }
+});
+
+</script> -->
+
+<script>
+  // Получаем все элементы с классом "nav-sub"
+  var dropdowns = document.querySelectorAll('.nav-sub');
+
+  // Перебираем все элементы и добавляем обработчик события
+  dropdowns.forEach(function(dropdown) {
+    dropdown.addEventListener('click', function(e) {
+      e.preventDefault(); // Отменяем переход по ссылке
+      this.classList.toggle('show'); // Добавляем/удаляем класс "show" для элемента "nav-sub"
+      var dropdownMenu = this.nextElementSibling; // Получаем следующий элемент после "nav-sub"
+
+      // Если выпадающее меню открыто, скрываем его
+      if (dropdownMenu.style.display === 'block') {
+        dropdownMenu.style.display = 'none';
+      } else {
+        dropdownMenu.style.display = 'block';
+      }
+    });
+  });
+
+  // Закрываем выпадающий список при щелчке вне него
+  window.addEventListener('click', function(e) {
+    dropdowns.forEach(function(dropdown) {
+      var dropdownMenu = dropdown.nextElementSibling;
+      if (!dropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdown.classList.remove('show');
+        dropdownMenu.style.display = 'none';
+      }
+    });
+  });
+</script>
   {%block content%}{%endblock%}
 

@@ -36,38 +36,51 @@ class Employer(models.Model):
 
 class Vacancy(models.Model):
     SCHEDULE=[
+        ('none',"doesn't matter"),
         ('full','full-time'),
         ('flex','flexible'),
         ('shift','shift'),
         ('part','part-time'),
         ('seasonal','seasonal'),
-        ('hybrid','hybrid')
+        ('hybrid','hybrid'),
+    ]
+    WORK_PLACE=[
+        ('none',"doesn't matter"),
+        ('full','full-time'),
+        ('flex','flexibility'),
+        ('home','from home'),
     ]
     EDUCATION=[
+        ('none',"Without education"),
         ('bachelor',"Bachelor's Degree"),
         ('master',"Master's Degree"),
         ('doctorate',"Doctorate Degree"),
         ('license',"Professional Certification/License"),
         ('courses','Courses/Training'),
-        ('hight',"hight school")
+        ('hight',"hight school"),
     ]
-    JOB_EXPERIENCE=[
-        ('none','without'),
-        ('1','1 year'),
-        ('13','1-3 year'),
-        ('3','3 year'),
-        ('5','5 year')
-    ]
+    # JOB_EXPERIENCE=[
+    #     ('none','without'),
+    #     ('1','1 year'),
+    #     ('13','1-3 year'),
+    #     ('3','3 year'),
+    #     ('5','5 year')
+    # ]
 
     
     employer=models.ForeignKey(Employer, on_delete=models.CASCADE)
-    occupation=models.ForeignKey(Occupation, on_delete=models.CASCADE,default=None)
-    city=models.ForeignKey(Cities, on_delete=models.CASCADE,default=None)
-    schedule=models.CharField(max_length=10,choices=SCHEDULE,default=None)
-    experience=models.CharField(max_length=4,choices=JOB_EXPERIENCE)
-    education=models.CharField(max_length=10,choices=EDUCATION)
-    salary=models.IntegerField(blank=True)
-    job_description=models.TextField(blank=True)
-    key_skills=models.TextField(blank=True)
+    occupation=models.CharField(max_length=500,default=None, null=True)
+    city=models.CharField(max_length=500,default=None, null=True)
+    schedule=models.CharField(max_length=10,choices=SCHEDULE,default=None, null=True)
+    experience=models.IntegerField(blank=True, default= None, null=True)
+    education=models.CharField(max_length=10,choices=EDUCATION, null=True)
+    salary=models.IntegerField(blank=True,null=True)
+    work_place=models.CharField(max_length=4, choices=WORK_PLACE, default=None, null=True)
+    job_description=models.TextField(blank=True, null=True)
+    key_skills=models.TextField(blank=True, null=True)
+    
+
+    def __str__(self):
+        return str(self.occupation)
 
 

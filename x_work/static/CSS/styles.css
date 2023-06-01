@@ -68,6 +68,10 @@ search input
     display: none;
     
 }
+.searchinput:focus{
+    display: block;
+    
+}
 
 .searchform:hover .searchinput{
     display: block;
@@ -238,3 +242,22 @@ li.highlight {
     display:flexbox;
     width: 760px;
 }
+/*  */
+.search-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .search-icon {
+    cursor: pointer;
+  }
+  
+  #search-input {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    padding: 5px;
+    display: none;
+  }
+/*  */

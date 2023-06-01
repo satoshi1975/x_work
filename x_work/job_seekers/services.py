@@ -5,8 +5,7 @@ import json
 from itertools import zip_longest
 
 def get_context_cv_list(user_id):
-    user=User.objects.get(id=user_id)
-    jobseeker=JobSeeker.objects.filter(user=user)
+    jobseeker=JobSeeker.objects.get(user_=user_id)
     list_of_cv=CV.objects.filter(jobseeker=jobseeker)
     
     return list_of_cv
@@ -25,6 +24,12 @@ class CVEditor:
     @staticmethod
     def get_jobseeker(request):
         return JobSeeker.objects.get(user_id=request.user.id)
+
+    @staticmethod
+    def delete_cv(request):
+        cv_id=request.POST['cv_id']
+        CV.objects.get(id=cv_id).delete()
+        return True
 
     @staticmethod
     def update_cv(data,model_instance):
@@ -49,17 +54,36 @@ class CVEditor:
         CVEditor().update_cv(request.POST,cv)
         
         if len(request.POST.getlist('institution'))!=0:
-            CVEditor().create_education_objects(request, cv)
+            CVEditor().create_education_objects(request, cv, edit=False)
         if len(request.POST.getlist('company'))!=0:
-            CVEditor().create_experience_objects(request, cv)
+            CVEditor().create_experience_objects(request, cv, edit=False)
+        return True
+    
+    @staticmethod
+    def edit_cv(request,cv_id):
+        print(request.POST)
+        cv=CV.objects.get(id=cv_id)
+        CVEditor().update_cv(request.POST, cv)
+        # if len(request.POST.getlist('institution'))!=0:
+        CVEditor().create_education_objects(request, cv, edit=True)
+        # if len(request.POST.getlist('company'))!=0:
+        CVEditor().create_experience_objects(request, cv, edit=True)
         return True
 
+
     @staticmethod
-    def create_experience_objects(request,cv):
+    def create_experience_objects(request,cv, edit):
+        print(request.POST)
+        if edit:
+            Experience.objects.filter(cv_id=cv.id).delete()
         company=request.POST.getlist('company')
+        print(company)
         position=request.POST.getlist('position')
+        print(position)
         work_start=request.POST.getlist('work_start')
+        print(work_start)
         work_end=request.POST.getlist('work_end')
+        print(work_end)
         for company, position, work_start, work_end in zip_longest(company,position,work_start,work_end):
             experience_entry= Experience(cv=cv, occupation=position, company=company, start_work=work_start,end_work=work_end)
             experience_entry.save()
@@ -67,7 +91,9 @@ class CVEditor:
 
 
     @staticmethod
-    def create_education_objects(request,cv):
+    def create_education_objects(request,cv,edit):
+        if edit:
+            Education.objects.filter(cv_id=cv.id).delete()
         institution=request.POST.getlist('institution')
         study_start=request.POST.getlist('study_start')
         study_end=request.POST.getlist('study_end')
@@ -82,8 +108,23 @@ class CVEditor:
 
 class CVShow:
 
+    @staticmethod
+    def get_context_user_cv_list(user_id):
+        user=User.objects.get(id=user_id)
+
+        jobseeker=JobSeeker.objects.get(user=user)
+        list_of_cv=CV.objects.filter(jobseeker=jobseeker)
+        return list_of_cv
 
     @staticmethod
-    def get_context_user_cv_list(request):
+    def get_context_user_cv_show(cv_id):
+        cv=CV.objects.prefetch_related('cv_education','cv_experience').get(id=cv_id)
+        user_id=cv.jobseeker.user.id
+        context={
+            'cv':cv,
+            'user_id':user_id
+        }
+        # print(context.all())
+        # print(context[0].cv_education.all())
         
-        pass
+        return context

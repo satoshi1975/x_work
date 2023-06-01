@@ -1,0 +1,57 @@
+{% include 'base.html' %}
+{% block  content %}
+<div class="container">
+    <ul class="list-group">
+        {% for vacancy in vacancy_list %}
+        <li class="list-group-item">
+            <div class="card">
+                <div class="card-header justify-content-between d-flex">
+                  <div class="align-self-start">{{vacancy.occupation}}</div>
+                  <div class="align-self-end">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Delete
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete vacancy</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Do you realy wont to delete this vacancy?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <form method="post">
+                              {% csrf_token %}
+                              <input type="hidden" name="vacancy_id" value={{vacancy.id}}>
+                              <button type="submit" class="btn btn-primary">
+                                Yes
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="/JOB/show/{{vacancy.id}}" class="btn btn-primary">Go to CV</a>
+                </div>
+              </div>
+        </li>
+        {%endfor%}
+        
+      </ul>
+
+
+</div>
+
+
+{%endblock%}
