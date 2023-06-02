@@ -1,4 +1,6 @@
 from job_seekers.models import CV, JobSeeker,Education,Experience
+from employers.models import Vacancy
+from django.db.models import Q
 from main.models import User
 from job_seekers.forms import CVForm
 import json
@@ -128,3 +130,32 @@ class CVShow:
         # print(context[0].cv_education.all())
         
         return context
+
+
+class VacancySearchService:
+    @staticmethod
+    def search_vacancies(form_data):
+        query = Vacancy.objects.all()
+        
+        search_fields = {
+            'occupation': 'occupation__icontains',
+            'city': 'city__icontains',
+            'schedule': 'schedule',
+            'experience': 'experience__gte',
+            'education': 'education',
+            'salary': 'salary__gte',
+            'work_place': 'work_place',
+            'job_description': 'job_description__icontains',
+            # 'key_skills': 'key_skills__icontains',
+        }
+        
+        conditions = Q()
+        
+        for field, lookup in search_fields.items():
+            value = form_data.get(field)
+            if value:
+                conditions |= Q(**{lookup: value})
+        
+        query = query.filter(conditions)
+        
+        return query 

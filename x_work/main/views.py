@@ -7,6 +7,10 @@ from main.models import User, Cities, Occupation
 from django.http import JsonResponse
 from django.db.models import Q
 
+
+
+
+
 def main_page(request):
 
     return render(request, 'main_page.html')

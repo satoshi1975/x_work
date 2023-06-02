@@ -9,4 +9,6 @@ urlpatterns = [
     path('<int:user_id>/create_cv', views.create_cv),
     path('edit/<int:cv_id>', views.edit_cv),
     path('CV/<int:cv_id>/', views.cv_list, name='cv_detail'),
+    # path('search_v/', views.search_vacancy),
+    path('search/<str:>', views.VacancySearchView.as_view(), name='search_vacancy'),
 ] 

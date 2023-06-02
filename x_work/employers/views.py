@@ -42,3 +42,19 @@ def edit_vacancy(request, vacancy_id):
     else:
         context=services.VacancyShow().get_context_vacancy(vacancy_id)
         return render(request, 'edit_vacancy.html', context=context)
+
+
+
+def search_vacancy(request):
+    form = forms.VacancySearchForm(request.GET)
+    vacancies = []
+    
+    if form.is_valid():
+        vacancies = services.VacancySearchService.search_vacancies(form.cleaned_data)
+    
+    context = {
+        'form': form,
+        'vacancies': vacancies,
+    }
+    
+    return render(request, 'vacancy_search.html', context)

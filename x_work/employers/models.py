@@ -59,13 +59,6 @@ class Vacancy(models.Model):
         ('courses','Courses/Training'),
         ('hight',"hight school"),
     ]
-    # JOB_EXPERIENCE=[
-    #     ('none','without'),
-    #     ('1','1 year'),
-    #     ('13','1-3 year'),
-    #     ('3','3 year'),
-    #     ('5','5 year')
-    # ]
 
     
     employer=models.ForeignKey(Employer, on_delete=models.CASCADE)

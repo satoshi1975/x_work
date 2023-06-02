@@ -65,24 +65,22 @@
               <a class="nav-link nav-sub" href="#">Link</a>
             </li>
 
+        
             
-
-
-
-
+            
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle nav-sub"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+              class="nav-link dropdown-toggle nav-sub"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
               >
-                Dropdown
-              </a>
-
-              <ul class="dropdown-menu drop-staff">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+              Dropdown
+            </a>
+            
+            <ul class="dropdown-menu drop-staff">
+              <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li>
                   <hr class="dropdown-divider" />
@@ -92,6 +90,10 @@
                 </li>
               </ul>
             </li>
+            
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="/JOB/act">test</a>
+            </li> -->
             {% if user.user_type == 'company' %}
             <li class="nav-item">
               <a class="nav-sub nav-link" href="/JOB/{{user.id}}/vacancy_list">My vacancies</a>
@@ -101,7 +103,9 @@
               <a class="nav-sub nav-link" href="/CV/cv_list/{{user.id}}">My CV</a>
             </li>
             {% endif %}
-
+            <!-- <li class="nav-item">
+              <a class="nav-sub nav-link" href="/JOB/">My vacancies</a>
+            </li> -->
             
             <form class="d-flex searchform" role="search">
               <input
@@ -175,7 +179,7 @@ searchInput.addEventListener('blur', () => {
 
 </script> -->
 
-<script>
+<!-- <script>
   // Получаем все элементы с классом "nav-sub"
   var dropdowns = document.querySelectorAll('.nav-sub');
 
@@ -205,6 +209,6 @@ searchInput.addEventListener('blur', () => {
       }
     });
   });
-</script>
+</script> -->
   {%block content%}{%endblock%}
 
