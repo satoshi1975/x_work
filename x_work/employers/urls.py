@@ -8,5 +8,5 @@ urlpatterns = [
     path('<int:user_id>/vacancy_list', views.vacancy_list),
     path('show/<int:vacancy_id>/', views.show_vacancy),
     path('<int:vacancy_id>/edit', views.edit_vacancy),
-    path('search_/', views.search_vacancy),
+    path('search/', views.CVSearchView.as_view(),name='search_cv'),
 ] 

@@ -11,5 +11,6 @@ urlpatterns = [
     path('profile',views.profile),
     path('get_city/', views.get_city),
     path('get_occupation/', views.get_occupation),
+    # path("chat/<int:user_id>/", views.chat_room, name="chat_room"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

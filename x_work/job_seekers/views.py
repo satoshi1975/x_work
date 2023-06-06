@@ -19,45 +19,24 @@ class VacancySearchView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         if len(self.request.GET)!=0:
-            occupation = self.request.GET.get('occupation')
-            city = self.request.GET.get('city')
-            schedule = self.request.GET.get('schedule')
-            experience = self.request.GET.get('experience')
-            upper_exp, lower_exp = experience.split('|')
-            education = self.request.GET.get('education')
-            salary = self.request.GET.get('salary')
-            work_place = self.request.GET.get('work_place')
             print(self.request.GET)
-            if occupation != '':
-                print(occupation)
-                queryset = queryset.filter(occupation__icontains=occupation)
-                print(queryset)
-            if city!='':
-                print(city)
-                queryset = queryset.filter(city__icontains=city)
-                print(queryset)
-            if schedule != 'false':
-                print(schedule)
-                queryset = queryset.filter(schedule=schedule)
-                print(queryset)
-            if experience != 'false|false':
-                print(lower_exp)
-                print(upper_exp)
+            params = {key: value for key, value in self.request.GET.items() if value and value != 'false'}
 
+            print(self.request.GET)
+            if 'occupation' in params:
+                queryset = queryset.filter(occupation__icontains=params['occupation'])
+            if 'city' in params:
+                queryset = queryset.filter(city__icontains=params['city'])
+            if 'schedule' in params:
+                queryset = queryset.filter(schedule=params['schedule'])
+            if 'experience' in params:
                 queryset = queryset.filter(experience__gte=int(upper_exp), experience__lte=int(lower_exp))
-                print(queryset)
-            if education!='false':
-                print(education)
-                queryset = queryset.filter(education=education)
-                print(queryset)
-            if salary:
-                print(salary)
-                queryset = queryset.filter(salary=salary)
-                print(queryset)
-            if work_place!='false':
-                print(work_place)
-                queryset = queryset.filter(work_place=work_place)
-                print(queryset)
+            if 'education' in params:
+                queryset = queryset.filter(education=params['education'])
+            if 'salary' in params:
+                queryset = queryset.filter(salary=params['salary'])
+            if 'work_place' in params:
+                queryset = queryset.filter(work_place=params['work_place'])
 
 
             print(queryset)
@@ -92,9 +71,7 @@ def cv_list(request, user_id):
 @login_required
 def create_cv(request, user_id):
     if request.method=='POST':
-        print(len(request.POST.getlist('institution')))
-        print(request.POST.getlist('institution')[0])
-
+        print(request.POST)
         services.CVEditor().create_cv(request)
         return render(request, 'create_cv.html')
     else:

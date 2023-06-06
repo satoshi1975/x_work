@@ -33,6 +33,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'channels',
+    'daphne',
+    'chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,10 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'employers',
     'job_seekers',
-    # 'cities',
     'main',
-    # 'cities',
-    # 'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
@@ -81,9 +81,17 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'x_work.wsgi.application'
+# WSGI_APPLICATION = 'x_work.wsgi.application'
+ASGI_APPLICATION = "x_work.asgi.application"
 
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -98,6 +106,8 @@ DATABASES = {
         
     }
 }
+
+
 
 AUTH_USER_MODEL = "main.User"
 

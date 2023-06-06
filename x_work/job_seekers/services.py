@@ -1,7 +1,7 @@
 from job_seekers.models import CV, JobSeeker,Education,Experience
 from employers.models import Vacancy
 from django.db.models import Q
-from main.models import User
+from main.models import User, Cities
 from job_seekers.forms import CVForm
 import json
 from itertools import zip_longest
@@ -36,9 +36,15 @@ class CVEditor:
     @staticmethod
     def update_cv(data,model_instance):
         form=CVForm(data=data,instance=model_instance)
+        
         if form.is_valid():
             form.save()
+            
+            model_instance.city=Cities.objects.get(id=data['city_id'])
+            model_instance.save()
             return True
+        
+        
         else:
             errors = form.errors.as_data()
             for field, error_list in errors.items():

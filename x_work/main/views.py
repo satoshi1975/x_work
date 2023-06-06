@@ -88,3 +88,8 @@ def get_occupation(request):
         'status' : True,
         'payload': payload
     })
+
+# from django.shortcuts import render
+
+# def chat_room(request, user_id):
+#     return render(request, "chat_room.html", {"user_id": user_id})

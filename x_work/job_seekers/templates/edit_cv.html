@@ -99,7 +99,12 @@ rel="stylesheet"
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
       </div> -->
-      
+      <div id="autocomplete" class="autocomplete mb-3">
+        <label  class="form-label">City</label>
+        <input class="autocomplete-input" value={{cv.city.city}}>
+        <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
+        <ul class="autocomplete-result-list"></ul>
+      </div>
 
         <div class="mb-3">
             <label for="salary" class="form-label">Desired salary</label>
@@ -122,7 +127,9 @@ rel="stylesheet"
 <!-- <script>
   document.getElementById("work_schedule").value = {cv.schedule};
 </script> -->
-<script>
+<script src="{%static 'js/scripts.js'%}"></script>
+
+<!-- <script>
   function removeEducationRow(button) {
       var row = button.parentNode;
       row.parentNode.removeChild(row);
@@ -171,10 +178,10 @@ rel="stylesheet"
     // Добавление обработчика события ввода в поле автодополнения
     const occupationInput = document.querySelector('#occupation-input');
     occupationInput.addEventListener('input', handleInput);
-  </script>
+  </script> -->
 
 
-<script>
+<!--<script>
   function addWorkExperienceFields() {
       var workExperienceFields = document.getElementById('work-experience-fields');
 
@@ -285,7 +292,7 @@ rel="stylesheet"
           return educationalInstitutionInput.value !== '' && startDateInput.value !== '' && endDateInput.value !== '';
       }
   });
-</script>
+</script> -->
 <!-- <script>
    window.addEventListener('DOMContentLoaded', (event) => {
   const addFieldsButton = document.getElementById('addFieldsButton');

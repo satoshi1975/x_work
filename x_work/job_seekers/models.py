@@ -60,7 +60,7 @@ class CV(models.Model):
     key_skills=models.TextField(blank=True,default=None, null=True)
     work_place=models.CharField(max_length=4, choices=WORK_PLACE, default=None, null=True)
     experience=models.IntegerField(blank=True, default=None, null=True)
-    # city=models.ForeignKey(Cities, on_delete=models.CASCADE,default=None, blank=True)
+    city=models.ForeignKey(Cities, on_delete=models.CASCADE,default=None, blank=True,null=True)
 
     def __str__(self):
         return str(self.occupation)

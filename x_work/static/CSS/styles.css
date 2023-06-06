@@ -1,15 +1,16 @@
 /* .bg-header {
     background-color: #06ff6a;
 } */
-@font-face {
+/* @font-face {
     font-family: 'red_hat';
     src: url("../fonts/RedHatDisplay-VariableFont_wght.ttf") ;
     font-weight:100;
     font-style:normal;
-}
+} */
 
 body{
     height: 2000px;
+    background-color: url();
 }
 
 .nav-item{

@@ -1,3 +1,47 @@
+function closeAutocomplete() {
+const occupationList = document.querySelector('#occupation-list');
+occupationList.innerHTML = '';
+}
+
+// Функция для обработки выбора профессии из списка
+function handleSelection(occupation) {
+const occupationInput = document.querySelector('#occupation-input');
+occupationInput.value = occupation;
+closeAutocomplete();
+}
+
+// Обработчик ввода в поле автодополнения
+function handleInput() {
+const input = document.querySelector('#occupation-input').value;
+const url = `/get_occupation/?search=${input}`;
+
+fetch(url)
+    .then(response => response.json())
+    .then(data => {
+    const occupationList = document.querySelector('#occupation-list');
+    occupationList.innerHTML = '';
+
+    if (data.status) {
+        const payload = data.payload;
+        payload.forEach(occupation => {
+        const listItem = document.createElement('li');
+        listItem.textContent = occupation.occupation;
+        listItem.addEventListener('click', () => handleSelection(occupation.occupation));
+        occupationList.appendChild(listItem);
+        });
+    }
+    })
+    .catch(error => {
+    console.log('Произошла ошибка:', error);
+    });
+}
+
+// Добавление обработчика события ввода в поле автодополнения
+const occupationInput = document.querySelector('#occupation-input');
+occupationInput.addEventListener('input', handleInput);
+
+
+
 new Autocomplete('#autocomplete',{
 search : input => {
     console.log(input)
@@ -47,3 +91,126 @@ function closeAutocomplete() {
 const list = document.querySelector('#autocomplete').querySelector('ul');
 list.classList.remove('autocomplete-result-list'); // Скрыть список автодополнения
 }
+
+
+// 
+
+
+
+function removeEmptyFields() {
+    var form = document.getElementById("search-form-vacancy");
+    var inputs = form.getElementsByTagName("input");
+    var selects = form.getElementsByTagName("select");
+
+    // Remove empty values from input fields
+    for (var i = 0; i < inputs.length; i++) {
+      var input = inputs[i];
+      if (input.value.trim() === "" || input.value === "false" || input.value === "None") {
+        input.remove();
+      }
+    }
+
+    // Remove empty values from select fields
+    for (var i = 0; i < selects.length; i++) {
+      var select = selects[i];
+      var selectedOption = select.options[select.selectedIndex];
+      if (selectedOption.value === "false" || selectedOption.value === "None") {
+        select.remove();
+      }
+    }
+  }
+
+  // Attach the removeEmptyFields function to the form's submit event
+  var form = document.getElementById("search-form-vacancy");
+  form.addEventListener("submit", removeEmptyFields);
+
+
+
+  function addWorkExperienceFields() {
+    var workExperienceFields = document.getElementById('work-experience-fields');
+
+    // Проверка, что все предыдущие поля заполнены
+    var previousFields = workExperienceFields.querySelectorAll('input');
+    var isPreviousFieldsFilled = true;
+    previousFields.forEach(function(field) {
+        if (field.value.trim() === '') {
+            isPreviousFieldsFilled = false;
+        }
+    });
+
+    if (isPreviousFieldsFilled) {
+        // Создание новых полей "компания", "должность", "начало работы" и "конец работы"
+        var companyInput = document.createElement('input');
+        companyInput.type = 'text';
+        companyInput.name = 'company';
+        companyInput.placeholder = 'Компания';
+
+        var positionInput = document.createElement('input');
+        positionInput.type = 'text';
+        positionInput.name = 'position';
+        positionInput.placeholder = 'Должность';
+
+        var startDateInput = document.createElement('input');
+        startDateInput.type = 'date';
+        startDateInput.name = 'work_start';
+        startDateInput.placeholder = 'Начало работы';
+
+        var endDateInput = document.createElement('input');
+        endDateInput.type = 'date';
+        endDateInput.name = 'work_end';
+        endDateInput.placeholder = 'Конец работы';
+
+        var closeButton = document.createElement('button');
+        closeButton.classList.add('close-button');
+        closeButton.innerText = 'Закрыть';
+        closeButton.addEventListener('click', () => {
+            var fieldset = companyInput.parentNode;
+            fieldset.remove();
+        });
+
+        var fieldset = document.createElement('fieldset');
+        fieldset.appendChild(companyInput);
+        fieldset.appendChild(positionInput);
+        fieldset.appendChild(startDateInput);
+        fieldset.appendChild(endDateInput);
+        fieldset.appendChild(closeButton);
+
+        workExperienceFields.appendChild(fieldset);
+    }
+}
+
+
+
+// window.onload = function() {
+// document.getElementById('search-form-vacancy').addEventListener('submit', function(event) {
+//     var form = event.target;
+//     var elements = form.elements;
+
+//     for (var i = 0; i < elements.length; i++) {
+//     var element = elements[i];
+    
+//     if (element.tagName === 'SELECT') {
+//         if (element.value === 'false') {
+//         form.removeChild(element);
+//         }
+//     } else if (element.tagName === 'INPUT' && element.value === '') {
+//         form.removeChild(element);
+//     }
+//     }
+// });
+// };
+
+
+
+// document.getElementById("search-form-vacancy").addEventListener("submit", function(event) {
+//     var form = event.target;
+//     var inputs = form.querySelectorAll("input[type=text], select");
+
+//     for (var i = 0; i < inputs.length; i++) {
+//         var input = inputs[i];
+
+//         if (input.value.trim() === "" || input.value === "false") {
+//             input.disabled = true;
+//         }
+//     }
+// });

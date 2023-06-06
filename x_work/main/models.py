@@ -29,3 +29,4 @@ class Occupation(models.Model):
     def __str__(self):
         return self.occupation
         
+
