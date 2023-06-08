@@ -59,10 +59,9 @@
             <h4>City:</h4>
             <div id="autocomplete" class="autocomplete mb-3">
                 <input name="city" class="autocomplete-input" value={{city}}>
-                <!-- <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}> -->
+                <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
                 <ul class="autocomplete-result-list"></ul>
             </div>
-
             
 
       </div>
@@ -137,7 +136,7 @@
                         {% for vacancy in vacancies %}
                       <a href="JOB/show/{{vacancy}}">
                      <tr>
-                      <td class="number text-center">1</td>
+                      <td class="number text-center">{{ forloop.counter }}</td>
                       <td class="image">
                         <img
                           src="https://www.bootdey.com/image/400x300/FF8C00"
@@ -146,8 +145,8 @@
                       </td>
                       <td class="product">
                         <a href="/JOB/show/{{vacancy.id}}">
-                        <strong>{{ vacancy.occupation }}</strong><br />
-                      </a>
+                          <strong>{{ vacancy.occupation }}</strong><br />
+                        </a>
                       </td>
                       
                       <td class="rate text-right">

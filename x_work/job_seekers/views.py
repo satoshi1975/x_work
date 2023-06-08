@@ -20,10 +20,11 @@ class VacancySearchView(ListView):
         queryset = super().get_queryset()
         if len(self.request.GET)!=0:
             print(self.request.GET)
-            params = {key: value for key, value in self.request.GET.items() if value and value != 'false'}
-
-            print(self.request.GET)
+            params = {key: value for key, value in self.request.GET.items() if value and value != 'false' and value != 'None'}
+            
+            # print(self.request.GET)
             if 'occupation' in params:
+                print(queryset)
                 queryset = queryset.filter(occupation__icontains=params['occupation'])
             if 'city' in params:
                 queryset = queryset.filter(city__icontains=params['city'])
@@ -51,7 +52,7 @@ class VacancySearchView(ListView):
         for filter_name in filters:
             value = self.request.GET.get(f'{filter_name}')
             context[filter_name] = value
-        print(context)
+        # print(context)
         return context
 
 @login_required

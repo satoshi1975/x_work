@@ -59,7 +59,7 @@
             <h4>City:</h4>
             <div id="autocomplete" class="autocomplete mb-3">
                 <input name="city" class="autocomplete-input" value={{city}}>
-                <!-- <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}> -->
+                <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
                 <ul class="autocomplete-result-list"></ul>
             </div>
 
@@ -137,29 +137,29 @@
                         {% for cv in cv %}
                         <a href="/CV/show/{{cv.id}}">
                         <tr>
-                          <td class="number text-center">1</td>
-                          <td class="image">
-                        <img
-                          src="https://www.bootdey.com/image/400x300/FF8C00"
-                          alt=""
-                        />
-                      </td>
-                      <a href="/CV/show/{{cv.id}}">
-                      <td class="product">
-                        <strong>{{ cv.occupation }}</strong><br />
-                      </td>
-                    </a>
-                      <td class="rate text-right">
-                        <span
-                          ><i class="fa fa-star"></i><i class="fa fa-star"></i
-                          ><i class="fa fa-star"></i><i class="fa fa-star"></i
-                          ><i class="fa fa-star-half-o"></i
-                        ></span>
-                      </td>
-                      {%if cv.salary%}
-                      <td class="price text-right">{{cv.salary}}</td>
-                      {%endif%}
-                    </tr>
+                           <td class="number text-center">{{ forloop.counter }}</td>
+                              <td class="image">
+                                  <img
+                                    src="https://www.bootdey.com/image/400x300/FF8C00"
+                                    alt=""
+                                  />
+                              </td>
+                            <td class="product">
+                              <a href="/CV/show/{{cv.id}}">
+                                <strong>{{ cv.occupation }}</strong><br />
+                              </a>
+                            </td>
+                          {%if cv.salary%}
+                            <td class="price text-right">{{cv.salary}}$
+                              
+                            </td>
+                          {%endif%}
+                          <td class="rate" style="padding-right: 20px;">
+                            <a href="#">начать чат</a>
+
+                          </td>
+                    
+                        </tr>
                     </a>
                     {% endfor %}
                     {% else %}
@@ -168,7 +168,7 @@
                    
 
               <!-- BEGIN PAGINATION -->
-              <ul class="pagination">
+              <!-- <ul class="pagination">
                 <li class="disabled"><a href="#">«</a></li>
                 <li class="active"><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
@@ -176,7 +176,7 @@
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
                 <li><a href="#">»</a></li>
-              </ul>
+              </ul> -->
               <!-- END PAGINATION -->
             </div>
             <!-- END RESULT -->
@@ -189,5 +189,5 @@
 </div>
 
 
-<script src="{%static 'js/scripts.js'%}"></script>
+<script src="{%static 'JS/scripts.js'%}"></script>
 {%endblock%}

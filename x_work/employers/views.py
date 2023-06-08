@@ -12,15 +12,18 @@ class CVSearchView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
         if len(self.request.GET)!=0:
-            print(self.request.GET)
+            # print(self.request.GET.items())
             params = {key: value for key, value in self.request.GET.items() if value and value != 'false'}
             
             print(self.request.GET)
             if 'occupation' in params:
                 queryset = queryset.filter(occupation__icontains=params['occupation'])
-            if 'city' in params:
-                queryset = queryset.filter(city__icontains=params['city'])
+            if 'city_id' in params:
+                queryset = queryset.filter(city_id=params['city_id'])
+            # if 'city' in params:
+            #     queryset = queryset.filter(city__icontains=params['city'])
             if 'schedule' in params:
                 queryset = queryset.filter(schedule=params['schedule'])
             if 'experience' in params:
@@ -40,7 +43,7 @@ class CVSearchView(ListView):
         context = super().get_context_data(**kwargs)
 
         # Добавление значений критериев поиска в контексте
-        filters = ['occupation', 'city', 'experience', 'schedule','education','occupation','work_place']  # Добавьте все поля фильтрации
+        filters = ['occupation', 'city', 'experience', 'schedule','education','occupation','work_place','city_id']  # Добавьте все поля фильтрации
 
         for filter_name in filters:
             value = self.request.GET.get(f'{filter_name}')

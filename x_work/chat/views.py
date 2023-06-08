@@ -14,7 +14,8 @@ def redirect_to_chat(request, user_id):
     return redirect(url_chat)
 
 def chat(request, chat_id):
-    print(chat_id)
-    print('affffffffffffffaaaaaaaaaaaaaaaaaaaaaaaaa')
-    return render(request, "chat.html", {"chat_id": chat_id})
+    print(request)
+    user_id=request.user.id
+
+    return render(request, "chat.html", {"chat_id": chat_id, 'user_id':user_id})
     
