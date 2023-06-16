@@ -6,7 +6,27 @@ type="text/css"
 rel="stylesheet"
 />
 {% block  content %}
-<div class="container">
+<div class="card" id="employer-card">
+    <div style="position: relative;" id="image">
+      <img id="profile-photo" src="{{vacancy.employer.profile_photo.url}}" alt="">
+    </div>
+    
+    <!-- <div class="card-title">
+      {{vacancy.employer.company_name}}
+    </div> -->
+    <h2 class="card-title">
+      {{vacancy.employer.company_name}}
+    </h2>
+    <div class="card-link d-flex">
+      <div id="to-profile-link">
+        <a href="/profile/{{vacancy.employer.user.id}}">to profile</a>
+      </div>
+      <div id="chat-user-link">
+          <a href="/chat/user/{{vacancy.employer.user.id}}">call</a>
+      </div>
+      </div>
+</div>
+<div id="vacancy-info">
     <div class="container mt-4">
         <div class="card mb-3">
           <div class="card-body">
@@ -89,7 +109,7 @@ rel="stylesheet"
             
             
             {% if user_id == request.user.id%}
-            <a href= "/JOB/{{vacancy.id}}/edit">Edit vacancy</a>
+            <a id="edit-button" href= "/JOB/{{vacancy.id}}/edit">Edit vacancy</a>
             {%endif%}
       <!-- </div> -->
   </div>    
@@ -97,3 +117,24 @@ rel="stylesheet"
 
 
 {%endblock%}
+<script>
+  var element = document.getElementById('employer-card');
+  
+  function setScrollTrigger(element, distance) {
+ var offset = element.getBoundingClientRect().top;
+ 
+ window.addEventListener('scroll', function() {
+   if (window.scrollY > offset) {
+   
+     element.style.position = 'fixed';
+     element.style.top = 0;
+   } else {
+    
+     element.style.position = 'absolute';
+     element.style.top = 130 + 'px';
+   }
+ });
+}
+
+ setScrollTrigger(element, 0);
+</script>

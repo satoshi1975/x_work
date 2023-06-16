@@ -5,6 +5,7 @@ from main.models import User, Cities
 from job_seekers.forms import CVForm
 import json
 from itertools import zip_longest
+from datetime import date
 
 def get_context_cv_list(user_id):
     jobseeker=JobSeeker.objects.get(user_=user_id)
@@ -20,6 +21,15 @@ def get_data_from_post(request):
         data[key] = value
     return data
 
+def get_user_age(birth_date):
+    today = date.today()
+    age = today.year - birth_date.year
+
+    # Проверяем, был ли уже день рождения в этом году
+    if today.month < birth_date.month or (today.month == birth_date.month and today.day < birth_date.day):
+        age -= 1
+
+    return age
 
 class CVEditor:
     
@@ -39,9 +49,9 @@ class CVEditor:
         
         if form.is_valid():
             form.save()
-            
-            model_instance.city=Cities.objects.get(id=data['city_id'])
-            model_instance.save()
+            if data['city_id'] and data['city_id']!='None':
+                model_instance.city=Cities.objects.get(id=data['city_id'])
+                model_instance.save()
             return True
         
         
@@ -128,14 +138,17 @@ class CVShow:
     def get_context_user_cv_show(cv_id):
         cv=CV.objects.prefetch_related('cv_education','cv_experience').get(id=cv_id)
         user_id=cv.jobseeker.user.id
+        user_age=get_user_age(cv.jobseeker.get_date())
         context={
             'cv':cv,
-            'user_id':user_id
+            'user_id':user_id,
+            'user_age':user_age
         }
         # print(context.all())
         # print(context[0].cv_education.all())
         
         return context
+    
 
 
 class VacancySearchService:

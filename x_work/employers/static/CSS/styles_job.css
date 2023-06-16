@@ -1,14 +1,12 @@
-body{
+/* body {
   height: 2000px;
   background-color: #eee;
-}
-
+} */
 
 .autocomplete {
-    position: relative;
-    display: inline-block;
-    
-  }
+  position: relative;
+  display: inline-block;
+}
 .autocomplete input {
   /* width: 300px; */
   width: 100%;
@@ -31,7 +29,7 @@ body{
   background-color: #fffbfb;
 }
 
-#bio{
+#bio {
   width: 100%;
 }
 
@@ -45,3 +43,412 @@ body{
   background-color: currentcolor;
   opacity: 0.25;
 }
+/* 
+#div-open-user-chat{
+  position:absolute;
+  padding-top: 30px;
+  right: 20px;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  flex-wrap:wrap;
+  align-content: center;
+  justify-content: center;
+} */
+
+#open-user-chat {
+  position: absolute;
+  display: flex;
+  color: #06ff6a;
+  background-color: black;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 25px;
+  font-size: large;
+  text-decoration: none;
+
+  height: 80px;
+  width: 80px;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+#reply-to-vacancy {
+  position: absolute;
+  display: flex;
+  background-color: #06ff6a;
+  color: black;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 105px;
+  font-size: large;
+  text-decoration: none;
+
+  height: 80px;
+  width: 80px;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+/* vacancy_page */
+
+#vacancy-info {
+  left: 25%;
+  position: relative;
+  width: 75%;
+}
+
+#employer-card {
+  position: absolute;
+  width: 23%;
+  margin-top: 23px;
+  height: 300px;
+  margin-left: 23px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+  border-radius: 29px;
+  /* background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  ); */
+}
+
+#employer-card #profile-photo {
+  position: absolute;
+  top: 8.8%;
+  /* margin-left: 8.8%; */
+  height: 160px;
+  width: 240px;
+  border-style: double;
+}
+
+#to-profile-link {
+  border-bottom-left-radius: 30px;
+  border-right-style: solid;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  transition: background-image 3s ease;
+}
+#to-profile-link a {
+  color: black;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#to-profile-link:hover {
+  background: linear-gradient(
+    5deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+
+  /* transition: background-color 0.3s ease */
+}
+#chat-user-link {
+  border-bottom-right-radius: 30px;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+}
+#chat-user-link:hover {
+  background: linear-gradient(
+    -5deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+}
+#chat-user-link a {
+  color: black;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#image {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+#image > #profile-photo {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#employer-card > .card-title {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#employer-card > .card-link {
+  position: relative;
+  top: 4.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-wrap: wrap;
+  border-top-style: solid;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-link div {
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* top: 3px; */
+  text-decoration: none;
+  background-color: #06ff6a;
+}
+#reply-to-vacancy {
+  position: absolute;
+  display: flex;
+  background-color: black;
+  color: rgba(149, 254, 224, 1);
+  top: 50%;
+  transform: translateY(-50%);
+  right: 105px;
+  font-size: large;
+  text-decoration: none;
+  height: 80px;
+  width: 80px;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+#open-user-chat {
+  position: absolute;
+  display: flex;
+  color: black;
+  /* background-color: black; */
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  top: 50%;
+  transform: translateY(-50%);
+  right: 25px;
+  font-size: large;
+  text-decoration: none;
+  height: 80px;
+  width: 80px;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+/*  */
+#edit-button {
+  left: 45%;
+  position: relative;
+  display: flex;
+  height: 30px;
+  width: 140px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: black;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* vacancy list */
+
+#job-list button {
+  color: black;
+  background: linear-gradient(
+    31deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border-radius: 36px;
+  border: none;
+  font-family: system-ui;
+  border-bottom: groove;
+  border-color: black;
+  border-width: 2px;
+}
+
+#cv-filters {
+  position: absolute;
+  left: 25px;
+  top: 158px;
+  width: 325px;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+#search-area {
+  position: relative;
+  width: 77%;
+  left: 391px;
+  top: 21px;
+}
+#search-area a {
+  text-decoration: none;
+}
+#search-area h4 {
+  color: black;
+}
+#search-area #search-btn {
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border: none;
+}
+#job-list button:hover {
+  border: none;
+}
+
+#job-list a {
+  color: black;
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border-radius: 36px;
+  border: none;
+  font-family: system-ui;
+}
+#job-list #occupation {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border-radius: 36px;
+  border-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: black;
+}
+
+#job-card {
+  border-radius: 36px;
+}
+#job-card #occupation-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+#create-vacancy-button {
+  position: relative;
+  left: 40%;
+  text-decoration: none;
+  display: flex;
+  width: 208px;
+  height: 48px;
+  top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  border-style: groove;
+  border-radius: 5px;
+}
+
+/* #create-vacancy-button a{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+} */

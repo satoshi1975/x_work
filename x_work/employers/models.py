@@ -63,7 +63,8 @@ class Vacancy(models.Model):
     
     employer=models.ForeignKey(Employer, on_delete=models.CASCADE)
     occupation=models.CharField(max_length=500,default=None, null=True)
-    city=models.CharField(max_length=500,default=None, null=True)
+    # city=models.CharField(max_length=500,default=None, null=True)
+    city=models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, default=None, null=True)
     schedule=models.CharField(max_length=10,choices=SCHEDULE,default=None, null=True)
     experience=models.IntegerField(blank=True, default= None, null=True)
     education=models.CharField(max_length=10,choices=EDUCATION, null=True)

@@ -1,13 +1,73 @@
 {%include 'base.html'%}
-<!DOCTYPE html>
+{%load static%}
+<link
+href="{%static 'CSS/styles_chat.css'%}"
+type="text/css"
+rel="stylesheet"
+/>
+<!-- <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Chat Room</title>
+</head> -->
 <body>
-    <div class="container" style="padding-top: 50px; padding-left: 100px;"> 
-        <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <div id="chat-list">
+        <h3>My chats</h3>
+        <hr style="height: 2px; margin: 0 0;">
+        {% if recipient.user.user_type == 'company'%}
+            <div id="chat-items">
+            {%for chat in chat_list%}
+                <div id="item">
+                <a href="/chat/user/{{chat.employer.user_id}}">
+                    {{chat.employer.company_name}}
+                </a>
+                </div>
+                <hr>            
+            {%endfor%}
+            </div>
+        </div>
+        {%else%}
+        <div id="chat-items">
+            {%for chat in chat_list%}
+            <div id="item">
+                <a href="/chat/user/{{chat.jobseeker.user_id}}">
+                    {{chat.jobseeker.first_name}}
+                    {{chat.jobseeker.last_name}}
+                </a>
+            </div>
+            <hr>
+            {%endfor%}
+        </div>
+        {%endif%}
+    </div>
+    <!-- <p>{{chat_list}}</p> -->
+    <div id="chat-area">
+        {% if recipient.user.user_type == 'company' %}
+        <div id="recipient-card">
+            
+            <h2 style="left: 30px;">{{recipient.company_name}}</h2>
+            <hr style="position: relative;">
+            <div id="recipient-manager">
+                <a id="company-profile" href="/profile/{{recipient.user.id}}" style="padding-right: 10px;">company profile</a>
+                <div class="vr"></div>
+                <a id="blocked" href="">blocked</a>
+            </div>
+        </div> 
+        {%else%}
+        <div id="recipient-card">
+            
+            <h2 style="left: 30px;">{{recipient.first_name}} {{recipient.last_name}}</h2>
+            <hr style="position: relative;">
+            <div id="recipient-manager">
+                <a id="company-profile" href="/profile/{{recipient.user.id}}" style="padding-right: 10px;">user profile</a>
+                <div class="vr"></div>
+                <a id="blocked" href="">blocked</a>
+            </div>
+        </div> 
+        {%endif%}
+        <!-- <p>{{recipient.user.user_type}}</p> -->
+        <textarea disabled id="chat-log" cols="100" rows="20"></textarea><br>
         <div class="d-flex">
             <input id="chat-message-input" type="text" size="100"><br>
             <input id="chat-message-submit" type="button" value="Send">

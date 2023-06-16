@@ -1,0 +1,46 @@
+{%include 'base.html'%}
+{%load static%}
+<link
+href="{%static 'css/styles_main.css'%}"
+type="text/css"
+rel="stylesheet"
+/>
+<div id="articles-page">
+    <div id="articles-list">
+        {%for article in articles_list%}
+        <div id="article-link">
+            <a href="/articles/{{article.id}}">
+                {{article.title}}
+            </a>
+        </div>
+        {%endfor%}
+    </div>
+    {%if article_id%}
+    {%for article in articles_list%}
+    {%if article.id == article_id%}
+    <div id="article-area">
+        <div id="article-title">
+            
+            {{article.title}}
+        </div>
+        <div id="article-text">
+            
+            {{article.text}}
+        </div>
+    </div>
+    {%endif%}
+
+    {%endfor%}
+    {%else%}
+    <!-- <div id="article-area" style="left: 190px; top:26px"> -->
+        <div id="article-area">
+            <div id="article-title">
+                {{articles_list.0.title}}
+            </div>
+            <div id="article-text">
+                {{articles_list.0.text}}
+            </div>
+        </div>
+    </div>
+    {%endif%}
+</div>

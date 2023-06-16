@@ -48,6 +48,57 @@
 //     const list = document.querySelector('#autocomplete').querySelector('ul');
 //     list.classList.remove('autocomplete-result-list'); // Скрыть список автодополнения
 //     }
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    const addFieldsButton = document.getElementById('addFieldsButton');
+    const inputFieldsContainer = document.getElementById('inputFieldsContainer');
+  
+    let fieldCounter = 0;
+  
+    addFieldsButton.addEventListener('click', (event) => {
+      event.preventDefault(); // Предотвращаем отправку формы
+  
+      if (fieldCounter < 2 || (fieldCounter >= 2 && arePreviousFieldsFilled())) {
+        fieldCounter++;
+        const fieldsWrapper = document.createElement('div');
+        fieldsWrapper.classList.add('fields-wrapper');
+  
+        const educationalInstitutionInput = document.createElement('input');
+        educationalInstitutionInput.type = 'text';
+        educationalInstitutionInput.name='institution'
+        educationalInstitutionInput.placeholder = 'Учебное заведение';
+  
+        const startDateInput = document.createElement('input');
+        startDateInput.type = "date" ;
+        startDateInput.name='study_start'
+        startDateInput.placeholder = 'Начало обучения';
+  
+        const endDateInput = document.createElement('input');
+        endDateInput.type = "date" ;
+        endDateInput.name='study_end'
+        endDateInput.placeholder = 'Конец обучения';
+        endDateInput.style='padding-top: 10px;'
+  
+        fieldsWrapper.appendChild(educationalInstitutionInput);
+        fieldsWrapper.appendChild(startDateInput);
+        fieldsWrapper.appendChild(endDateInput);
+        inputFieldsContainer.appendChild(fieldsWrapper);
+      }
+    });
+  
+    function arePreviousFieldsFilled() {
+      const previousFields = Array.from(inputFieldsContainer.getElementsByClassName('fields-wrapper'));
+      const lastFieldsWrapper = previousFields[previousFields.length - 1];
+      const educationalInstitutionInput = lastFieldsWrapper.querySelector('input:nth-child(1)');
+      const startDateInput = lastFieldsWrapper.querySelector('input:nth-child(2)');
+      const endDateInput = lastFieldsWrapper.querySelector('input:nth-child(3)');
+      
+      return educationalInstitutionInput.value !== '' && startDateInput.value !== '' && endDateInput.value !== '';
+    }
+  });
+  
+
+
 new Autocomplete('#autocomplete',{
     search : input => {
         console.log(input)
@@ -237,6 +288,62 @@ function removeEmptyFields() {
 
 
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    const addFieldsButton = document.getElementById('addFieldsButton');
+    const inputFieldsContainer = document.getElementById('inputFieldsContainer');
+
+    let fieldCounter = 0;
+
+    addFieldsButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Предотвращаем отправку формы
+
+        if (fieldCounter < 2 || (fieldCounter >= 2 && arePreviousFieldsFilled())) {
+            fieldCounter++;
+            const fieldsWrapper = document.createElement('div');
+            fieldsWrapper.classList.add('fields-wrapper');
+
+            const educationalInstitutionInput = document.createElement('input');
+            educationalInstitutionInput.type = 'text';
+            educationalInstitutionInput.name = 'institution';
+            educationalInstitutionInput.placeholder = 'Учебное заведение';
+
+            const startDateInput = document.createElement('input');
+            startDateInput.type = "date";
+            startDateInput.name = 'study_start';
+            startDateInput.placeholder = 'Начало обучения';
+
+            const endDateInput = document.createElement('input');
+            endDateInput.type = "date";
+            endDateInput.name = 'study_end';
+            endDateInput.placeholder = 'Конец обучения';
+            endDateInput.style = 'padding-top: 10px;';
+
+            const closeButton = document.createElement('button');
+            closeButton.classList.add('close-button');
+            closeButton.innerText = 'Закрыть';
+            closeButton.addEventListener('click', () => {
+                fieldsWrapper.remove();
+                fieldCounter--; // Уменьшаем счетчик полей после удаления
+            });
+
+            fieldsWrapper.appendChild(educationalInstitutionInput);
+            fieldsWrapper.appendChild(startDateInput);
+            fieldsWrapper.appendChild(endDateInput);
+            fieldsWrapper.appendChild(closeButton);
+            inputFieldsContainer.appendChild(fieldsWrapper);
+        }
+    });
+
+    function arePreviousFieldsFilled() {
+        const previousFields = Array.from(inputFieldsContainer.getElementsByClassName('fields-wrapper'));
+        const lastFieldsWrapper = previousFields[previousFields.length - 1];
+        const educationalInstitutionInput = lastFieldsWrapper.querySelector('input:nth-child(1)');
+        const startDateInput = lastFieldsWrapper.querySelector('input:nth-child(2)');
+        const endDateInput = lastFieldsWrapper.querySelector('input:nth-child(3)');
+
+        return educationalInstitutionInput.value !== '' && startDateInput.value !== '' && endDateInput.value !== '';
+    }
+});
 // window.onload = function() {
 // document.getElementById('search-form-vacancy').addEventListener('submit', function(event) {
 //     var form = event.target;

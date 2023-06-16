@@ -1,5 +1,5 @@
 {%include 'base.html'%} {% load static %}
-<link href="{%static 'CSS/styles_cv.css'%}" type="text/css" rel="stylesheet" />
+<link href="{%static 'CSS/styles_job.css'%}" type="text/css" rel="stylesheet" />
 {%block content %}
 <div>
   <div>
@@ -10,13 +10,13 @@
             <form action="{% url 'search_cv' %}" method="GET" id="search-form-vacancy">
       <div class="d-flex">
             <!-- BEGIN FILTERS -->
-        <div class="col-md-3"  style="width: 200px; position:sticky; top: 0px; padding-bottom: 10px;">
+        <div class="col-md-3" id="cv-filters">
               <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
               <hr />
 
 
               
-            <h4>Education:</h4>
+            <h4>Education</h4>
             <select class="form-select" name="education" id="education">
                 <option {%if education == 'false'%}selected{%endif%} value="false">Doesn't matter</option>
                 <option {%if education == 'none'%}selected{%endif%} value="none">Without education</option>
@@ -28,7 +28,7 @@
                 <option {%if education == 'hight'%}selected{%endif%} value="hight">hight school</option>
             </select>
         
-            <h4>Experience:</h4>
+            <h4>Experience</h4>
             <select class="form-select" name="experience" id="experience">
                 <!-- <option selected>Doesn't matter</option> -->
                 <option  {%if experience == 'false|false'%}selected{%endif%} value="false">Doesn't matter</option>
@@ -38,7 +38,7 @@
                 <option {%if experience == '3|6'%}selected{%endif%} value="3|6">3-6 years </option>
                 <option {%if experience == '6|100'%}selected{%endif%} value="6|100">over 6 year</option>
             </select>
-            <h4>Work schedule:</h4>
+            <h4>Work schedule</h4>
             <select class="form-select" name="schedule" id="schedule" >
                 <option disabled>no</option>
                 <option {%if schedule == 'false'%}selected{%endif%} value="false">Doesn't matter</option>
@@ -49,14 +49,14 @@
                 <option {%if schedule == 'seasonal'%}selected{%endif%} value="seasonal">seasonal</option>
                 <option {%if schedule == 'hybrid'%}selected{%endif%} value="hybrid">hybrid</option>
             </select>
-            <h4>Work place:</h4>
+            <h4>Work place</h4>
             <select class="form-select" name="work_place" id="work_place">
                 <option {%if work_place == 'false'%}selected{%endif%} value="false">Doesn't matter </option>
                 <option {%if work_place == 'full'%}selected{%endif%} value="full">Full-time</option>
                 <option {%if work_place == 'flex'%}selected{%endif%} value="flex">flexability</option>
                 <option {%if work_place == 'home'%}selected{%endif%} value="home">from home</option>
             </select>
-            <h4>City:</h4>
+            <h4>City</h4>
             <div id="autocomplete" class="autocomplete mb-3">
                 <input name="city" class="autocomplete-input" value={{city}}>
                 <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
@@ -70,7 +70,7 @@
             
 
             <!-- BEGIN RESULT -->
-      <div style="width: 100%;padding-left: 2rem; top: 20px;">
+      <div id="search-area">
               <h2><i class="fa fa-file-o"></i>CV</h2>
               <hr />
               <!-- BEGIN SEARCH INPUT -->
@@ -84,8 +84,9 @@
                 {%endif%}
                 >
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">
+                    <button class="btn btn-primary" style="height: 100%;" type="submit" id="search-btn">
                         <i class="fa fa-search"></i>
+                        <img src="{% static 'images/icon_search.png'%}" class="search_icon" alt="" />
                     </button>
                 </span>
             </div>
@@ -132,26 +133,57 @@
                 <table class="table table-hover">
                   <tbody>
                     {% if cv %}
-                    <!-- Отображение результатов поиска -->
-                    
+                        <hr>
                         {% for cv in cv %}
-                        <a href="/CV/show/{{cv.id}}">
-                        <tr>
-                           <td class="number text-center">{{ forloop.counter }}</td>
-                              <td class="image">
-                                  <img
-                                    src="https://www.bootdey.com/image/400x300/FF8C00"
-                                    alt=""
-                                  />
-                              </td>
+                        <div class="d-flex" style="position:relative; height: 150px;">
+                          <h5>{{forloop.counter}}</h5>
+                            <div style="padding-left: 20px;">
+                              <a href="/CV/show/{{cv.id}}">
+                                <h4>{{cv.occupation}}</h4>
+                              </a>
+                              <p style="width: 700px;">{{cv.bio}}</p>
+                            </div>
+                            <div>
+                                <h4>Salary</h4>
+                                <p>{{cv.salary}}$</p>
+                            </div>
+                            <div style="padding-left: 20px;">
+                                <h4>Work experience</h4>
+                                <p>{{cv.experience}} years</p>
+                            </div>
+                            <div style="padding-left: 20px;">
+                                <h4>City</h4>
+                                <p>{{cv.city.state_name}}/{{cv.city.city}}</p>
+                            </div>
+                            <!-- <div id="div-open-user-chat"> -->
+                              <a href="/chat/user/{{cv.jobseeker.user.id}}" id="open-user-chat">
+                                
+                                    call
+                                
+                              </a>
+                              <a href="" id="reply-to-vacancy">
+                                reply
+                              </a>
+                                
+    
+                            <!-- </div> -->
+
+                          
+
+
+
+
+                        <!-- <tr>
+                           <td>{{ forloop.counter }}</td>
+                              
                             <td class="product">
                               <a href="/CV/show/{{cv.id}}">
                                 <strong>{{ cv.occupation }}</strong><br />
                               </a>
                             </td>
                           {%if cv.salary%}
-                            <td class="price text-right">{{cv.salary}}$
-                              
+                            <td class="price" >
+                              {{cv.salary}}$
                             </td>
                           {%endif%}
                           <td class="rate" style="padding-right: 20px;">
@@ -159,8 +191,9 @@
 
                           </td>
                     
-                        </tr>
-                    </a>
+                        </tr> -->
+                  </div>
+                  <hr>
                     {% endfor %}
                     {% else %}
                     <p>none</p>
@@ -191,3 +224,24 @@
 
 <script src="{%static 'JS/scripts.js'%}"></script>
 {%endblock%}
+<script>
+  var element = document.getElementById('cv-filters');
+  
+  function setScrollTrigger(element, distance) {
+ var offset = element.getBoundingClientRect().top;
+ 
+ window.addEventListener('scroll', function() {
+   if (window.scrollY > offset) {
+   
+     element.style.position = 'fixed';
+     element.style.top = 0;
+   } else {
+    
+     element.style.position = 'absolute';
+     element.style.top = 155 + 'px';
+   }
+ });
+}
+
+ setScrollTrigger(element, 0);
+</script>

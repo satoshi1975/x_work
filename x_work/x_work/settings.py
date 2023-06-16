@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'employers',
     'job_seekers',
     'main',
@@ -150,6 +151,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'job_seekers/static'),
     os.path.join(BASE_DIR, 'employers/static'),
     os.path.join(BASE_DIR, 'main/static'),
+    os.path.join(BASE_DIR, 'chat/static'),
     os.path.join(BASE_DIR, 'static'),
 ]
 

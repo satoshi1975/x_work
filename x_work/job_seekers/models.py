@@ -18,12 +18,16 @@ class JobSeeker(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE, default=None)
     first_name=models.CharField(max_length=50, blank=True)
     last_name=models.CharField(max_length=50,blank=True)
+    date_of_birth=models.DateField(default=None, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     city=models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, default=None)
     email=models.EmailField(max_length=255,default=None)
 
     def __str__(self):
         return str(self.id)
+
+    def get_date(self):
+        return self.date_of_birth
 
 
 class CV(models.Model):

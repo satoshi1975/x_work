@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from main.forms import RegistrationForm, LoginForm
-from main.services import UserService, UserData, UpdateUserData
+from main.services import UserService, UserData, UpdateUserData,MainPageContent,EmployersJobseekerContext,ArticlesContext
 from employers.models import Employer                                                     
-from job_seekers.models import JobSeeker                                                     
+from job_seekers.models import JobSeeker     
 from main.models import User, Cities, Occupation
 from django.http import JsonResponse
 from django.db.models import Q
@@ -12,8 +12,9 @@ from django.db.models import Q
 
 
 def main_page(request):
-
-    return render(request, 'main_page.html')
+    context= MainPageContent().get_main_page_content()    
+    print(context)
+    return render(request, 'main_page.html',context=context)
 
 def profile(request):
     if request.method=='POST':
@@ -23,6 +24,7 @@ def profile(request):
         return render(request, 'user_profile.html', context)
     else:
         context=UserData().return_context_for_user_profile(request)
+        print(context)
         return render(request, 'user_profile.html', context)
 
 def register(request):
@@ -93,3 +95,21 @@ def get_occupation(request):
 
 # def chat_room(request, user_id):
 #     return render(request, "chat_room.html", {"user_id": user_id})
+def show_profile(request,user_id):
+    context = EmployersJobseekerContext().get_profile_context(user_id)
+    if context['user_type'] == 'jobseeker':
+        return render(request, 'jobseeker_profile.html', context)
+    else:
+        return render(request, 'employer_profile.html', context)
+
+# def employer_profile(request,user_id):
+#     context = EmployersJobseekerContext().get_jobseeker_context(user_id)
+#     return render(request, 'employer_profile.html', context)
+
+def show_articles_list(request,article_id):
+    articles_list=ArticlesContext().get_articles_list()
+    if article_id == 0:
+        return render(request, 'articles.html',context={'articles_list':articles_list})
+    else:
+        return render(request, 'articles.html',context={'articles_list':articles_list,'article_id':article_id})
+

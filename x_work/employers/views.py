@@ -17,7 +17,8 @@ class CVSearchView(ListView):
             # print(self.request.GET.items())
             params = {key: value for key, value in self.request.GET.items() if value and value != 'false'}
             
-            print(self.request.GET)
+            # print(self.request.GET)
+            print(params)
             if 'occupation' in params:
                 queryset = queryset.filter(occupation__icontains=params['occupation'])
             if 'city_id' in params:
@@ -27,6 +28,8 @@ class CVSearchView(ListView):
             if 'schedule' in params:
                 queryset = queryset.filter(schedule=params['schedule'])
             if 'experience' in params:
+                upper_exp, lower_exp = params['experience'].split('|')
+                print(upper_exp, lower_exp)
                 queryset = queryset.filter(experience__gte=int(upper_exp), experience__lte=int(lower_exp))
             if 'education' in params:
                 queryset = queryset.filter(education=params['education'])

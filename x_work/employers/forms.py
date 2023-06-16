@@ -4,7 +4,7 @@ from employers.models import Employer, Vacancy
 class VacancyForm(forms.ModelForm):
     class Meta:
         model = Vacancy
-        exclude = ['employer']
+        exclude = ['employer','city']
 
 
 class VacancySearchForm(forms.Form):

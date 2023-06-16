@@ -1,5 +1,6 @@
 from employers.models import Employer, Vacancy
 from employers.forms import VacancyForm
+from main.models import Cities
 from django.db.models import Q
 
 
@@ -14,9 +15,13 @@ class VacancyEditor:
 
     @staticmethod
     def update_vacancy(data, model_instance):
+        print(data)
         form=VacancyForm(data=data, instance=model_instance)
         if form.is_valid():
             form.save()
+            if data['city_id'] and data['city_id']!='None':
+                model_instance.city=Cities.objects.get(id=data['city_id'])
+                model_instance.save()
             return True
         else:
             errors = form.errors.as_data()

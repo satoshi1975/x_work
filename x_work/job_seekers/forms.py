@@ -4,7 +4,7 @@ from employers.models import Vacancy
 class CVForm(forms.ModelForm):
     class Meta:
         model = CV
-        exclude = ['jobseeker']
+        exclude = ['jobseeker','city']
 
 
 

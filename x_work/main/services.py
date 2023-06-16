@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from main.forms import RegistrationForm, LoginForm, UpdateEmployerForm, UpdateJobseekerForm
-from employers.models import Employer                                                     
-from job_seekers.models import JobSeeker                                                     
-from main.models import User, Cities                                                 
+from employers.models import Employer,Vacancy                                               
+from job_seekers.models import JobSeeker,CV
+from job_seekers import services as jobseeker_services
+from main.models import User, Cities, Articles                                                
 
 class UserService:
 
@@ -114,3 +115,57 @@ class UpdateUserData:
             #         print(f"- {error}")
             return False
         
+
+
+class MainPageContent:
+
+
+
+    @staticmethod
+    def get_main_page_content():
+        summary=CV.objects.order_by('?').first()
+        job=Vacancy.objects.order_by('?').first()
+        company=Employer.objects.order_by('?').first()
+        articles=Articles.objects.order_by('?')[:3]
+        context={
+            'summary':summary,
+            'job':job,
+            'company': company,
+            'articles': articles,
+        }
+        return context
+
+class EmployersJobseekerContext:
+
+
+    @staticmethod
+    def get_profile_context(user_id):
+        user=User.objects.get(id=user_id)
+        if user.user_type == 'jobseeker':
+            jobseeker=JobSeeker.objects.get(user=user)
+            jobseeker_age=jobseeker_services.get_user_age(jobseeker.get_date())
+            cv_list=CV.objects.filter(jobseeker=jobseeker)
+            context={
+                'user_type':'jobseeker',
+                'jobseeker':jobseeker,
+                'jobseeker_age':jobseeker_age,
+                'cv_list': cv_list
+            }
+        else:
+            employer=Employer.objects.get(user=user)
+            job_list=Vacancy.objects.filter(employer=employer)
+            context={
+                'user_type':'employer',
+                'employer':employer,
+                'job_list':job_list
+            }
+        return context
+
+class ArticlesContext:
+
+
+    def get_articles_list(request):
+        return Articles.objects.all()
+    
+    def get_article(article_id):
+        return Articles.objects.get(id=article_id)

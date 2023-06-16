@@ -1,45 +1,56 @@
 {% include 'base.html' %}
+{%load static%}
+<link
+href="{%static 'css/styles_main.css'%}"
+type="text/css"
+rel="stylesheet"
+/>
 
 {% block content %}
 {% if user.user_type == 'company' %}
-    <div class="container justify-content-center" style="padding-top:50px">
-        <form method='post' enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="mb-3">
+<div>
+    <form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+    <div style="position: absolute; top: 150px; left: 10px;">
+        <img style="height: 220px; width: 220px;"
+        src="{{user_fields.profile_photo.url}}" alt="">
+
+        <label id="label-file-unput" for="myFile" style="background-color: black; margin-left: 55px;">Upload</label>
+        <input id="myFile" type="file" accept="image/" name='profile_photo' value={{user_fields.profile_photo}} style="display: none;">
+        
+    </div>  
+
+    <div style="position:absolute; top: 150px; left: 260px; width: 75rem;">
+        <!-- <form method='post' enctype="multipart/form-data">
+            {% csrf_token %} -->
+            <!-- <div class="mb-3">
                 <img style="height: 200px; width: 200px;"
                 src="{{user_fields.profile_photo.url}}" alt="">
-                <!-- <label  class="form-label">Profile photo</label> -->
                 <input type="file" class="form-control" name='profile_photo' accept="image/" value={{user_fields.profile_photo}}>
-            </div>
+            </div> -->
             <div class="mb-3">
                 <h4>Company name</h4>
-                <!-- <label  class="form-label">Company name</label> -->
-                <input class="form-control" name='company_name' value={{user_fields.company_name}}>
+                <input class="form-control" name='company_name' value="{{user_fields.company_name}}">
             </div>
             <div class="mb-3">
                 <h4>Website</h4>
-                <!-- <label  class="form-label">Website</label> -->
                 <input type='url' class="form-control" name='website'value={{user_fields.website}}>
             </div>
             
             <div class="mb-3">
                 <h4>Phone number</h4>
-                <!-- <label  class="form-label">Phone_number</label> -->
                 <input class="form-control" name='phone_number' value={{user_fields.phone_number}}>
             </div>
             <div class="mb-3">
                 <h4>Industry</h4>
-                <!-- <label  class="form-label">Industry</label> -->
                 <input class="form-control" name='industry' value={{user_fields.industry}}>
             </div>
             <div class="mb-3">
                 <h4>Description</h4>
-                <!-- <label  class="form-label">Description</label> -->
-                <input class="form-control" name='company_info' value={{user_fields.company_info}}>
+                <textarea style="overflow:hidden;" id="myTextarea" name="company_info">{{user_fields.company_info}}</textarea> 
             </div>
             <div id="autocomplete" class="autocomplete mb-3">
                 <h4>City</h4>
-                <!-- <label  class="form-label">City</label> -->
                 <input name="city" class="autocomplete-input" value={{user_fields.city.city}} />
                 <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
                 <ul class="autocomplete-result-list"></ul>
@@ -50,50 +61,64 @@
         </form>
     </div>
 
-    
+<!-- </div> -->
 {% else %}
+<div>
+    <form method='post' enctype="multipart/form-data">
+        {% csrf_token %}
 <div class="container justify-content-center"style="padding-top:50px">
     <form method='post' enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="mb-3">
+        <div style="position: absolute; top: 150px; left: 10px;">
+            <img style="height: 220px; width: 220px;"
+            src="{{user_fields.profile_photo.url}}" alt="">
+    
+            <label id="label-file-unput" for="myFile" style="background-color: black; margin-left: 55px;">Upload</label>
+            <input id="myFile" type="file" accept="image/" name='profile_photo' value={{user_fields.profile_photo}} style="display: none;">
+            
+        </div>
+        <!-- <div class="mb-3">
             <img style="height: 200px; width: 180px;"
             src="{{user_fields.profile_photo.url}}" alt="">
-            <!-- <label  class="form-label">Profile photo</label> -->
+             <label  class="form-label">Profile photo</label>
             <input type="file" class="form-control" name='profile_photo' accept="image/" value={{user_fields.profile_photo}}>
-        </div>
-        <div class="mb-3">
-            <label  class="form-label">First name</label>
-            <input type='text' class="form-control" name='first_name' value={{user_fields.first_name}}>
-        </div>
-        <div class="mb-3">
-            <label  class="form-label">Last name</label>
-            <input type='text' class="form-control" name='last_name' value={{user_fields.last_name}}>
-        </div>
-        <div class="mb-3">
-            <label  class="form-label">Phone number</label>
-            <input class="form-control" name='phone_number'value={{user_fields.phone_number}}>
-        </div>
-      
-        <div id="autocomplete" class="autocomplete mb-3">
-            <label  class="form-label">City</label>
-            <input name="city" class="autocomplete-input" value={{user_fields.city.city}} />
-            <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
-            <ul class="autocomplete-result-list"></ul>
-        </div>
-        <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Отправить</button> 
+        </div> -->
+        <div style="position:absolute; top: 150px; left: 260px; width: 75rem;">
+            <div class="mb-3">
+                <label  class="form-label">First name</label>
+                <input type='text' class="form-control" name='first_name' value={{user_fields.first_name}}>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Last name</label>
+                <input type='text' class="form-control" name='last_name' value={{user_fields.last_name}}>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Phone number</label>
+                <input class="form-control" name='phone_number'value={{user_fields.phone_number}}>
+            </div>
+        
+            <div id="autocomplete" class="autocomplete mb-3">
+                <label  class="form-label">City</label>
+                <input name="city" class="autocomplete-input" value={{user_fields.city.city}} />
+                <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
+                <ul class="autocomplete-result-list"></ul>
+            </div>
+            <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Отправить</button> 
+             </div>
         </div>
         
          
     </form>
 </div>
-
+</div>
 <!-- <div id="autocomplete" class="autocomplete">
     <input class="autocomplete-input" />
     <ul class="autocomplete-result-list"></ul>
 </div> -->
 {% endif %}
 {% endblock %}
+<script src="{%static 'JS/scripts_main.js'%}"></script>
 <script>
     new Autocomplete('#autocomplete',{
     search : input => {

@@ -30,3 +30,9 @@ class Occupation(models.Model):
         return self.occupation
         
 
+class Articles(models.Model):
+    title=models.CharField(max_length=500,default=None)
+    text=models.TextField()
+
+    def __str__(self):
+        return self.title
