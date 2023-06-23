@@ -69,14 +69,14 @@ body {
 
 #job-filters {
   width: 200px;
-  position:absolute;
+  position: absolute;
   top: 0px;
 }
 #search-area {
   width: 83%;
   position: relative;
   top: 0px;
-  
+
   left: 253px;
 }
 
@@ -224,7 +224,177 @@ body {
 
   /* height: 40px; */
 }
-/* #test {
-  border-width: 10px;
-  border-color: #000000;
-} */
+/* pagination */
+#list-of-pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#list-of-pages a {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  width: 43px;
+  height: 45px;
+  color: black;
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  margin-left: 20px;
+  border-radius: 20px;
+  align-content: center;
+}
+
+#create-cv-link {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  text-decoration: none;
+  color: black;
+  height: 55px;
+  display: flex;
+  width: 131px;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+#create-cv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#cv-list #go-to-cv-link {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  width: 113px;
+  display: flex;
+  height: 40px;
+  flex-wrap: wrap;
+  align-content: center;
+  color: black;
+  justify-content: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: system-ui;
+  font-weight: 400;
+}
+#cv-list #delete-cv-button {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  width: 113px;
+  display: flex;
+  height: 40px;
+  flex-wrap: wrap;
+  align-content: center;
+  color: black;
+  justify-content: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: system-ui;
+  font-weight: 400;
+  border: none;
+}
+#addFieldsButton {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border: none;
+  color: black;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+#work-button {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border: none;
+  color: black;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.close-button {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+#submit-new-cv-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#submit-new-cv-button button {
+  width: 100px;
+  height: 64px;
+  border: none;
+  border-radius: 20px;
+  color: black;
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+}

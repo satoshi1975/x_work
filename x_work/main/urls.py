@@ -4,11 +4,11 @@ from x_work import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.main_page),
-    path('set_up', views.register),
-    path('log_in', views.log_in),
-    path('log_out', views.log_out),
-    path('profile',views.profile),
+    path('', views.main_page, name='main_page'),
+    path('set_up', views.register, name='register'),
+    path('log_in', views.log_in, name='login'),
+    path('log_out', views.log_out, name='logout'),
+    path('profile',views.profile, name='edit_profile'),
     path('get_city/', views.get_city),
     path('get_occupation/', views.get_occupation),
     path('profile/<int:user_id>', views.show_profile),

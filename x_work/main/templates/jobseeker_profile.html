@@ -5,8 +5,8 @@ href="{%static 'css/styles_main.css'%}"
 type="text/css"
 rel="stylesheet"
 />
-
-<div class="d-flex" style="position: absolute;" id="jobseeker-profile">
+{%block content%}
+<div class="d-flex" style="position: relative;" id="jobseeker-profile">
 <div id="main-user-info">
     <div id="profile-photo">
         <img style="height: 220px; width: 220px;"
@@ -73,6 +73,7 @@ rel="stylesheet"
             
     
 </div>
+{%endblock%}
 <script>
     var element = document.getElementById('main-user-info');
  //    var companyName = document.getElementById('company-name');

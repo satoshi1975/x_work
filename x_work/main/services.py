@@ -11,7 +11,7 @@ class UserService:
     @staticmethod
     def add_new_user_by_type(data):
         user = User.objects.get(email=data['email'])
-        city=Cities.objects.get(id=data['city_id'])
+        city=Cities.objects.get(id=int(data['city_id']))
         user.user_type=data['user_type']
         user.save()
         if data['user_type'] == 'company':
@@ -31,15 +31,13 @@ class UserService:
                                                 city=city)
             jobseeker.profile_photo='job_seekers_photos/default_profile_img.jpg'
             jobseeker.save()
-        print('complete')
+        
         return True
 
     @staticmethod
     def register_user(request, form_data):
         user = RegistrationForm(form_data)
-        if user.is_valid():
-            print('assssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-        print(form_data)
+        
         if user.is_valid():
             user.save()
             UserService.add_new_user_by_type(form_data)
@@ -57,8 +55,6 @@ class UserService:
     def login_user(request, form_data):
         email=form_data['username']
         password=form_data['password']
-        print(email)
-        print(password)
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
@@ -93,18 +89,37 @@ class UpdateUserData:
 
     @staticmethod
     def update_child_model(request):
+        # print(request.user)
+        # print(request.POST)
         user_type = User.objects.filter(email=request.user).values_list('user_type', flat=True)[0]
+        # print('user_type_fff')
+        # print(JobSeeker.objects.all())
+        # print(Employer.objects.all())
+        # print('user_type_fff')
         city=Cities.objects.get(id=request.POST['city_id'])
         if user_type=='jobseeker':
+            print('user_type_fff')
+            print(JobSeeker.objects.all())
+        
+            print('user_type_fff')
             user=JobSeeker.objects.get(user=request.user)
             form=UpdateJobseekerForm(request.POST,request.FILES, instance=user)
         elif user_type=='company':
+            print('user_type_fff')
+
+            print(Employer.objects.all())
+            print('user_type_fff')
             user=Employer.objects.get(user=request.user)
-            form=UpdateEmployerForm(request.POST,request.FILES, instance=user)    
+            # print(Employer.objects.get(user=request.user))
+            form=UpdateEmployerForm(request.POST,request.FILES, instance=user)  
+            # print('request.POST')  
+            # print(request.POST)  
+            # print(request.FILES)  
         user.city=city
-        # print(form.as_table)
         if form.is_valid():
+            
             form.save()
+            # print(Employer.objects.get(user=request.user))
             return True
         else:
             # errors = data.errors.as_data()

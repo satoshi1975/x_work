@@ -2,6 +2,7 @@
 <link href="{%static 'CSS/styles_job.css'%}" type="text/css" rel="stylesheet" />
 {%block content %}
 <div>
+  
   <div>
     <!-- BEGIN SEARCH RESULT -->
     <div class="col-md-12">
@@ -128,13 +129,13 @@
                 </div>
               </div>
 
-              <!-- BEGIN TABLE RESULT -->
+              
               <div class="table-responsive">
                 <table class="table table-hover">
                   <tbody>
                     {% if cv %}
                         <hr>
-                        {% for cv in cv %}
+                        {% for cv in page_obj %}
                         <div class="d-flex" style="position:relative; height: 150px;">
                           <h5>{{forloop.counter}}</h5>
                             <div style="padding-left: 20px;">
@@ -166,58 +167,43 @@
                               </a>
                                 
     
-                            <!-- </div> -->
-
-                          
-
-
-
-
-                        <!-- <tr>
-                           <td>{{ forloop.counter }}</td>
-                              
-                            <td class="product">
-                              <a href="/CV/show/{{cv.id}}">
-                                <strong>{{ cv.occupation }}</strong><br />
-                              </a>
-                            </td>
-                          {%if cv.salary%}
-                            <td class="price" >
-                              {{cv.salary}}$
-                            </td>
-                          {%endif%}
-                          <td class="rate" style="padding-right: 20px;">
-                            <a href="#">начать чат</a>
-
-                          </td>
-                    
-                        </tr> -->
+                         
                   </div>
                   <hr>
                     {% endfor %}
                     {% else %}
                     <p>none</p>
                 {% endif %}
-                   
+                <!-- <p>{{last_page_number}}</p> -->
+                <div id="list-of-pages">
+                {%for i in pages_list%}
+                {%if i == page_obj.number%}
+                <a style="border-style: solid;" href="?page={{i}}">{{i}}</a>
+                {%else%}
+                <a href="?page={{i}}">{{i}}</a>
+                {%endif%}
+                {%endfor%}
+                </div>
+                <!-- <div class="pagination">
+                  {% if page_obj.has_previous %}
 
-              <!-- BEGIN PAGINATION -->
-              <!-- <ul class="pagination">
-                <li class="disabled"><a href="#">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-              </ul> -->
-              <!-- END PAGINATION -->
+                    <a id="first" href="?page=1">First</a>
+                    <a id="previous" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                  {% endif %}
+                  <span class="current-page">{{ page_obj.number }}</span>
+                  {% if page_obj.has_next %}
+                  <a id="next" href="?page={{ page_obj.next_page_number }}">Next</a>
+                  <a id="last" href="?page={{ page_obj.next_page_number }}">Last</a>
+                  {% endif %}
+                </div> -->
+       
             </div>
-            <!-- END RESULT -->
+            
           </div>
         </div>
       </div>
     </div>
-    <!-- END SEARCH RESULT -->
+    
   </div>
 </div>
 

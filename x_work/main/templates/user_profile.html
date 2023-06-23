@@ -11,11 +11,11 @@ rel="stylesheet"
 <div>
     <form method='post' enctype="multipart/form-data">
     {% csrf_token %}
-    <div style="position: absolute; top: 150px; left: 10px;">
+    <div id="profile-photo-edit"style="position: absolute; top: 150px; left: 10px;">
         <img style="height: 220px; width: 220px;"
         src="{{user_fields.profile_photo.url}}" alt="">
 
-        <label id="label-file-unput" for="myFile" style="background-color: black; margin-left: 55px;">Upload</label>
+        <label id="label-file-unput" for="myFile">Upload</label>
         <input id="myFile" type="file" accept="image/" name='profile_photo' value={{user_fields.profile_photo}} style="display: none;">
         
     </div>  
@@ -57,7 +57,7 @@ rel="stylesheet"
             </div>
             
            
-            <button type="submit" class="btn btn-primary">Отправить</button>
+            <button id="send-new-data-button" type="submit" class="btn btn-primary">Отправить</button>
         </form>
     </div>
 
@@ -104,7 +104,7 @@ rel="stylesheet"
                 <ul class="autocomplete-result-list"></ul>
             </div>
             <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Отправить</button> 
+            <button id="send-new-data-button" type="submit" class="btn btn-primary">Отправить</button> 
              </div>
         </div>
         

@@ -1,121 +1,95 @@
-{% include 'base.html' %}
-{%load static%}
+{% include 'base.html' %} {%load static%}
 <link
-href="{%static 'css/styles_main.css'%}"
-type="text/css"
-rel="stylesheet"
+  href="{%static 'css/styles_main.css'%}"
+  type="text/css"
+  rel="stylesheet"
 />
 
 {%block content%}
-<div id="employer-profile-title">
+<div style="position: relative;">
+  <div id="employer-profile-title">
     <div id="title-center">
-        <div id="img-border1">
-            <div id="img-border2">
-            <img src="{{employer.profile_photo.url}}" alt=""> 
-            </div>
+      <div id="img-border1">
+        <div id="img-border2">
+          <img src="{{employer.profile_photo.url}}" alt="" />
         </div>
-         <h2 id="company-name">{{employer.company_name}}</h2>
+      </div>
+      <h2 id="company-name">{{employer.company_name}}</h2>
     </div>
-</div>
-        <div id="main-content">
-            <div id="main-info">
-                <h4>Phone</h4>
-                <p>{{employer.phone_number}}</p>
-                <hr>
-                <h4>Email</h4>
-                <p>{{employer.email}}</p>
-                <hr>
-                <h4>Website</h4>
-                <p>{{employer.website}}</p>
-                <hr>
-                <h4>Industry</h4>
-                <p>{{employer.industry}}</p>
-                <hr>
-                <h4>About company</h4>
-                <p>{{employer.company_info}}</p>
-            </div>
-            
-            <div id="job-list">
-                <h1>Jobs</h1>
-                <div id="job-list-items">
-                    {%for job in job_list %}
-                        <div class="card" id="job-card">
-                            <div class="card-title">
-                                <h3>
-                                {{job.occupation}}
-                                </h3>
-                            </div>
-                            <hr>
-                            <div class="card-text">
-                                {{job.job_description}}
-                            </div>
-                            <div class="card-link">
-                                <a href="/JOB/show/{{job.id}}">to vacancy</a>
-                            </div>
-                        </div>
+  </div>
+<div style="position: relative;">
+  <div id="main-content">
+    <div id="main-info-company">
+      <h4>Phone</h4>
+      <p>{{employer.phone_number}}</p>
+      <hr />
+      <h4>Email</h4>
+      <p>{{employer.email}}</p>
+      <hr />
+      <h4>Website</h4>
+      <p>{{employer.website}}</p>
+      <hr />
+      <h4>Industry</h4>
+      <p>{{employer.industry}}</p>
+      <hr />
+      <h4>About company</h4>
+      <p>{{employer.company_info}}</p>
+    </div>
 
-
-                    {%endfor%}
-                </div>
-            </div>
-
+    <div id="job-list">
+      <h1>Jobs</h1>
+      <div id="job-list-items">
+          <!-- <ul> -->
+        {%for job in job_list %}
+        <!-- <li> -->
+        <div class="card" id="job-card">
+          <div class="card-title">
+            <h3>{{job.occupation}}</h3>
+          </div>
+          <hr />
+          <div class="card-text">{{job.job_description}}</div>
+          <div class="card-link">
+            <a href="/JOB/show/{{job.id}}">to vacancy</a>
+          </div>
         </div>
-
-    <!-- <div id="test" style="top: 100px; position: relative;">
+        <!-- </li>    -->
+        {%endfor%}
+        <!-- </ul> -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- <div id="test" style="top: 100px; position: relative;">
         wooooooooooooooooooooooooooooooow
     </div> -->
-        {%endblock%}
+{%endblock%}
 <script>
-   var element = document.getElementById('main-info');
-//    var companyName = document.getElementById('company-name');
-   
-   function setScrollTrigger(element, distance) {
-       // Get the element's offset from the top of the window.
-  var offset = element.getBoundingClientRect().top;
-  
-  // Set a scroll listener for the window.
-  window.addEventListener('scroll', function() {
-    // Check if the scroll position is greater than the distance.
-    if (window.scrollY > offset) {
-    
-      element.style.position = 'fixed';
-      element.style.top = 0;
-    //   companyName.style.position = 'fixed';
-    //   companyName.style.left = 0;
-    //   companyName.style.top = 0;
-    } else {
-        console.log(window.scrollY)
+  var element = document.getElementById("main-info-company");
+  //    var companyName = document.getElementById('company-name');
 
-      element.style.position = 'relative';
-    //   element.style.top = '';
-      element.style.top = 0 + 'px';
-    }
-  });
-}
+  function setScrollTrigger(element, distance) {
+    // Get the element's offset from the top of the window.
+    var offset = element.getBoundingClientRect().top;
+
+    // Set a scroll listener for the window.
+    window.addEventListener("scroll", function () {
+      // Check if the scroll position is greater than the distance.
+      if (window.scrollY > offset) {
+        element.style.position = "fixed";
+        element.style.top = 0;
+        //   companyName.style.position = 'fixed';
+        //   companyName.style.left = 0;
+        //   companyName.style.top = 0;
+      } else {
+        console.log(window.scrollY);
+
+        element.style.position = "absolute";
+        //   element.style.top = '';
+        element.style.top = 0 + "px";
+      }
+    });
+  }
 
   setScrollTrigger(element, 0);
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

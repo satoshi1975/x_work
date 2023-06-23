@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.urls import reverse
 from main.forms import RegistrationForm, LoginForm
 from main.services import UserService, UserData, UpdateUserData,MainPageContent,EmployersJobseekerContext,ArticlesContext
 from employers.models import Employer                                                     
@@ -13,18 +15,15 @@ from django.db.models import Q
 
 def main_page(request):
     context= MainPageContent().get_main_page_content()    
-    print(context)
     return render(request, 'main_page.html',context=context)
 
 def profile(request):
     if request.method=='POST':
-        # print(request.POST,'adadad')
         UpdateUserData().update_child_model(request)
         context=UserData().return_context_for_user_profile(request)
         return render(request, 'user_profile.html', context)
     else:
         context=UserData().return_context_for_user_profile(request)
-        print(context)
         return render(request, 'user_profile.html', context)
 
 def register(request):
@@ -41,22 +40,24 @@ def register(request):
 
 def log_in(request):
     if request.method == 'POST':
+        # print(request.POST)
         if UserService().login_user(request, request.POST):
-            return render(request, 'main_page.html')
+            # return render(request, 'main_page.html')
+            return redirect(reverse('main_page'))
 
         else:
-            
-            form=LoginForm()
-            return render(request,'login.html',{'form': form})
-    else:
-        form=LoginForm()
-        return render(request,'login.html',{'form': form})
+            messages.error(request, 'Некорректные учетные данные. Пожалуйста, повторите вход.')
+            # form=LoginForm()
+            # return render(request,'login.html',{'form': form})
+    
+    form=LoginForm()
+    return render(request,'login.html',{'form': form})
 
 
 # 
 def log_out(request):
     UserService().logout_user(request)
-    return render(request,'main_page.html')
+    return redirect(reverse('main_page'))
 
 def get_city(request):
     search=request.GET.get('search').capitalize()
@@ -91,10 +92,7 @@ def get_occupation(request):
         'payload': payload
     })
 
-# from django.shortcuts import render
 
-# def chat_room(request, user_id):
-#     return render(request, "chat_room.html", {"user_id": user_id})
 def show_profile(request,user_id):
     context = EmployersJobseekerContext().get_profile_context(user_id)
     if context['user_type'] == 'jobseeker':
@@ -102,9 +100,6 @@ def show_profile(request,user_id):
     else:
         return render(request, 'employer_profile.html', context)
 
-# def employer_profile(request,user_id):
-#     context = EmployersJobseekerContext().get_jobseeker_context(user_id)
-#     return render(request, 'employer_profile.html', context)
 
 def show_articles_list(request,article_id):
     articles_list=ArticlesContext().get_articles_list()

@@ -15,21 +15,18 @@ class VacancySearchView(ListView):
     model = Vacancy
     template_name = 'search_vacancy.html'  # Replace with your template file
     context_object_name = 'vacancies'  # Name of the context variable in the template
-
+    paginate_by=5
     def get_queryset(self):
         queryset = super().get_queryset()
         if len(self.request.GET)!=0:
             print(self.request.GET)
             params = {key: value for key, value in self.request.GET.items() if value and value != 'false' and value != 'None'}
             
-            # print(self.request.GET)
+            
             if 'occupation' in params:
-                print(queryset)
                 queryset = queryset.filter(occupation__icontains=params['occupation'])
             if 'city_id' in params:
                 queryset = queryset.filter(city_id=params['city_id'])
-            # if 'city' in params:
-            #     queryset = queryset.filter(city__icontains=params['city'])
             if 'schedule' in params:
                 queryset = queryset.filter(schedule=params['schedule'])
             if 'experience' in params:
@@ -44,9 +41,6 @@ class VacancySearchView(ListView):
                 queryset = queryset.filter(salary__gte=params['salary'])
             if 'work_place' in params:
                 queryset = queryset.filter(work_place=params['work_place'])
-
-
-            print(queryset)
             return queryset
 
     def get_context_data(self, **kwargs):
@@ -58,7 +52,9 @@ class VacancySearchView(ListView):
         for filter_name in filters:
             value = self.request.GET.get(f'{filter_name}')
             context[filter_name] = value
-        # print(context)
+        paginator = context['paginator']
+        last_page_number = paginator.num_pages
+        context['pages_list'] = list(range(1, last_page_number+1))
         return context
 
 @login_required

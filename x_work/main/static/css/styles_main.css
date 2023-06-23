@@ -33,20 +33,55 @@
     overflow: hidden; 
     resize: none;  */
 }
-
+#profile-photo-edit {
+  position: absolute;
+  top: 150px;
+  left: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+}
 #label-file-unput {
-  /* display: inline-block; */
   display: flex;
   width: 100px;
-  background-color: indigo;
-  color: white;
   padding: 0.5rem;
-  /* font-family: sans-serif; */
   border-radius: 0.3rem;
   cursor: pointer;
   margin-top: 1rem;
   justify-content: center;
   align-content: center;
+  flex-wrap: wrap;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  color: black;
+}
+#send-new-data-button {
+  left: 44%;
+  position: relative;
+  border-radius: 30px;
+  height: 70px;
+  width: 172px;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border: none; 
+  color: black;
 }
 
 /*  */
@@ -119,7 +154,8 @@
 }
 
 #jobseeker-profile #cv-list {
-  position: absolute;
+  /* position: absolute; */
+  position: relative;
   top: 30px;
   left: 800px;
 }
@@ -380,7 +416,7 @@
   );
 }
 
-#article-card a{
+#article-card a {
   text-decoration: none;
   color: black;
 }
@@ -423,8 +459,18 @@
   width: 100%;
   height: 42px;
   top: 100px;
+  border-radius: 20px;
   /* background-color:#06ff6a; */
-  background-color: #000000;
+  background: linear-gradient(
+    180deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
   border-style: solid;
   display: flex;
   flex-wrap: wrap;
@@ -459,33 +505,32 @@
   position: relative;
   border-style: solid;
   border-width: thick;
-  border-color: #06ff6a;
+  border-color:  rgba(123, 255, 204, 1)
 }
 #main-content {
   position: relative;
-  top: 230px;
+  margin-top: 300px;
   padding-left: 40px;
   padding-right: 40px;
   /* left:20px; */
   /* background-color: #0080ff; */
 }
-#main-content #main-info {
-  position: relative;
-  /* background-color:#0080ff; */
-  width: 50%;
-  border-right-style: solid;
-  border-left-style: solid;
-  display: flex;
-  padding-left: 25px;
-  padding-right: 25px;
-  flex-wrap: wrap;
-  flex-direction: column;
+#main-content #main-info-company {
+  position: absolute;
+  /* position: relative; */
+    width: 43%;
+    display: flex;
+    /* padding-left: 25px;
+    padding-right: 25px; */
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 #main-content #job-list {
-  position: absolute;
+  position: relative;
   padding-right: 10px;
-  left: 51%;
+  left: 46%;
+  width: 54%;
   top: 2px;
 }
 
@@ -505,17 +550,27 @@
   border-radius: 15px;
   padding: 6px;
 }
-
+/* #footer{
+  top: 125%;
+} */
 #job-card a {
   text-decoration: none;
   display: flex;
   color: #000000;
-  border-style: solid;
-  border-radius: 6px;
+  border-radius: 20px;
   margin-top: 5px;
   width: 126px;
   flex-wrap: wrap;
-  background-color: #06ff6a;
+  background: linear-gradient(
+    180deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
   justify-content: center;
   font-size: larger;
 }
@@ -602,14 +657,14 @@
   margin-bottom: 5px;
   border-top-right-radius: 30px;
 }
-#article-link a{
+#article-link a {
   height: 100%;
-    width: 100%;
-    text-decoration: none;
-    color: black;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 /*  */

@@ -3,28 +3,24 @@ from django.contrib.auth.decorators import login_required
 from employers import services, forms
 from django.views.generic import ListView
 from job_seekers.models import CV
+from django.core.paginator import Paginator
 
 
 class CVSearchView(ListView):
     model = CV
     template_name = 'search_cv.html'  # Replace with your template file
     context_object_name = 'cv'  # Name of the context variable in the template
-
+    paginate_by = 10
     def get_queryset(self):
         queryset = super().get_queryset()
 
         if len(self.request.GET)!=0:
-            # print(self.request.GET.items())
-            params = {key: value for key, value in self.request.GET.items() if value and value != 'false'}
             
-            # print(self.request.GET)
-            print(params)
+            params = {key: value for key, value in self.request.GET.items() if value and value != 'false'}
             if 'occupation' in params:
                 queryset = queryset.filter(occupation__icontains=params['occupation'])
             if 'city_id' in params:
                 queryset = queryset.filter(city_id=params['city_id'])
-            # if 'city' in params:
-            #     queryset = queryset.filter(city__icontains=params['city'])
             if 'schedule' in params:
                 queryset = queryset.filter(schedule=params['schedule'])
             if 'experience' in params:
@@ -44,6 +40,8 @@ class CVSearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
+
 
         # Добавление значений критериев поиска в контексте
         filters = ['occupation', 'city', 'experience', 'schedule','education','occupation','work_place','city_id']  # Добавьте все поля фильтрации
@@ -51,9 +49,12 @@ class CVSearchView(ListView):
         for filter_name in filters:
             value = self.request.GET.get(f'{filter_name}')
             context[filter_name] = value
-        print(context)
+        
+        paginator = context['paginator']
+        last_page_number = paginator.num_pages
+        context['pages_list'] = list(range(1, last_page_number+1))
         return context
-
+        
 
 
 

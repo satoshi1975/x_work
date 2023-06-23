@@ -1,14 +1,20 @@
 {% include 'base.html' %}
+{% load static %}
+<link
+href="{%static 'CSS/styles_cv.css'%}"
+type="text/css"
+rel="stylesheet"
+/>
 {% block  content %}
 <div class="container">
-    <ul class="list-group">
+    <ul class="list-group" id="cv-list">
         {% for cv in cv_list %}
         <li class="list-group-item">
             <div class="card">
                 <div class="card-header justify-content-between d-flex">
                   <div class="align-self-start">{{cv.occupation}}</div>
                   <div class="align-self-end">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{cv.id}}">
+                    <button type="button" id="delete-cv-button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{cv.id}}">
                       Delete
                     </button>
                     
@@ -42,16 +48,16 @@
                 <div class="card-body">
                   <h5 class="card-title">Special title treatment</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="/CV/show/{{cv.id}}" class="btn btn-primary">Go to CV</a>
+                  <a href="/CV/show/{{cv.id}}" id="go-to-cv-link">Go to CV</a>
                 </div>
               </div>
         </li>
         {%endfor%}
-        <div>
-          <a href="/CV/{{user.id}}/create_cv">
-            <button class="btn-primary">
-            Create summary
-            </button>
+        <div id="create-cv">
+          <a href="/CV/{{user.id}}/create_cv" id="create-cv-link">
+            
+            Create CV
+            
           </a>
         </div>
       </ul>

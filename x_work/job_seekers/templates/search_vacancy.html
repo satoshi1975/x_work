@@ -176,42 +176,20 @@
                       <hr>
 
 
-                      <!-- <a href="JOB/show/{{vacancy}}"></a>
-                     <tr>
-                      <td class="number text-center">{{ forloop.counter }}</td>
-                      <td class="image">
-                        <img
-                          src="https://www.bootdey.com/image/400x300/FF8C00"
-                          alt=""
-                        />
-                      </td>
-                      <td class="product">
-                        <a href="/JOB/show/{{vacancy.id}}">
-                          <strong>{{ vacancy.occupation }}</strong><br />
-                        </a>
-                      </td>
                       
-                      <td class="rate text-right">
-                        <a href="/chat/{{vacancy.employer.user_id}}">начать чат</a>
-                        <span
-                        
-                          ><i class="fa fa-star"></i><i class="fa fa-star"></i
-                          ><i class="fa fa-star"></i><i class="fa fa-star"></i
-                          ><i class="fa fa-star-half-o"></i
-                        ></span>
-                      </td>
-
-                      {%if vacancies.salary%}
-                      <td class="price text-right">{{vacancies.salary}}</td>
-                      {%endif%}
-                    </tr>
-                  
-                  </div>  -->
                     {% endfor %}
                     {% else %}
                     <p>none</p>
                 {% endif %}
-                   
+                <div id="list-of-pages">
+                {%for i in pages_list%}
+                {%if i == page_obj.number%}
+                <a style="border-style: solid;" href="?page={{i}}">{{i}}</a>
+                {%else%}
+                <a href="?page={{i}}">{{i}}</a>
+                {%endif%}
+                {%endfor%}
+                </div>
 
             
             </div>

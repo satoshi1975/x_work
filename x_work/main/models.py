@@ -19,7 +19,6 @@ class Cities(models.Model):
     state_name = models.CharField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'cities'
 
 class Occupation(models.Model):

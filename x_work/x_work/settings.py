@@ -98,12 +98,16 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        "ENGINE": "django.db.backends.postgresql",
         'NAME': 'x_work',
         'USER': 'x_work_admin',
         'PASSWORD': 'barselona1933',
         'HOST': 'localhost',
         'PORT': '5432',
+        "TEST": {
+            "NAME": "mytestdatabase",
+        },
         
     }
 }
@@ -164,4 +168,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-print(MEDIA_ROOT)
