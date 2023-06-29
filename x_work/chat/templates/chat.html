@@ -46,7 +46,7 @@ rel="stylesheet"
         {% if recipient.user.user_type == 'company' %}
         <div id="recipient-card">
             
-            <h2 style="left: 30px;">{{recipient.company_name}}</h2>
+            <h2 style="left: 30px;">{{recipient}}</h2>
             <hr style="position: relative;">
             <div id="recipient-manager">
                 <a id="company-profile" href="/profile/{{recipient.user.id}}" style="padding-right: 10px;">company profile</a>
@@ -57,7 +57,7 @@ rel="stylesheet"
         {%else%}
         <div id="recipient-card">
             
-            <h2 style="left: 30px;">{{recipient.first_name}} {{recipient.last_name}}</h2>
+            <h2 style="left: 30px;">{{recipient}}</h2>
             <hr style="position: relative;">
             <div id="recipient-manager">
                 <a id="company-profile" href="/profile/{{recipient.user.id}}" style="padding-right: 10px;">user profile</a>
@@ -74,11 +74,15 @@ rel="stylesheet"
         </div>
     </div>
     {{ chat_id|json_script:"chat-id" }}
-    <div id="sender" data-sender="{{user_id}}"></div>
+    <!-- <div id="sender" data-sender="{{user_id}}"></div> -->
+    <div id="sender-name" data-sender-name="{{sender_name}}"></div>
+    <div id="recipient" data-recipient="{{recipient}}"></div>
     <script>
         const ChatId = JSON.parse(document.getElementById('chat-id').textContent);
-        var sender = document.getElementById('sender').getAttribute('data-sender');
-
+        // var sender = document.getElementById('sender').getAttribute('data-sender');
+        var senderName = document.getElementById('sender-name').getAttribute('data-sender-name');
+        var recipient = document.getElementById('recipient').getAttribute('data-recipient');
+        
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
@@ -89,20 +93,14 @@ rel="stylesheet"
         
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-
+            console.log(chatSocket)
             let message = data.message;
-            if (data.user_id) {
-                message = data.user_id + ' : ' +message;
+            if (data.sender_name) {
+                message = data.sender_name + ' : ' +message;
             }
 
             document.querySelector('#chat-log').value += (message + '\n');
         };
-
-        // chatSocket.onmessage = function(e) {
-        //     const data = JSON.parse(e.data);
-        //     console.log(data)
-        //     document.querySelector('#chat-log').value += (data.user_id + data.message + '\n');
-        // };
 
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
@@ -122,7 +120,8 @@ rel="stylesheet"
             chatSocket.send(JSON.stringify({
                 'message': message,
                 'chat_id':ChatId,
-                'sender':sender
+                // 'sender':sender,
+                'sender_name':senderName
                 
             }));
             messageInputDom.value = '';

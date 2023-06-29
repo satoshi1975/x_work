@@ -19,6 +19,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 class LoginTestCase(TestCase):
     def setUp(self):
+        
         self.login_url = reverse('login')
         self.user = User.objects.create_user(email='testuser@gos.com', password='testpassword', username='testuser')
 
@@ -234,7 +235,7 @@ class EditProfileMainInfoTestCase(TestCase):
         
             uploaded_image = SimpleUploadedFile(file.name, file.read(), content_type='image/jpeg')
 
-        print()
+        
         new_data={'company_name':'test', 'website':'www.newwebsite.com','profile_photo':uploaded_image,
                     'phone_number':'18888','industry':'newindustry','company_info':'some','city_id':city.id,'user':self.user}
         self.client.force_login(self.user)                    

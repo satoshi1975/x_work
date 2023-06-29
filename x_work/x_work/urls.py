@@ -7,6 +7,6 @@ urlpatterns = [
     path('CV/', include('job_seekers.urls')),
     path('JOB/', include('employers.urls')),
     path('chat/', include('chat.urls')),
-    # path('chat/', include('chat.routing')),
-    # path('accounts/', include('django.contrib.auth.urls')),
+    
+    
 ]

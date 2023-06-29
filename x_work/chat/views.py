@@ -41,10 +41,11 @@ def chat(request, chat_id):
     user_id=request.user.id
     recipient_id=request.GET.get('recipient_id')
     
-    recipient=ChatManager().get_recipient_context(recipient_id)
+    recipient=ChatManager().get_recipient_name(recipient_id)
     sender=ChatManager().get_sender_context(user_id)
     chat_list=ChatManager().get_chat_list(user_id)
-
+    sender_name=ChatManager().get_sender_name(user_id)
     
-    return render(request, "chat.html", {"chat_id": chat_id, 'user_id':user_id,'recipient':recipient,'chat_list':chat_list})
+    return render(request, "chat.html",
+                    {"chat_id": chat_id, 'user_id':user_id,'recipient':recipient,'chat_list':chat_list, 'sender_name':sender_name})
     

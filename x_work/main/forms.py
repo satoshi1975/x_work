@@ -30,12 +30,12 @@ class ProfilePhotoMixin:
 
     def clean(self):
         cleaned_data = super().clean()
-        print(cleaned_data)
+        
         profile_photo = self.files.get('profile_photo')
-        print(profile_photo)
-        # print(type(profile_photo))
+        
+        
         if profile_photo:
-            print('yes')
+        
             old_profile_photo = self.instance.profile_photo
             if old_profile_photo:
                 old_profile_photo.delete()

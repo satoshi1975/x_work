@@ -25,9 +25,8 @@ class Employer(models.Model):
     industry = models.CharField(max_length=255, blank=True, null=True)
     email=models.EmailField(max_length=255)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
-    # address = models.CharField(max_length=255, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
-    city=models.ForeignKey(Cities, on_delete=models.CASCADE, default=None)
+    city=models.ForeignKey(Cities, on_delete=models.CASCADE, default=None, null=True)
 
 
     def __str__(self):

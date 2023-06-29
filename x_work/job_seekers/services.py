@@ -14,7 +14,7 @@ def get_context_cv_list(user_id):
     return list_of_cv
 
 def get_data_from_post(request):
-    print(request.body)
+    
     postdata = json.loads(request.POST.decode('utf-8'))
     data={}
     for key, value in postdata.items():
@@ -79,7 +79,7 @@ class CVEditor:
     
     @staticmethod
     def edit_cv(request,cv_id):
-        print(request.POST)
+        # print(request.POST)
         cv=CV.objects.get(id=cv_id)
         CVEditor().update_cv(request.POST, cv)
         # if len(request.POST.getlist('institution'))!=0:
@@ -91,17 +91,17 @@ class CVEditor:
 
     @staticmethod
     def create_experience_objects(request,cv, edit):
-        print(request.POST)
+        
         if edit:
             Experience.objects.filter(cv_id=cv.id).delete()
         company=request.POST.getlist('company')
-        print(company)
+        
         position=request.POST.getlist('position')
-        print(position)
+        
         work_start=request.POST.getlist('work_start')
-        print(work_start)
+        
         work_end=request.POST.getlist('work_end')
-        print(work_end)
+        
         for company, position, work_start, work_end in zip_longest(company,position,work_start,work_end):
             experience_entry= Experience(cv=cv, occupation=position, company=company, start_work=work_start,end_work=work_end)
             experience_entry.save()

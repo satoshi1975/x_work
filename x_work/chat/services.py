@@ -28,12 +28,12 @@ class ChatManager:
         return chat_id
 
     @staticmethod
-    def get_recipient_context(user_id):
+    def get_recipient_name(user_id):
         user = User.objects.get(id=user_id)
         if user.user_type == 'jobseeker':
-            return JobSeeker.objects.get(user=user)
+            return JobSeeker.objects.get(user=user).first_name + ' ' + JobSeeker.objects.get(user=user).last_name
         else:
-            return Employer.objects.get(user=user)
+            return Employer.objects.get(user=user).company_name
 
     @staticmethod
     def get_sender_context(user_id):
@@ -48,3 +48,11 @@ class ChatManager:
             return ChatRoom.objects.filter(jobseeker=JobSeeker.objects.get(user=user))
         # chat_list=ChatRoom.objects.filter(Q(jobseeker=user)|Q(employer=user))
         # return chat_list
+    @staticmethod
+    def get_sender_name(sender):
+        if JobSeeker.objects.filter(user_id=sender).exists():
+            sender= JobSeeker.objects.get(user_id=sender)
+            sender_name = sender.first_name + sender.last_name
+        else:
+            sender_name = Employer.objects.get(user_id=sender).company_name
+        return sender_name

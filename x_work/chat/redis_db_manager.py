@@ -6,18 +6,6 @@ redis_conn = redis.Redis()
 
 
 async def get_messages(chat_id):
-
-    # r = redis.Redis(host='localhost', port=6379, db=0)
-    # chat_key = f"chat:{chat_id}:messages"
-    # messages = r.lrange(chat_key, 0, -1)  # Получение всех сообщений из списка
-    # parsed_messages = []
-    # for message_json in messages:
-    #     message_data = json.loads(message_json)
-    #     sender_id = message_data.get("sender_id")
-    #     message_text = message_data.get("message_text")
-    #     parsed_message = f"ID отправителя: {sender_id}\nСообщение: {message_text}"
-    #     parsed_messages.append(parsed_message)
-    # return parsed_messages
     r = redis.Redis(host='localhost', port=6379, db=0)
     chat_key = f"chat:{chat_id}:messages"
     messages = r.lrange(chat_key, 0, -1)  # Получение всех сообщений из списка
@@ -25,8 +13,8 @@ async def get_messages(chat_id):
     for message_json in messages:
         message_data = json.loads(message_json)
         parsed_messages.append({
-            "sender_id": message_data.get("sender_id"),
-            "message_text":f'{message_data.get("sender_id")} : {message_data.get("message_text")}'
+            "sender_id": message_data.get("sender"),
+            "message_text":f'{message_data.get("sender")} : {message_data.get("message_text")}'
         })
     return parsed_messages
 
@@ -72,12 +60,12 @@ async def get_messages(chat_id):
 
 
 
-async def handle_new_message(chat_id, message, user_id):
+async def handle_new_message(chat_id, message, sender):
 
     r = redis.Redis(host='localhost', port=6379, db=0)
     chat_key = f"chat:{chat_id}:messages"  # Измененный ключ для списка сообщений
     message_data = {
-        "sender_id": user_id,
+        "sender": sender,
         "message_text": message
     }
     message_json = json.dumps(message_data)

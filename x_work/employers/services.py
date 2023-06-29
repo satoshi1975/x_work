@@ -15,9 +15,11 @@ class VacancyEditor:
 
     @staticmethod
     def update_vacancy(data, model_instance):
-        print(data)
         form=VacancyForm(data=data, instance=model_instance)
+        print('VACANCY')
+        
         if form.is_valid():
+            print('COMPLETE')
             form.save()
             if data['city_id'] and data['city_id']!='None':
                 model_instance.city=Cities.objects.get(id=data['city_id'])
@@ -41,6 +43,7 @@ class VacancyEditor:
     @staticmethod
     def edit_vacancy(request,vacancy_id):
         vacancy=Vacancy.objects.get(id=vacancy_id)
+        print("EDIT")
         VacancyEditor().update_vacancy(request.POST, model_instance=vacancy)
         return True
 

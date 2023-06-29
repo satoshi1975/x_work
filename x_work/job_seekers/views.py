@@ -19,7 +19,7 @@ class VacancySearchView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         if len(self.request.GET)!=0:
-            print(self.request.GET)
+        
             params = {key: value for key, value in self.request.GET.items() if value and value != 'false' and value != 'None'}
             
             
@@ -45,9 +45,10 @@ class VacancySearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        print('CONTEXT')
+        print(self.request.GET)
         # Добавление значений критериев поиска в контексте
-        filters = ['occupation', 'city', 'experience', 'schedule','education','occupation','work_place','salary']  # Добавьте все поля фильтрации
+        filters = ['occupation', 'city', 'experience', 'schedule','education','occupation','work_place','salary','city_id']  # Добавьте все поля фильтрации
 
         for filter_name in filters:
             value = self.request.GET.get(f'{filter_name}')
@@ -67,14 +68,14 @@ def cv_list(request, user_id):
         context = {
             'cv_list': list_of_cv 
         }
-        print(list_of_cv)
+        
         return render(request, 'cv_list.html', context=context)
 
 
 @login_required
 def create_cv(request, user_id):
     if request.method=='POST':
-        print(request.POST)
+        
         services.CVEditor().create_cv(request)
         return render(request, 'create_cv.html')
     else:

@@ -89,37 +89,22 @@ class UpdateUserData:
 
     @staticmethod
     def update_child_model(request):
-        # print(request.user)
-        # print(request.POST)
         user_type = User.objects.filter(email=request.user).values_list('user_type', flat=True)[0]
-        # print('user_type_fff')
-        # print(JobSeeker.objects.all())
-        # print(Employer.objects.all())
-        # print('user_type_fff')
         city=Cities.objects.get(id=request.POST['city_id'])
         if user_type=='jobseeker':
-            print('user_type_fff')
-            print(JobSeeker.objects.all())
         
-            print('user_type_fff')
             user=JobSeeker.objects.get(user=request.user)
             form=UpdateJobseekerForm(request.POST,request.FILES, instance=user)
         elif user_type=='company':
-            print('user_type_fff')
 
-            print(Employer.objects.all())
-            print('user_type_fff')
             user=Employer.objects.get(user=request.user)
-            # print(Employer.objects.get(user=request.user))
+
             form=UpdateEmployerForm(request.POST,request.FILES, instance=user)  
-            # print('request.POST')  
-            # print(request.POST)  
-            # print(request.FILES)  
         user.city=city
         if form.is_valid():
             
             form.save()
-            # print(Employer.objects.get(user=request.user))
+
             return True
         else:
             # errors = data.errors.as_data()
