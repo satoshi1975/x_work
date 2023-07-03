@@ -1,35 +1,24 @@
-{%include 'footer.html'%}
-{%load static%}
+{%include 'footer.html'%} {%load static%}
 <!DOCTYPE html>
-<html lang="en" style="position: relative;">
+<html lang="en" style="position: relative">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-    <!-- <link
-     rel="stylesheet"
-     href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"
-    /> -->
+
     <link
       href="{%static 'CSS/bootstrap.css'%}"
       type="text/css"
       rel="stylesheet"
     />
-    <link
-      href="{%static 'CSS/styles.css'%}"
-      type="text/css"
-      rel="stylesheet"
-    />
-    <link
-      href="{%static 'images/icon.svg'%}"
-    />
-    <title>header</title>
+    <link href="{%static 'CSS/styles.css'%}" type="text/css" rel="stylesheet" />
+    <link href="{%static 'images/icon.svg'%}" />
+    {%block title%} {%endblock%}
   </head>
 
   <body>
     <script src="{%static 'JS/bootstrap.js'%}"></script>
-    <!-- <script src="{%static 'JS/bootstrap.bundle.js'%}"></script> -->
     <div class="help-zone">
       <ul>
         <li>
@@ -43,7 +32,6 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/">
-          <!-- <img src="../static/images/icon.png" class="me-2" alt="" /> -->
           <img src="{% static 'images/icon.png' %}" class="me-2" alt="" />
         </a>
         <button
@@ -62,24 +50,20 @@
             <li class="nav-item">
               <a class="nav-link nav-sub" aria-current="page" href="#">Home</a>
             </li>
-           
 
-        
-            
-            
             <li class="nav-item dropdown">
               <a
-              class="nav-link dropdown-toggle nav-sub"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+                class="nav-link dropdown-toggle nav-sub"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-              Dropdown
-            </a>
-            
-            <ul class="dropdown-menu drop-staff">
-              <li><a class="dropdown-item" href="#">Action</a></li>
+                Dropdown
+              </a>
+
+              <ul class="dropdown-menu drop-staff">
+                <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li>
                   <hr class="dropdown-divider" />
@@ -90,43 +74,24 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-sub" href="/chat/my_chats/{{user.id}}">My chats</a>
+              <a class="nav-link nav-sub" href="/chat/my_chats/{{user.id}}"
+                >My chats</a
+              >
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="/JOB/act">test</a>
-            </li> -->
             {% if user.user_type == 'company' %}
             <li class="nav-item">
-              <a class="nav-sub nav-link" href="/JOB/{{user.id}}/vacancy_list">My vacancies</a>
+              <a class="nav-sub nav-link" href="/JOB/{{user.id}}/vacancy_list"
+                >My vacancies</a
+              >
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-sub nav-link" href="/CV/cv_list/{{user.id}}">My CV</a>
+              <a class="nav-sub nav-link" href="/CV/cv_list/{{user.id}}"
+                >My CV</a
+              >
             </li>
             {% endif %}
-            <!-- <li class="nav-item">
-              <a class="nav-sub nav-link" href="/JOB/">My vacancies</a>
-            </li> -->
-            <!-- {} -->
-            <!-- <form class="d-flex searchform" name="searchForm" role="search" id="searchForm">
-              {% csrf_token %} -->
-            <div id="search-field-base" style="display: flex;">
-              <input
-                class="form-control me-2 searchinput"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                id="searchinputfield"
-              />
-              <button class="btn btn-outline-success searchbutton" type="submit">
-                <img src="{% static 'images/icon_search.png'%}" class="search_icon" alt="" />
-              </button>
-            </div>
-            <!-- </form> -->
-            
-            <!-- <form class="d-flex searchform" name="searchForm" role="search">
-              {% csrf_token %}
-
+            <div id="search-field-base" style="display: flex">
               <input
                 class="form-control me-2 searchinput"
                 type="search"
@@ -138,9 +103,13 @@
                 class="btn btn-outline-success searchbutton"
                 type="submit"
               >
-              <img src="{% static 'images/icon_search.png'%}" class="search_icon" alt="" />
+                <img
+                  src="{% static 'images/icon_search.png'%}"
+                  class="search_icon"
+                  alt=""
+                />
               </button>
-            </form> -->
+            </div>
 
             <li class="nav-item dropdown dropdown-auth">
               <a
@@ -148,7 +117,11 @@
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                ><img src="{% static 'images/icon_user.png'%}" class="user_icon" alt="" />
+                ><img
+                  src="{% static 'images/icon_user.png'%}"
+                  class="user_icon"
+                  alt=""
+                />
               </a>
               <ul class="dropdown-menu drop-staff drop-staff-auth">
                 {% if user.is_authenticated %}
@@ -168,39 +141,32 @@
                 {% endif %}
               </ul>
             </li>
-
-          
           </ul>
         </div>
       </div>
     </nav>
-      <!-- <div style="position: relative; min-height: 100vh;"> -->
-      {%block content%}{%endblock%}
-    <!-- </div> -->
-      <!-- <footer id="footer">
-    
-      </footer> -->
-    </body>
-    </html>
-    
-      
-      <script>
-  
-  document.querySelector('.searchbutton').addEventListener('click', function(e) {
-      e.preventDefault(); // Предотвращаем отправку формы
-  
-      var input = document.querySelector('.searchinput').value;
-      var user_type = '{{ user.user_type }}'; // Замените на способ получения значения user_type в вашем шаблоне
-  
+    {%block content%}{%endblock%}
+  </body>
+</html>
+
+<script>
+  document
+    .querySelector(".searchbutton")
+    .addEventListener("click", function (e) {
+      e.preventDefault();
+
+      var input = document.querySelector(".searchinput").value;
+      var user_type = "{{ user.user_type }}";
+
       var url;
-      if (user_type === 'company') {
-        url = '/JOB/search/?occupation=' + encodeURIComponent(input);
-      } else if (user_type === 'jobseeker') {
-        url = '/CV/search/?occupation=' + encodeURIComponent(input);
+      if (user_type === "company") {
+        url = "/JOB/search/?occupation=" + encodeURIComponent(input);
+      } else if (user_type === "jobseeker") {
+        url = "/CV/search/?occupation=" + encodeURIComponent(input);
       }
-  
+
       if (url) {
-        window.location.href = url; // Перенаправляем пользователя на соответствующий URL
+        window.location.href = url;
       }
     });
-  </script>
+</script>

@@ -3,7 +3,6 @@
   display: inline-block;
 }
 .autocomplete input {
-  /* width: 300px; */
   width: 100%;
   padding: 5px;
 }
@@ -39,11 +38,6 @@
   opacity: 0.25;
 }
 /*  */
-body {
-  /* margin-top:20px; */
-  /* background: #ffffff; */
-  /* width: 100%; */
-}
 
 #search-area #search-btn {
   margin-bottom: 5px;
@@ -71,6 +65,28 @@ body {
   width: 200px;
   position: absolute;
   top: 0px;
+}
+#reset-filters-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+#reset-filters-button a {
+  color: black;
+  text-decoration: none;
+  font-size: x-large;
 }
 #search-area {
   width: 83%;
@@ -142,7 +158,6 @@ body {
   position: absolute;
   display: flex;
   color: black;
-  /* background-color: black; */
   background: linear-gradient(
     0deg,
     rgba(149, 254, 224, 1) 0%,
@@ -196,7 +211,56 @@ body {
   border-width: 3px;
   border-color: black;
   border-style: dashed;
-  /* background-color: #f39c12; */
+}
+#user-link {
+  position: relative;
+}
+
+#edit-cv-button {
+  text-decoration: none;
+  color: black;
+  margin-left: 45%;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  display: flex;
+  width: 100px;
+  height: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  border-radius: 20px;
+}
+
+#submit-edit-cv {
+  text-decoration: none;
+  color: black;
+  margin-left: 45%;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  display: flex;
+  width: 100px;
+  height: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  border-radius: 20px;
+  border-style: none;
 }
 
 #cv-user-block a {
@@ -221,8 +285,6 @@ body {
   width: 100%;
   flex-wrap: wrap;
   height: 50px;
-
-  /* height: 40px; */
 }
 /* pagination */
 #list-of-pages {
@@ -305,6 +367,21 @@ body {
   font-family: system-ui;
   font-weight: 400;
 }
+
+.modal-footer button {
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  color: black;
+}
+
 #cv-list #delete-cv-button {
   background: linear-gradient(
     163deg,
@@ -329,6 +406,19 @@ body {
   font-weight: 400;
   border: none;
 }
+
+#reply-counter {
+  position: absolute;
+  right: 150px;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+}
+#reply-counter p {
+  top: 12px;
+  position: relative;
+}
+
 #addFieldsButton {
   background: linear-gradient(
     163deg,

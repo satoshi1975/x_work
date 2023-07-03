@@ -5,6 +5,11 @@ href="{%static 'CSS/styles_cv.css'%}"
 type="text/css"
 rel="stylesheet"
 />
+{%block title%}
+<title>
+    edit vacancy
+</title>
+{%endblock%}
 {%block content %}
 <div class="container">
     <form method="post">
@@ -88,9 +93,6 @@ rel="stylesheet"
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-<!-- <script>
-  document.getElementById("work_schedule").value = {cv.schedule};
-</script> -->
 
 <script>
     new Autocomplete('#autocomplete',{
@@ -125,7 +127,7 @@ rel="stylesheet"
             input.value = result.city;
             const hidden_input=document.querySelector('#autocomplete #city_id')
             hidden_input.value = result.id
-            closeAutocomplete(); // Закрыть список автодополнения
+            closeAutocomplete(); 
         });
         listItem.addEventListener('mouseenter', () => {
             listItem.classList.add('highlight');
@@ -151,20 +153,20 @@ function closeAutocomplete() {
   }
 </script>
 <script>
-    // Функция для закрытия списка автодополнения
+    
     function closeAutocomplete() {
       const occupationList = document.querySelector('#occupation-list');
       occupationList.innerHTML = '';
     }
 
-    // Функция для обработки выбора профессии из списка
+    
     function handleSelection(occupation) {
       const occupationInput = document.querySelector('#occupation-input');
       occupationInput.value = occupation;
       closeAutocomplete();
     }
 
-    // Обработчик ввода в поле автодополнения
+    
     function handleInput() {
       const input = document.querySelector('#occupation-input').value;
       const url = `/get_occupation/?search=${input}`;
@@ -190,7 +192,7 @@ function closeAutocomplete() {
         });
     }
 
-    // Добавление обработчика события ввода в поле автодополнения
+    
     const occupationInput = document.querySelector('#occupation-input');
     occupationInput.addEventListener('input', handleInput);
   </script>

@@ -1,13 +1,12 @@
 {%include 'base.html'%} {% load static %}
 <link href="{%static 'CSS/styles_cv.css'%}" type="text/css" rel="stylesheet" />
-{%block content%}
+{%block title%}
+<title>create CV</title>
+{%endblock%} {%block content%}
 <div class="container">
   <form method="post">
     {% csrf_token %}
-    <!-- <div class="mb-3">
-          <label for="occupation" class="form-label">Occupation</label>
-          <input type="text" class="form-control" id="occupation" name="occupation" aria-describedby="emailHelp">
-        </div> -->
+    
     <div class="mb-3">
       <div class="autocomplete">
         <label for="occupation-input">Enter name of occupation</label>
@@ -68,7 +67,6 @@
       </select>
     </div>
     <div class="mb-3">
-      <!-- <label for="work-button" class="form-label">Work experience</label> -->
       <button
         type="button"
         id="work-button"
@@ -79,12 +77,6 @@
       </button>
       <div id="work-experience-fields"></div>
     </div>
-    <!-- <div class="mb-3">
-        <label for="work-button" class="form-label">Work experience</label>
-         <div id="work-experience-fields"></div>
-        <button type="button" id="work-button" class="btn-primary" onclick="addWorkExperienceFields()">Добавить запись</button>
-        </div> -->
-
     <div id="autocomplete" class="autocomplete mb-3">
       <label class="form-label">City</label>
       <input class="autocomplete-input" value="{{user_fields.city.city}}" />
@@ -127,256 +119,4 @@
   </form>
 </div>
 <script src="{%static 'js/scripts.js'%}"></script>
-<!-- <script>
-    // Функция для закрытия списка автодополнения
-    function closeAutocomplete() {
-      const occupationList = document.querySelector('#occupation-list');
-      occupationList.innerHTML = '';
-    }
-
-    // Функция для обработки выбора профессии из списка
-    function handleSelection(occupation) {
-      const occupationInput = document.querySelector('#occupation-input');
-      occupationInput.value = occupation;
-      closeAutocomplete();
-    }
-
-    // Обработчик ввода в поле автодополнения
-    function handleInput() {
-      const input = document.querySelector('#occupation-input').value;
-      const url = `/get_occupation/?search=${input}`;
-
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          const occupationList = document.querySelector('#occupation-list');
-          occupationList.innerHTML = '';
-
-          if (data.status) {
-            const payload = data.payload;
-            payload.forEach(occupation => {
-              const listItem = document.createElement('li');
-              listItem.textContent = occupation.occupation;
-              listItem.addEventListener('click', () => handleSelection(occupation.occupation));
-              occupationList.appendChild(listItem);
-            });
-          }
-        })
-        .catch(error => {
-          console.log('Произошла ошибка:', error);
-        });
-    }
-
-    // Добавление обработчика события ввода в поле автодополнения
-    const occupationInput = document.querySelector('#occupation-input');
-    occupationInput.addEventListener('input', handleInput);
-  </script> -->
-
-<!-- <script>
-  function addWorkExperienceFields() {
-      var workExperienceFields = document.getElementById('work-experience-fields');
-
-      // Проверка, что все предыдущие поля заполнены
-      var previousFields = workExperienceFields.querySelectorAll('input');
-      var isPreviousFieldsFilled = true;
-      previousFields.forEach(function(field) {
-          if (field.value.trim() === '') {
-              isPreviousFieldsFilled = false;
-          }
-      });
-
-      if (isPreviousFieldsFilled) {
-          // Создание новых полей "компания", "должность", "начало работы" и "конец работы"
-          var companyInput = document.createElement('input');
-          companyInput.type = 'text';
-          companyInput.name = 'company';
-          companyInput.placeholder = 'Компания';
-
-          var positionInput = document.createElement('input');
-          positionInput.type = 'text';
-          positionInput.name = 'position';
-          positionInput.placeholder = 'Должность';
-
-          var startDateInput = document.createElement('input');
-          startDateInput.type = 'date';
-          startDateInput.name = 'work_start';
-          startDateInput.placeholder = 'Начало работы';
-
-          var endDateInput = document.createElement('input');
-          endDateInput.type = 'date';
-          endDateInput.name = 'work_end';
-          endDateInput.placeholder = 'Конец работы';
-
-          var closeButton = document.createElement('button');
-          closeButton.classList.add('close-button');
-          closeButton.innerText = 'Закрыть';
-          closeButton.addEventListener('click', () => {
-              var fieldset = companyInput.parentNode;
-              fieldset.remove();
-          });
-
-          var fieldset = document.createElement('fieldset');
-          fieldset.appendChild(companyInput);
-          fieldset.appendChild(positionInput);
-          fieldset.appendChild(startDateInput);
-          fieldset.appendChild(endDateInput);
-          fieldset.appendChild(closeButton);
-
-          workExperienceFields.appendChild(fieldset);
-      }
-  }
-</script> 
-<script>
-  function addWorkExperienceFields() {
-  var workExperienceFields = document.getElementById('work-experience-fields');
-
-  // Проверка, что все предыдущие поля заполнены
-  var previousFields = workExperienceFields.querySelectorAll('input');
-  var isPreviousFieldsFilled = true;
-  previousFields.forEach(function(field) {
-    if (field.value.trim() === '') {
-      isPreviousFieldsFilled = false;
-    }
-  });
-
-  if (isPreviousFieldsFilled) {
-    // Создание новых полей "компания", "должность", "начало работы" и "конец работы"
-    var companyInput = document.createElement('input');
-    companyInput.type = 'text';
-    companyInput.name = 'company';
-    companyInput.placeholder = 'Компания';
-
-    var positionInput = document.createElement('input');
-    positionInput.type = 'text';
-    positionInput.name = 'position';
-    positionInput.placeholder = 'Должность';
-
-    var startDateInput = document.createElement('input');
-    startDateInput.type = 'date';
-    startDateInput.name = 'work_start';
-    startDateInput.placeholder = 'Начало работы';
-
-    var endDateInput = document.createElement('input');
-    endDateInput.type = 'date';
-    endDateInput.name = 'work_end';
-    endDateInput.placeholder = 'Конец работы';
-
-    workExperienceFields.appendChild(companyInput);
-    workExperienceFields.appendChild(positionInput);
-    workExperienceFields.appendChild(startDateInput);
-    workExperienceFields.appendChild(endDateInput);
-  }
-}
-
-</script> -->
-<!-- <script>
-window.addEventListener('DOMContentLoaded', () => {
-    const addFieldsButton = document.getElementById('addFieldsButton');
-    const inputFieldsContainer = document.getElementById('inputFieldsContainer');
-
-    let fieldCounter = 0;
-
-    addFieldsButton.addEventListener('click', (event) => {
-        event.preventDefault(); // Предотвращаем отправку формы
-
-        if (fieldCounter < 2 || (fieldCounter >= 2 && arePreviousFieldsFilled())) {
-            fieldCounter++;
-            const fieldsWrapper = document.createElement('div');
-            fieldsWrapper.classList.add('fields-wrapper');
-
-            const educationalInstitutionInput = document.createElement('input');
-            educationalInstitutionInput.type = 'text';
-            educationalInstitutionInput.name = 'institution';
-            educationalInstitutionInput.placeholder = 'Учебное заведение';
-
-            const startDateInput = document.createElement('input');
-            startDateInput.type = "date";
-            startDateInput.name = 'study_start';
-            startDateInput.placeholder = 'Начало обучения';
-
-            const endDateInput = document.createElement('input');
-            endDateInput.type = "date";
-            endDateInput.name = 'study_end';
-            endDateInput.placeholder = 'Конец обучения';
-            endDateInput.style = 'padding-top: 10px;';
-
-            const closeButton = document.createElement('button');
-            closeButton.classList.add('close-button');
-            closeButton.innerText = 'Закрыть';
-            closeButton.addEventListener('click', () => {
-                fieldsWrapper.remove();
-                fieldCounter--; // Уменьшаем счетчик полей после удаления
-            });
-
-            fieldsWrapper.appendChild(educationalInstitutionInput);
-            fieldsWrapper.appendChild(startDateInput);
-            fieldsWrapper.appendChild(endDateInput);
-            fieldsWrapper.appendChild(closeButton);
-            inputFieldsContainer.appendChild(fieldsWrapper);
-        }
-    });
-
-    function arePreviousFieldsFilled() {
-        const previousFields = Array.from(inputFieldsContainer.getElementsByClassName('fields-wrapper'));
-        const lastFieldsWrapper = previousFields[previousFields.length - 1];
-        const educationalInstitutionInput = lastFieldsWrapper.querySelector('input:nth-child(1)');
-        const startDateInput = lastFieldsWrapper.querySelector('input:nth-child(2)');
-        const endDateInput = lastFieldsWrapper.querySelector('input:nth-child(3)');
-
-        return educationalInstitutionInput.value !== '' && startDateInput.value !== '' && endDateInput.value !== '';
-    }
-});  
-</script> -->
-<!-- <script>
-  window.addEventListener('DOMContentLoaded', (event) => {
-  const addFieldsButton = document.getElementById('addFieldsButton');
-  const inputFieldsContainer = document.getElementById('inputFieldsContainer');
-
-  let fieldCounter = 0;
-
-  addFieldsButton.addEventListener('click', (event) => {
-    event.preventDefault(); // Предотвращаем отправку формы
-
-    if (fieldCounter < 2 || (fieldCounter >= 2 && arePreviousFieldsFilled())) {
-      fieldCounter++;
-      const fieldsWrapper = document.createElement('div');
-      fieldsWrapper.classList.add('fields-wrapper');
-
-      const educationalInstitutionInput = document.createElement('input');
-      educationalInstitutionInput.type = 'text';
-      educationalInstitutionInput.name='institution'
-      educationalInstitutionInput.placeholder = 'Учебное заведение';
-
-      const startDateInput = document.createElement('input');
-      startDateInput.type = "date" ;
-      startDateInput.name='study_start'
-      startDateInput.placeholder = 'Начало обучения';
-
-      const endDateInput = document.createElement('input');
-      endDateInput.type = "date" ;
-      endDateInput.name='study_end'
-      endDateInput.placeholder = 'Конец обучения';
-      endDateInput.style='padding-top: 10px;'
-
-      fieldsWrapper.appendChild(educationalInstitutionInput);
-      fieldsWrapper.appendChild(startDateInput);
-      fieldsWrapper.appendChild(endDateInput);
-      inputFieldsContainer.appendChild(fieldsWrapper);
-    }
-  });
-
-  function arePreviousFieldsFilled() {
-    const previousFields = Array.from(inputFieldsContainer.getElementsByClassName('fields-wrapper'));
-    const lastFieldsWrapper = previousFields[previousFields.length - 1];
-    const educationalInstitutionInput = lastFieldsWrapper.querySelector('input:nth-child(1)');
-    const startDateInput = lastFieldsWrapper.querySelector('input:nth-child(2)');
-    const endDateInput = lastFieldsWrapper.querySelector('input:nth-child(3)');
-    
-    return educationalInstitutionInput.value !== '' && startDateInput.value !== '' && endDateInput.value !== '';
-  }
-});
-
-
-</script>  -->
-
 {%endblock%}

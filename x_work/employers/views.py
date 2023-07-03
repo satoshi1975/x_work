@@ -8,6 +8,7 @@ from django.urls import reverse
 
 
 class CVSearchView(ListView):
+    '''view for summary search'''
     model = CV
     template_name = 'search_cv.html'  
     context_object_name = 'cv'  
@@ -16,43 +17,27 @@ class CVSearchView(ListView):
         queryset = super().get_queryset()
 
         if len(self.request.GET)!=0:
-            print("COMPLETE")
             params = {key: value for key, value in self.request.GET.items() if value and value != 'false'}
             if 'occupation' in params:
                 queryset = queryset.filter(occupation__icontains=params['occupation'])
-                print(queryset)
             if 'city_id' in params:
                 queryset = queryset.filter(city_id=params['city_id'])
-                print(queryset)
             if 'schedule' in params:
                 queryset = queryset.filter(schedule=params['schedule'])
-                print(queryset)
             if 'experience' in params:
                 upper_exp, lower_exp = params['experience'].split('|')
                 queryset = queryset.filter(experience__gte=int(upper_exp), experience__lte=int(lower_exp))
-                print('EXP')
-                print(queryset)
             if 'education' in params:
                 queryset = queryset.filter(education=params['education'])
-                print(queryset)
             if 'salary' in params:
                 queryset = queryset.filter(salary=params['salary'])
-                print('SALARY')
-                print(queryset)
             if 'work_place' in params:
                 queryset = queryset.filter(work_place=params['work_place'])
-                print(queryset)
-
-
-            
             return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-
-
-        # Добавление значений критериев поиска в контексте
+        # Adding search criteria values in context
         filters = ['occupation', 'city', 'experience', 'schedule','education','occupation','work_place','city_id','salary']  # Добавьте все поля фильтрации
 
         for filter_name in filters:
@@ -65,13 +50,9 @@ class CVSearchView(ListView):
         return context
         
 
-
-
-
-
 @login_required
 def create_vacancy(request, user_id):
-    # print(request.POST)
+    '''create new vacancy'''
     if request.method == 'POST':
         if services.VacancyEditor().create_vacancy(request, user_id):
             return redirect(reverse('vacancy_list',kwargs={'user_id':user_id}))
@@ -83,47 +64,60 @@ def create_vacancy(request, user_id):
 
 @login_required
 def vacancy_list(request,user_id):
+    '''display list of vacancies'''
     if request.method=='POST':
         services.VacancyEditor().delete_vacancy(vacancy_id=request.POST['vacancy_id'])
         return redirect(request.path)
     else:
-        vacancy_list=services.VacancyShow().get_context_vacancy_list(user_id)
+        vacancy_list=services.VacancyShow().get_context_vacancy_list(user_id)#get context from list 
+                                                                            #of vacancies for template
+        
         context={
             'vacancy_list':vacancy_list
         }
-        # print(vacancy_list)
         return render(request, 'vacancy_list.html', context=context)
 
 @login_required
 def show_vacancy(request, vacancy_id):
-    context=services.VacancyShow().get_context_vacancy(vacancy_id)
+    '''Show data of vacancy'''
+    context=services.VacancyShow().get_context_vacancy(vacancy_id) #get context from vaca
 
     return render(request, 'show_vacancy.html', context=context )
 
 
 @login_required
 def edit_vacancy(request, vacancy_id):
+    '''Edit vacancy data'''
     if request.method=='POST':
-        print('EDIT')
-        services.VacancyEditor().edit_vacancy(request,vacancy_id)
-        context=services.VacancyShow().get_context_vacancy(vacancy_id)
+        services.VacancyEditor().edit_vacancy(request,vacancy_id) #edit vacancy data
+        context=services.VacancyShow().get_context_vacancy(vacancy_id) #get vacancy data for template context
         return render(request, 'edit_vacancy.html', context=context)
     else:
-        context=services.VacancyShow().get_context_vacancy(vacancy_id)
+        context=services.VacancyShow().get_context_vacancy(vacancy_id)#get vacancy data for template context
         return render(request, 'edit_vacancy.html', context=context)
 
+def reply_to_cv(request, cv_id):
+    '''send feedback to summary'''
+    previous_page = request.META.get('HTTP_REFERER')
+    if request.user.user_type == 'jobseeker' or not request.user.is_authenticated:
+        return redirect(previous_page)
+    else:
+        services.reply_to_cv(request, cv_id)
+        return redirect(previous_page)
 
 
-def search_vacancy(request):
-    form = forms.VacancySearchForm(request.GET)
-    vacancies = []
+
+# def search_vacancy(request):
+#     form = forms.VacancySearchForm(request.GET)
+#     vacancies = []
     
-    if form.is_valid():
-        vacancies = services.VacancySearchService.search_vacancies(form.cleaned_data)
+#     if form.is_valid():
+#         vacancies = services.VacancySearchService.search_vacancies(form.cleaned_data)
     
-    context = {
-        'form': form,
-        'vacancies': vacancies,
-    }
+#     context = {
+#         'form': form,
+#         'vacancies': vacancies,
+#     }
     
-    return render(request, 'vacancy_search.html', context)
+#     return render(request, 'vacancy_search.html', context)
+

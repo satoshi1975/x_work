@@ -5,15 +5,18 @@ href="{%static 'CSS/styles_job.css'%}"
 type="text/css"
 rel="stylesheet"
 />
+{%block title%}
+<title>
+    {{vacancy.occupation}}
+</title>
+{%endblock%}
 {% block  content %}
-<div class="card" id="employer-card">
+<div class="card" id="employer-card" style="z-index: 999;">
     <div style="position: relative;" id="image">
       <img id="profile-photo" src="{{vacancy.employer.profile_photo.url}}" alt="">
     </div>
     
-    <!-- <div class="card-title">
-      {{vacancy.employer.company_name}}
-    </div> -->
+
     <h2 class="card-title">
       {{vacancy.employer.company_name}}
     </h2>
@@ -26,6 +29,23 @@ rel="stylesheet"
       </div>
       </div>
 </div>
+{%if user == vacancy.employer.user%}
+<div id="feedback">
+  <h1>Feedback</h1>
+  <hr>
+  <div id="list-of-feedback">
+    {%for jobseeker in vacancy.feedback.all%}
+    <h4>
+      <a href="/profile/{{jobseeker.user.id}}">
+        {{jobseeker.first_name}}{{jobseeker.last_name}}
+      </a>
+   </h4>
+   <hr>
+    {%endfor%}
+  </div>
+
+</div>
+{%endif%}
 <div id="vacancy-info">
     <div class="container mt-4">
         <div class="card mb-3">
@@ -111,7 +131,7 @@ rel="stylesheet"
             {% if user_id == request.user.id%}
             <a id="edit-button" href= "/JOB/{{vacancy.id}}/edit">Edit vacancy</a>
             {%endif%}
-      <!-- </div> -->
+      
   </div>    
  </div> 
 

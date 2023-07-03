@@ -1,20 +1,25 @@
 {%include 'base.html'%} {% load static %}
+{%block title%}
+<title>
+  search job
+</title>
+      {%endblock%}
 <link href="{%static 'CSS/styles_cv.css'%}" type="text/css" rel="stylesheet" />
 {%block content %}
 <div>
   <div>
-    <!-- BEGIN SEARCH RESULT -->
+    
     <div class="col-md-12">
       <div class="grid search">
         <div class="grid-body">
             <form action="{% url 'search_vacancy' %}" method="GET" id="search-form-vacancy">
       <div class="d-flex">
-            <!-- BEGIN FILTERS -->
+    
         <div class="col-md-3"  id="job-filters">
               <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
               <hr />
 
-              <!-- BEGIN FILTER BY CATEGORY -->
+    
               
             <h4>Education:</h4>
             <select class="form-select" name="education" id="education">
@@ -30,7 +35,7 @@
         
             <h4>Experience:</h4>
             <select class="form-select" name="experience" id="experience">
-                <!-- <option selected>Doesn't matter</option> -->
+                
                 <option  {%if experience == 'false|false'%}selected{%endif%} value="false">Doesn't matter</option>
                 <option {%if experience == 'none|none'%}selected{%endif%} value="none|none">Without experience</option>
                 <option {%if experience == '0|1'%}selected{%endif%} value="0|1">under 1 year</option>
@@ -40,7 +45,7 @@
             </select>
             <h4>Work schedule:</h4>
             <select class="form-select" name="schedule" id="schedule" >
-                <!-- <option disabled>no</option> -->
+                
                 <option {%if schedule == 'false'%}selected{%endif%} value="false">Doesn't matter</option>
                 <option {%if schedule == 'full'%}selected{%endif%} value="full">full-time</option>
                 <option {%if schedule == 'flex'%}selected{%endif%} value="flex">flexible</option>
@@ -66,17 +71,17 @@
                 <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
                 <ul class="autocomplete-result-list"></ul>
             </div>
-            
+            <div id="reset-filters-button">
+              <a href="/CV/search/?page=1">reset</a>
+          </div>
+          
 
       </div>
             
-            
-
-            <!-- BEGIN RESULT -->
-      <div id="search-area">
+        <div id="search-area">
               <h2><i class="fa fa-file-o"></i>Job</h2>
               <hr />
-              <!-- BEGIN SEARCH INPUT -->
+  
               <div class="input-group">
                 <input
                 name="occupation"
@@ -93,13 +98,13 @@
                     </button>
                 </span>
             </div>
-            <!-- END SEARCH INPUT -->
+  
         </form>
 
               <div class="padding"></div>
 
               <div class="row">
-                <!-- BEGIN ORDER RESULT -->
+  
                 <div class="col-sm-6">
                   <div class="btn-group">
                     <button
@@ -117,7 +122,7 @@
                     </ul>
                   </div>
                 </div>
-                <!-- END ORDER RESULT -->
+  
 
                 <div class="col-md-6 text-right">
                   <div class="btn-group">
@@ -131,7 +136,7 @@
                 </div>
               </div>
 
-              <!-- BEGIN TABLE RESULT -->
+  
               <div class="table-responsive">
                 <table class="table table-hover">
                   <tbody>
@@ -165,7 +170,7 @@
                                 
                             call
                           </a>
-                          <a href="" id="reply-to-vacancy">
+                          <a href="/CV/reply/{{vacancy.id}}" id="reply-to-vacancy">
                                 
                             reply
                           </a>
@@ -193,12 +198,12 @@
 
             
             </div>
-            <!-- END RESULT -->
+  
           </div>
         </div>
       </div>
     </div>
-    <!-- END SEARCH RESULT -->
+  
   </div>
 </div>
 

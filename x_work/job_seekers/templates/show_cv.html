@@ -1,176 +1,244 @@
-{% include 'base.html' %}
-<!-- {% load humanize %} -->
-{% load static %}
-<link
-href="{%static 'CSS/styles_cv.css'%}"
-type="text/css"
-rel="stylesheet"
-/>
-{% block  content %}
+{% include 'base.html' %} {%block title%}
+<title>{{cv.occupation}}</title>
+{%endblock%} {% load static %}
+<link href="{%static 'CSS/styles_cv.css'%}" type="text/css" rel="stylesheet" />
+{% block content %}
 <div id="cv-user-block">
-  <div style="position: relative; height: 100%;">
-        <h4 style="padding-left: 10px;padding-top: 8px;">{{cv.jobseeker.first_name}} {{cv.jobseeker.last_name}}</h4>
-        <hr>
-        <div style="position: absolute;">
-          <div class="d-flex" style="left: 10px; position: absolute;">
-            <h5>Age: </h5>
-            <h5>{{ user_age }}</h5>
-            <h5> years </h5>
-          </div>
-          <div class="d-flex" style="left: 10px; position: absolute; top: 40px;">
-            <h5>City: </h5>
-            <h5>{{cv.jobseeker.city.state_name}}/{{ cv.jobseeker.city.city }}</h5>
-          </div>
-          <div class="d-flex" style="left: 10px; position: absolute; top: 80px;width: 100%;">
-            <h5>Email: </h5>
-            <h5 style="width:300px; word-wrap: break-word;">{{ cv.jobseeker.email }}</h5>
-          </div>
-        </div>
-      <a class="btn-primary" href="/profile/{{cv.jobseeker.user.id}}">to profile</a>
+  <div style="position: relative; height: 100%">
+    <h4 style="padding-left: 10px; padding-top: 8px">
+      {{cv.jobseeker.first_name}} {{cv.jobseeker.last_name}}
+    </h4>
+    <hr />
+    <div style="position: absolute">
+      <div class="d-flex" style="left: 10px; position: absolute">
+        <h5>Age:</h5>
+        <h5>{{ user_age }}</h5>
+        <h5>years</h5>
+      </div>
+      <div class="d-flex" style="left: 10px; position: absolute; top: 40px">
+        <h5>City:</h5>
+        <h5>{{cv.jobseeker.city.state_name}}/{{ cv.jobseeker.city.city }}</h5>
+      </div>
+      <div
+        class="d-flex"
+        style="left: 10px; position: absolute; top: 80px; width: 100%"
+      >
+        <h5>Email:</h5>
+        <h5 style="width: 300px; word-wrap: break-word">
+          {{ cv.jobseeker.email }}
+        </h5>
+      </div>
+    </div>
+    <a class="btn-primary" href="/profile/{{cv.jobseeker.user.id}}"
+      >to profile</a
+    >
+  </div>
+  {%if cv.jobseeker.user%}
+  <div id="feedback">
+    <h1>Feedback:</h1>
+    <hr />
+    <div id="list-of-feedback">
+      {%for employer in cv.feedback.all%}
+      <h4 id="user-link">
+        <a href="/profile/{{employer.user.id}}"> {{employer.company_name}} </a>
+      </h4>
+      <hr />
+      {%endfor%}
+    </div>
   </div>
 </div>
-<div style="position: relative; left:400px; width: 70rem;">
-    <div class="container mt-4">
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Occupation</h5>
-            <hr>
-            <p class="card-text">{{cv.occupation}}</p>
+{%endif%}
+<div style="position: relative; left: 400px; width: 70rem">
+  <div class="container mt-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Occupation</h5>
+        <hr />
+        <p class="card-text">{{cv.occupation}}</p>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Bio</h5>
+        <hr />
+        <p class="card-text">{{cv.bio}}</p>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Working condition</h5>
+        <hr />
+        <div class="card card-body">
+          <div class="d-flex">
+            <h5 class="card-title" style="vertical-align: middle">Schedule</h5>
+            <div class="vr"></div>
+            <p class="card-text">{{cv.schedule}}</p>
           </div>
         </div>
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Bio</h5>
-            <hr>
-            <p class="card-text">{{cv.bio}}</p>
+        <hr />
+        <div class="card card-body">
+          <div class="d-flex">
+            <h5 class="card-title" style="vertical-align: middle">
+              Work place
+            </h5>
+            <div class="vr"></div>
+            <p class="card-text">{{cv.work_place}}</p>
           </div>
         </div>
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Working condition</h5>
-            <hr>
-              <div class="card card-body">
-                <div class="d-flex ">
-                  <h5 class="card-title" style="vertical-align: middle;">Schedule</h5>
-                  <div class="vr"></div>
-                  <p class="card-text">{{cv.schedule}}</p>
-                </div>
-              </div>
-              <hr>
-              <div class="card card-body">
-                <div class="d-flex ">
-                  <h5 class="card-title" style="vertical-align: middle;">Work place</h5>
-                  <div class="vr"></div>
-                  <p class="card-text">{{cv.work_place}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Desired salary</h5>
-            <hr>
-            <p class="card-text">{{cv.salary}}$</p>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Desired salary</h5>
+        <hr />
+        <p class="card-text">{{cv.salary}}$</p>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Education</h5>
+        <hr />
+        <div class="card card-body">
+          <div class="d-flex">
+            <h5 class="card-title" style="vertical-align: middle">
+              Education level
+            </h5>
+            <div class="vr"></div>
+            <p class="card-text">{{cv.education}}</p>
           </div>
         </div>
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">Education</h5>
-                <hr>
-                <div class="card card-body">
-                  <div class="d-flex ">
-                    <h5 class="card-title" style="vertical-align: middle;">Education level</h5>
-                    <div class="vr"></div>
-                    <p class="card-text">{{cv.education}}</p>
-                  </div>
-                </div>
-                <div class="card">
-                  <h5 class="card-title">Education entrys</h5>
-                  <hr>
-                {% for education in cv.cv_education.all %}
-                  <div class="card card-body">
-                    <div class="d-flex ">
-                      <h5 class="card-title" style="vertical-align: middle; background-color: greenyellow; color: black;">Institution</h5>
-                      <div class="vr"></div>
-                      <p class="card-text">{{education.institution}}</p>
-                    </div>
-                  </div>
-                  <div class="card card-body">
-                    <div class="d-flex ">
-                      <h5 class="card-title" style="vertical-align: middle; background-color: black; color: greenyellow;">Study time</h5>
-                      <div class="vr"></div>
-                      <p class="card-text">{{education.study_start}} - {{education.study_end}}</p>
-                    </div>
-                  </div>
-                  {%endfor%}
-                </div>
-              </div>
-                <!-- <hr> -->
-                
+        <div class="card">
+          <h5 class="card-title">Education entrys</h5>
+          <hr />
+          {% for education in cv.cv_education.all %}
+          <div class="card card-body">
+            <div class="d-flex">
+              <h5
+                class="card-title"
+                style="
+                  vertical-align: middle;
+                  background-color: greenyellow;
+                  color: black;
+                "
+              >
+                Institution
+              </h5>
+              <div class="vr"></div>
+              <p class="card-text">{{education.institution}}</p>
             </div>
-          
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">Work experience</h5>
-                <hr>
-                <div class="card">
-                  <h5 class="card-title">experience entrys</h5>
-                  <hr>
-                {% for experience in cv.cv_experience.all %}
-                  <div class="card card-body">
-                    <div class="d-flex ">
-                      <h5 class="card-title" style="vertical-align: middle; background-color: greenyellow; color: black;">Company</h5>
-                      <div class="vr"></div>
-                      <p class="card-text">{{experience.company}}</p>
-                    </div>
-                  </div>
-                  <div class="card card-body">
-                    <div class="d-flex ">
-                      <h5 class="card-title" style="vertical-align: middle; background-color: greenyellow; color: black;">Occupation</h5>
-                      <div class="vr"></div>
-                      <p class="card-text">{{experience.occupation}}</p>
-                    </div>
-                  </div>
-                  <div class="card card-body">
-                    <div class="d-flex ">
-                      <h5 class="card-title" style="vertical-align: middle; background-color: black; color: greenyellow;">Work time</h5>
-                      <div class="vr"></div>
-                      <p class="card-text">{{experience.start_work}} - {{experience.end_work}}</p>
-                    </div>
-                  </div>
-                  {%endfor%}
-                </div>
-              </div>
-                <!-- <hr> -->
+          </div>
+          <div class="card card-body">
+            <div class="d-flex">
+              <h5
+                class="card-title"
+                style="
+                  vertical-align: middle;
+                  background-color: black;
+                  color: greenyellow;
+                "
+              >
+                Study time
+              </h5>
+              <div class="vr"></div>
+              <p class="card-text">
+                {{education.study_start}} - {{education.study_end}}
+              </p>
             </div>
-            
-            {% if user_id == request.user.id%}
-            <a  href= "/CV/edit/{{cv.id}}">Edit CV</a>
-            {%endif%}
-      <!-- </div> -->
-  </div>    
- </div> 
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <!-- <hr> -->
+    </div>
 
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Work experience</h5>
+        <hr />
+        <div class="card">
+          <h5 class="card-title">experience entrys</h5>
+          <hr />
+          {% for experience in cv.cv_experience.all %}
+          <div class="card card-body">
+            <div class="d-flex">
+              <h5
+                class="card-title"
+                style="
+                  vertical-align: middle;
+                  background-color: greenyellow;
+                  color: black;
+                "
+              >
+                Company
+              </h5>
+              <div class="vr"></div>
+              <p class="card-text">{{experience.company}}</p>
+            </div>
+          </div>
+          <div class="card card-body">
+            <div class="d-flex">
+              <h5
+                class="card-title"
+                style="
+                  vertical-align: middle;
+                  background-color: greenyellow;
+                  color: black;
+                "
+              >
+                Occupation
+              </h5>
+              <div class="vr"></div>
+              <p class="card-text">{{experience.occupation}}</p>
+            </div>
+          </div>
+          <div class="card card-body">
+            <div class="d-flex">
+              <h5
+                class="card-title"
+                style="
+                  vertical-align: middle;
+                  background-color: black;
+                  color: greenyellow;
+                "
+              >
+                Work time
+              </h5>
+              <div class="vr"></div>
+              <p class="card-text">
+                {{experience.start_work}} - {{experience.end_work}}
+              </p>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      
+    </div>
+
+    {% if user_id == request.user.id%}
+    <a id="edit-cv-button" href="/CV/edit/{{cv.id}}">Edit CV</a>
+    {%endif%}
+    
+  </div>
+</div>
 
 {%endblock%}
 <script>
-  var element = document.getElementById('cv-user-block');
-  
-  function setScrollTrigger(element, distance) {
- var offset = element.getBoundingClientRect().top;
- 
- window.addEventListener('scroll', function() {
-   if (window.scrollY > offset) {
-   
-     element.style.position = 'fixed';
-     element.style.top = 0;
-   } else {
-    
-     element.style.position = 'absolute';
-     element.style.top = 153 + 'px';
-   }
- });
-}
+  var element = document.getElementById("cv-user-block");
 
- setScrollTrigger(element, 0);
+  function setScrollTrigger(element, distance) {
+    var offset = element.getBoundingClientRect().top;
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > offset) {
+        element.style.position = "fixed";
+        element.style.top = 0;
+      } else {
+        element.style.position = "absolute";
+        element.style.top = 153 + "px";
+      }
+    });
+  }
+
+  setScrollTrigger(element, 0);
 </script>

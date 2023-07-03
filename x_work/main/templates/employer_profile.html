@@ -4,7 +4,11 @@
   type="text/css"
   rel="stylesheet"
 />
-
+{%block title%}
+<title>
+    {{employer.company_name}}
+</title>
+{%endblock%}
 {%block content%}
 <div style="position: relative;">
   <div id="employer-profile-title">
@@ -39,9 +43,9 @@
     <div id="job-list">
       <h1>Jobs</h1>
       <div id="job-list-items">
-          <!-- <ul> -->
+    
         {%for job in job_list %}
-        <!-- <li> -->
+    
         <div class="card" id="job-card">
           <div class="card-title">
             <h3>{{job.occupation}}</h3>
@@ -52,40 +56,34 @@
             <a href="/JOB/show/{{job.id}}">to vacancy</a>
           </div>
         </div>
-        <!-- </li>    -->
+    
         {%endfor%}
-        <!-- </ul> -->
+    
       </div>
     </div>
   </div>
 </div>
 </div>
-<!-- <div id="test" style="top: 100px; position: relative;">
-        wooooooooooooooooooooooooooooooow
-    </div> -->
 {%endblock%}
 <script>
   var element = document.getElementById("main-info-company");
-  //    var companyName = document.getElementById('company-name');
+
 
   function setScrollTrigger(element, distance) {
-    // Get the element's offset from the top of the window.
+
     var offset = element.getBoundingClientRect().top;
 
-    // Set a scroll listener for the window.
+
     window.addEventListener("scroll", function () {
-      // Check if the scroll position is greater than the distance.
+
       if (window.scrollY > offset) {
         element.style.position = "fixed";
         element.style.top = 0;
-        //   companyName.style.position = 'fixed';
-        //   companyName.style.left = 0;
-        //   companyName.style.top = 0;
       } else {
         console.log(window.scrollY);
 
         element.style.position = "absolute";
-        //   element.style.top = '';
+
         element.style.top = 0 + "px";
       }
     });

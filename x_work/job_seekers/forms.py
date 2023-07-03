@@ -2,6 +2,7 @@ from django import forms
 from job_seekers.models import CV, JobSeeker
 from employers.models import Vacancy
 class CVForm(forms.ModelForm):
+    '''form for creating summary'''
     class Meta:
         model = CV
         exclude = ['jobseeker','city']
@@ -9,6 +10,7 @@ class CVForm(forms.ModelForm):
 
 
 class VacancySearchForm(forms.Form):
+    '''form for search vacancy'''
     occupation = forms.CharField(label='Occupation', required=False)
     city = forms.CharField(label='City', required=False)
     schedule = forms.ChoiceField(label='Schedule', choices=Vacancy.SCHEDULE, required=False)

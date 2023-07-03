@@ -5,12 +5,11 @@ href="{%static 'CSS/styles_chat.css'%}"
 type="text/css"
 rel="stylesheet"
 />
-<!-- <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Chat Room</title>
-</head> -->
+{%block title%}
+<title>
+    Chat
+</title>
+{%endblock%}
 <body>
     <div id="chat-list">
         <h3>My chats</h3>
@@ -41,7 +40,7 @@ rel="stylesheet"
         </div>
         {%endif%}
     </div>
-    <!-- <p>{{chat_list}}</p> -->
+    
     <div id="chat-area">
         {% if recipient.user.user_type == 'company' %}
         <div id="recipient-card">
@@ -51,7 +50,11 @@ rel="stylesheet"
             <div id="recipient-manager">
                 <a id="company-profile" href="/profile/{{recipient.user.id}}" style="padding-right: 10px;">company profile</a>
                 <div class="vr"></div>
-                <a id="blocked" href="">blocked</a>
+                {%if is_blocked == 1%}
+                <a id="blocked" href="/chat/unblock/{{recipient_id}}">Unblock</a>
+                {%else%}
+                <a id="blocked" href="/chat/block/{{recipient_id}}">block</a>
+                {%endif%}
             </div>
         </div> 
         {%else%}
@@ -60,26 +63,39 @@ rel="stylesheet"
             <h2 style="left: 30px;">{{recipient}}</h2>
             <hr style="position: relative;">
             <div id="recipient-manager">
-                <a id="company-profile" href="/profile/{{recipient.user.id}}" style="padding-right: 10px;">user profile</a>
+                <a id="company-profile" href="/profile/{{recipient_id}}" style="padding-right: 10px;">user profile</a>
                 <div class="vr"></div>
-                <a id="blocked" href="">blocked</a>
+                {%if is_blocked == 1%}
+                <a id="blocked" href="/chat/unblock/{{recipient_id}}">Unblock</a>
+                {%else%}
+                <a id="blocked" href="/chat/block/{{recipient_id}}">block</a>
+                {%endif%}
             </div>
         </div> 
         {%endif%}
-        <!-- <p>{{recipient.user.user_type}}</p> -->
+        
         <textarea disabled id="chat-log" cols="100" rows="20"></textarea><br>
         <div class="d-flex">
+            {% if is_blocked == 0 %}
             <input id="chat-message-input" type="text" size="100"><br>
             <input id="chat-message-submit" type="button" value="Send">
+            {% elif is_blocked == 1 %}
+            <input placeholder="You have blocked the user" id="chat-message-input" type="text" size="100"><br>
+            <input disabled id="chat-message-submit"
+                    type="button" value="Send">
+            {% else %}
+            <input placeholder="You have been blocked" id="chat-message-input" type="text" size="100"><br>
+            <input disabled id="chat-message-submit"
+                    type="button" value="Send">
+            {% endif %}
         </div>
     </div>
     {{ chat_id|json_script:"chat-id" }}
-    <!-- <div id="sender" data-sender="{{user_id}}"></div> -->
+    
     <div id="sender-name" data-sender-name="{{sender_name}}"></div>
     <div id="recipient" data-recipient="{{recipient}}"></div>
     <script>
         const ChatId = JSON.parse(document.getElementById('chat-id').textContent);
-        // var sender = document.getElementById('sender').getAttribute('data-sender');
         var senderName = document.getElementById('sender-name').getAttribute('data-sender-name');
         var recipient = document.getElementById('recipient').getAttribute('data-recipient');
         
@@ -120,7 +136,6 @@ rel="stylesheet"
             chatSocket.send(JSON.stringify({
                 'message': message,
                 'chat_id':ChatId,
-                // 'sender':sender,
                 'sender_name':senderName
                 
             }));

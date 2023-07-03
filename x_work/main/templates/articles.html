@@ -5,6 +5,11 @@ href="{%static 'css/styles_main.css'%}"
 type="text/css"
 rel="stylesheet"
 />
+{%block title%}
+<title>
+    articles
+</title>
+{%endblock%}
 <div id="articles-page">
     <div id="articles-list">
         {%for article in articles_list%}
@@ -32,7 +37,7 @@ rel="stylesheet"
 
     {%endfor%}
     {%else%}
-    <!-- <div id="article-area" style="left: 190px; top:26px"> -->
+    
         <div id="article-area">
             <div id="article-title">
                 {{articles_list.0.title}}

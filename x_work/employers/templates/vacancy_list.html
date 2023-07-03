@@ -5,11 +5,15 @@ href="{%static 'CSS/styles_job.css'%}"
 type="text/css"
 rel="stylesheet"
 />
+{%block title%}
+<title>
+    list of vacancies
+</title>
+{%endblock%}
 {% block  content %}
 
 <div class="container" id="job-list">
     <ul class="list-group">
-      <!-- {{user.id}} -->
         {% for vacancy in vacancy_list %}
         <form method="post">
         <li class="list-group-item">
@@ -17,12 +21,16 @@ rel="stylesheet"
             <div class="card" id="job-card">
                 <div class="card-header justify-content-between d-flex" id="occupation">
                   <div id="occupation-name" >{{vacancy.occupation}}</div>
+                  {%if vacancy.feedback.all%}
+                  <div id="reply-counter" class="align-self-end">
+                    Reply : {{vacancy.feedback.all|length}}
+                  </div>
+                  {%endif%}
                   <div class="align-self-end">
                     <button type="button" class="btn btn-primary delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{vacancy.id}}">
                       Delete
                     </button>
                     
-                    <!-- Modal -->
                     <div class="modal fade" id="exampleModal{{vacancy.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -66,21 +74,4 @@ rel="stylesheet"
 
 </div>
 
-
 {%endblock%}
-<script>
-  const deleteButtons = document.querySelectorAll('.delete-btn');
-
-// Обработка нажатия кнопки "Удалить"
-deleteButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const vacancyId = button.getAttribute('data-vacancy-id');
-        const confirmDelete = confirm('Вы уверены, что хотите удалить вакансию?');
-        
-        if (confirmDelete) {
-            // Передача номера вакансии в представление Django для удаления
-            // Выполните здесь соответствующий AJAX-запрос или перенаправление на представление удаления
-        }
-    });
-});
-</script>

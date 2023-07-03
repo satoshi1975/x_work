@@ -2,6 +2,7 @@ from django import forms
 from employers.models import Employer, Vacancy
 
 class VacancyForm(forms.ModelForm):
+    '''form for create or edit vacancy data'''
     class Meta:
         model = Vacancy
         exclude = ['employer','city']

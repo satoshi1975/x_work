@@ -1,3 +1,30 @@
+@font-face {
+  font-family: "Red_hat";
+  src: url("/x_work/static/redhat/RedHatText-Italic-VariableFont_wght.ttf");
+}
+
+#login-button {
+  background: linear-gradient(
+    178deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  border-style: none;
+  color: black;
+}
+#img-login {
+  margin-left: 17%;
+  width: 100%;
+  position: relative;
+  height: 106px;
+  margin-top: 30px;
+}
+
 #to-summary-vacancy-bottom {
   background-color: #06ff6a;
   color: #000000;
@@ -27,11 +54,6 @@
 
 #myTextarea {
   width: 100%;
-  /* height: auto; */
-  /* min-height: 50px; 
-    max-height: 200px;
-    overflow: hidden; 
-    resize: none;  */
 }
 #profile-photo-edit {
   position: absolute;
@@ -80,7 +102,7 @@
     rgba(30, 255, 133, 1) 83%,
     rgba(6, 255, 114, 1) 100%
   );
-  border: none; 
+  border: none;
   color: black;
 }
 
@@ -115,7 +137,7 @@
     rgba(30, 255, 133, 1) 83%,
     rgba(6, 255, 114, 1) 100%
   );
-  /* border-style: solid; */
+
   border-radius: 24px;
   height: 35px;
   flex-wrap: wrap;
@@ -154,7 +176,6 @@
 }
 
 #jobseeker-profile #cv-list {
-  /* position: absolute; */
   position: relative;
   top: 30px;
   left: 800px;
@@ -193,8 +214,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-style: solid;
-  border-color: black; */
+  
 }
 
 #profile-info ul {
@@ -203,15 +223,10 @@
 
 /*                                       */
 .main_page_top {
-  /* margin-top: 20px; */
+  
   width: 100%;
 }
 
-/* .main_page_top ul li{
-    padding: 0px;
-    margin: 0px;
-
-} */
 .main_page_top #search-job-cv-links {
   height: 40px;
   display: flex;
@@ -243,14 +258,6 @@
   font-size: x-large;
   text-decoration: none;
 }
-/* .main_page_top div button{
-    background-color: #212529;
-    color: #000000;
-    border-color: #0080ff;
-    height: 40px;
-    width: 100px;
-
-} */
 .main_page_top div button {
   width: 100%;
   background-color: #06ff6a;
@@ -267,7 +274,6 @@
   margin-top: 15px;
   margin-left: 60px;
   margin-right: 60px;
-  /* display: flex; */
 }
 
 .main_page_cv_job {
@@ -312,7 +318,6 @@
 .main_page_second_level {
   padding-top: 15px;
   height: auto;
-  /* height: 700px; */
 }
 
 .main_page_company_day {
@@ -324,20 +329,16 @@
   height: 200px;
   left: 40%;
   top: 50px;
-  /* background-color: aqua; */
 }
 #company-links {
   position: absolute;
-  top: 40%;
+  margin-top: 14%;
   left: 40%;
   width: 58%;
   height: 60px;
   flex-wrap: wrap;
   align-content: center;
   justify-content: space-around;
-  /* border-width: 2px; */
-  /* border-style: solid; */
-  /* border-radius: 6px; */
   border-width: unset;
   border-radius: 43px;
   background: linear-gradient(
@@ -359,7 +360,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* background-color: #06ff6a; */
   font-size: x-large;
   align-content: center;
 }
@@ -485,7 +485,6 @@
 }
 #employer-profile-title h2 {
   position: absolute;
-  /* left: 726px; */
   border-left-style: dashed;
   border-right-style: dashed;
   width: 219px;
@@ -505,25 +504,21 @@
   position: relative;
   border-style: solid;
   border-width: thick;
-  border-color:  rgba(123, 255, 204, 1)
+  border-color: rgba(123, 255, 204, 1);
 }
 #main-content {
   position: relative;
   margin-top: 300px;
   padding-left: 40px;
   padding-right: 40px;
-  /* left:20px; */
-  /* background-color: #0080ff; */
+  
 }
 #main-content #main-info-company {
   position: absolute;
-  /* position: relative; */
-    width: 43%;
-    display: flex;
-    /* padding-left: 25px;
-    padding-right: 25px; */
-    flex-wrap: wrap;
-    flex-direction: column;
+  width: 43%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 #main-content #job-list {
@@ -550,9 +545,7 @@
   border-radius: 15px;
   padding: 6px;
 }
-/* #footer{
-  top: 125%;
-} */
+
 #job-card a {
   text-decoration: none;
   display: flex;
@@ -601,8 +594,7 @@
 }
 
 /* articles */
-#articles-page {
-}
+
 #articles-list {
   position: absolute;
   width: 300px;
@@ -619,17 +611,8 @@
   display: flex;
   align-content: center;
   flex-wrap: wrap;
+  font-family: "Red_hat";
   font-size: xx-large;
-  background: linear-gradient(
-    163deg,
-    rgba(149, 254, 224, 1) 0%,
-    rgba(123, 255, 204, 1) 15%,
-    rgba(99, 255, 186, 1) 33%,
-    rgba(74, 255, 167, 1) 52%,
-    rgba(53, 255, 151, 1) 67%,
-    rgba(30, 255, 133, 1) 83%,
-    rgba(6, 255, 114, 1) 100%
-  );
   border-radius: 20px;
   border-style: dashed;
   padding-left: 20px;

@@ -1,3 +1,4 @@
+#
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from main.forms import RegistrationForm, LoginForm, UpdateEmployerForm, UpdateJobseekerForm
@@ -6,10 +7,14 @@ from job_seekers.models import JobSeeker,CV
 from job_seekers import services as jobseeker_services
 from main.models import User, Cities, Articles                                                
 
-class UserService:
 
+
+
+class UserService:
+    '''The user's main client management service'''
     @staticmethod
     def add_new_user_by_type(data):
+        '''creating a user depending on the type of account'''
         user = User.objects.get(email=data['email'])
         city=Cities.objects.get(id=int(data['city_id']))
         user.user_type=data['user_type']
@@ -36,6 +41,7 @@ class UserService:
 
     @staticmethod
     def register_user(request, form_data):
+        '''user registration'''
         user = RegistrationForm(form_data)
         
         if user.is_valid():
@@ -53,6 +59,7 @@ class UserService:
 
     @staticmethod
     def login_user(request, form_data):
+        '''user authentication'''
         email=form_data['username']
         password=form_data['password']
         user = authenticate(request, email=email, password=password)
@@ -64,12 +71,14 @@ class UserService:
 
     @staticmethod
     def logout_user(request):
+        '''user log out'''
         logout(request)
 
 class UserData:
-    
+    '''getting information about users'''
     @staticmethod
     def return_context_for_user_profile(request):
+        '''Returns data about the user's profile'''
         user = User.objects.get(email=request.user)
         user_type = User.objects.filter(email=request.user).values_list('user_type', flat=True)[0]
         context = {'user': user}
@@ -86,9 +95,10 @@ class UserData:
 
 
 class UpdateUserData:
-
+    '''Update user profile data'''
     @staticmethod
     def update_child_model(request):
+        '''обновление данных соискателя/работодателя'''
         user_type = User.objects.filter(email=request.user).values_list('user_type', flat=True)[0]
         city=Cities.objects.get(id=request.POST['city_id'])
         if user_type=='jobseeker':
@@ -107,22 +117,15 @@ class UpdateUserData:
 
             return True
         else:
-            # errors = data.errors.as_data()
-            # for field, error_list in errors.items():
-            #     # Выводим имя поля и соответствующие сообщения об ошибках
-            #     print(f"Поле {field}:")
-            #     for error in error_list:
-            #         print(f"- {error}")
             return False
         
 
 
 class MainPageContent:
-
-
-
+    '''content for main page'''
     @staticmethod
     def get_main_page_content():
+        '''get content for main page'''
         summary=CV.objects.order_by('?').first()
         job=Vacancy.objects.order_by('?').first()
         company=Employer.objects.order_by('?').first()
@@ -136,10 +139,10 @@ class MainPageContent:
         return context
 
 class EmployersJobseekerContext:
-
-
+    '''Employer/Job seeker data'''
     @staticmethod
     def get_profile_context(user_id):
+        '''get employer/job seeker data'''
         user=User.objects.get(id=user_id)
         if user.user_type == 'jobseeker':
             jobseeker=JobSeeker.objects.get(user=user)
@@ -163,7 +166,7 @@ class EmployersJobseekerContext:
 
 class ArticlesContext:
 
-
+    '''context for atricles'''
     def get_articles_list(request):
         return Articles.objects.all()
     

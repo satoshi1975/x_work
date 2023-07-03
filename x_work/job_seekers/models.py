@@ -1,17 +1,18 @@
 from django.db import models
 from uuid import uuid4
 from main.models import User,Cities,Occupation
+from employers.models import Employer
 from django.contrib.postgres.fields import DateTimeRangeField
 
 # from main import models as model
 
 
 class JobSeeker(models.Model):
+    '''applicant model'''
     def image_upload_to(instance, filename):
-    # Генерация уникального имени файла
+    # Generating a unique file name
         ext = filename.split('.')[-1]
         filename = f'{uuid4()}.{ext}'
-        # Возвращение пути сохранения файла
         return f'job_seekers_photos/{filename}'
     id = models.BigAutoField(primary_key=True)
     profile_photo=models.ImageField(upload_to=image_upload_to, default=None)
@@ -31,6 +32,7 @@ class JobSeeker(models.Model):
 
 
 class CV(models.Model):
+    '''summary model'''
     SCHEDULE=[
         ("none","doesn't matter"),
         ('full','full-time'),
@@ -65,11 +67,12 @@ class CV(models.Model):
     work_place=models.CharField(max_length=4, choices=WORK_PLACE, default=None, null=True)
     experience=models.IntegerField(blank=True, default=None, null=True)
     city=models.ForeignKey(Cities, on_delete=models.CASCADE,default=None, blank=True,null=True)
-
+    feedback = models.ManyToManyField(Employer)
     def __str__(self):
         return str(self.occupation)
 
 class Experience(models.Model):
+    '''Experience entry model'''
     cv = models.ForeignKey(CV, on_delete=models.CASCADE,related_name='cv_experience',default=None)
     occupation = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
@@ -83,6 +86,7 @@ class Experience(models.Model):
         return self.occupation
 
 class Education(models.Model):
+    '''education entry model'''
     cv=models.ForeignKey(CV, on_delete=models.CASCADE,related_name='cv_education',default=None)
     institution=models.CharField(max_length=500)
     study_start=models.DateField(default=None)

@@ -21,8 +21,7 @@
 #recipient-manager {
   flex-wrap: wrap;
   display: flex;
-  /* justify-content: space-around; */
-}
+  }
 #recipient-manager a {
   text-decoration: none;
   color: black;
@@ -31,13 +30,11 @@
 }
 #recipient-manager #company-profile {
   position: relative;
-  /* left: 182px; */
   left: 18%;
 }
 #recipient-manager #blocked {
   position: relative;
   left: 22%;
-  /* left: 615px; */
 }
 
 .vr {
@@ -70,37 +67,33 @@ hr {
 }
 
 #chat-area {
-    position: absolute;
-    left: 23%;
-    height: 65%;
-    width: 85rem;
-    top: 17%;
+  position: absolute;
+  left: 23%;
+  height: 65%;
+  width: 85rem;
+  top: 17%;
 }
 
 #chat-list {
-  /* background-color: aquamarine; */
   width: 20%;
   height: auto;
   position: relative;
   top: 40px;
-  /* left: 40px; */
 }
 
-#chat-list h3{
-    left: 28%;
-    position: relative;
+#chat-list h3 {
+  left: 28%;
+  position: relative;
 }
 
-#chat-list #chat-items {
-}
 #chat-items hr {
   margin: 0 0;
 }
 #chat-items #item {
-    height: 85px;
-    width: 100%;
-    margin-bottom: 5px;
-    margin-top: 5px;
+  height: 85px;
+  width: 100%;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 #chat-items #item a {
   height: 100%;
@@ -111,7 +104,7 @@ hr {
   align-content: center;
   color: black;
   border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;   
+  border-bottom-right-radius: 10px;
   text-decoration: none;
   font-size: xx-large;
   background: linear-gradient(
@@ -125,8 +118,8 @@ hr {
     rgba(6, 255, 114, 1) 100%
   );
 }
-#chat-items #item a:hover{
-    background: linear-gradient(
+#chat-items #item a:hover {
+  background: linear-gradient(
     170deg,
     rgba(149, 254, 224, 1) 0%,
     rgba(123, 255, 204, 1) 15%,

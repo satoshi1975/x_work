@@ -2,10 +2,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
 class User(AbstractUser):
-    # CHOICES = (
-    #     ('JS', 'job_seeker'),
-    #     ('ER', 'employer'),
-    # )
+    '''Main user model'''
     username=models.CharField(unique=False)
     email = models.EmailField(unique=True)
     user_type=models.CharField(max_length=20)
@@ -14,6 +11,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
 class Cities(models.Model):
+    '''City model'''
     id=models.BigAutoField(primary_key=True,default=None)
     city = models.CharField(blank=True, null=True)
     state_name = models.CharField(blank=True, null=True)
@@ -22,7 +20,7 @@ class Cities(models.Model):
         db_table = 'cities'
 
 class Occupation(models.Model):
-    # id=models.AutoField(primary_key=True)
+    '''Occupation model'''
     occupation=models.CharField(max_length=100)
     
     def __str__(self):
@@ -30,6 +28,7 @@ class Occupation(models.Model):
         
 
 class Articles(models.Model):
+    '''Articles model'''
     title=models.CharField(max_length=500,default=None)
     text=models.TextField()
 

@@ -1,5 +1,10 @@
 {%include 'base.html'%}
 {%include 'footer.html'%}
+{%block title%}
+<title>
+    X WORK
+</title>
+{%endblock%}
 {%load static%}
 <link
 href="{%static 'css/styles_main.css'%}"
@@ -7,11 +12,6 @@ type="text/css"
 rel="stylesheet"
 />
 {%block content%} 
-<!-- {% if user.is_authenticated %}
-    Привет, {{ user.username }}!
-{% else %} -->
-    <!-- suck it -->
-<!-- {% endif %} -->
     <div class="main_page_top">
         <div class="row" id="search-job-cv-links">
         <div class="col">
@@ -112,7 +112,6 @@ rel="stylesheet"
                     </div>
                     <div>
                         <div class="card-body" class="col-md-8">
-                        <!-- <h5 class="card-title">{{company.company_name}}</h5> -->
                         <p class="card-text">{{company.company_info}}</p>
                         <p class="card-text"><small class="text-muted">Последнее обновление 3 мин. назад</small></p>
                         </div>

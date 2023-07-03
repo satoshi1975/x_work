@@ -1,21 +1,15 @@
-/* .bg-header {
-    background-color: #06ff6a;
-} */
-/* @font-face {
-    font-family: 'red_hat';
-    src: url("../fonts/RedHatDisplay-VariableFont_wght.ttf") ;
-    font-weight:100;
-    font-style:normal;
-} */
+@font-face {
+  font-family: "Red hat";
+  src: url("../redhat/RedHatText-VariableFont_wght.ttf");
+}
+
+body {
+  font-family: "Red hat";
+}
 
 html {
   height: auto;
 }
-
-/* body {
-  height: 100%;
-  background-color: url();
-} */
 
 .nav-item {
   margin-left: 40px;
@@ -23,7 +17,7 @@ html {
 }
 
 li {
-  font-family: "red_hat";
+  font-family: "Red_hat";
   font-size: larger;
   font-weight: bold;
 }
@@ -53,16 +47,15 @@ a:hover {
 }
 nav a:hover {
   transform: scale(1.1);
-  /* transform: rotate(380deg); */
   transition: transform 1s;
   color: black !important;
 }
 nav a {
-  /* transition: transform 1s; */
+  font-family: "Red hat";
+  font-weight: 500;
 }
 
 .drop-staff {
-  /* background-color: #06ff6a; */
   background: linear-gradient(
     0deg,
     rgba(149, 254, 224, 1) 0%,
@@ -79,19 +72,12 @@ nav a {
 }
 .drop-staff a {
   font-weight: bold;
-  font-family: "red_hat";
+  font-family: "Red_hat";
   font-size: medium;
 }
 
-/* .main_icon{
-    position: absolute;
-
-
-} */
-
 img {
   width: 154px;
-
   height: 50px;
 }
 search input .search-icon {
@@ -113,7 +99,6 @@ search input .search-icon {
 /*  */
 .help-zone {
   transform-origin: top left;
-
   background-color: black;
 }
 .help-zone ul {
@@ -142,7 +127,6 @@ search input .search-icon {
   display: inline-block;
   border-radius: 20px;
   padding: 20px 40px;
-  /* background-color: #007bff; */
   color: #fff;
   text-align: center;
   text-decoration: none;
@@ -164,7 +148,7 @@ form input {
   width: 100%;
   height: calc(2.25rem + 2px);
   padding: 0.375rem 0.75rem;
-  font-family: inherit;
+  font-family: "Red-hat";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -175,34 +159,19 @@ form input {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-/* form li{
-    display: none;
-} */
-/*  */
-/* .city_form ul{
-    height: 200px;
-} */
 li.highlight {
   background-color: #f2f2f2;
   cursor: pointer;
-  /* Дополнительные стили для выделения */
 }
 
 .autocomplete ul {
   background-color: #bdbdbd;
 }
 
-/* main page content */
 .main_page_top {
-  /* margin-top: 20px; */
   width: 100%;
 }
 
-/* .main_page_top ul li{
-    padding: 0px;
-    margin: 0px;
-
-} */
 .main_page_top div button {
   background-color: #212529;
   color: #000000;
@@ -221,7 +190,6 @@ li.highlight {
 
 body > #footer {
   position: absolute;
-  /* top: 105%; */
   bottom: -217px;
   width: 100%;
   height: 143px;
@@ -237,71 +205,3 @@ body > #footer {
     rgba(6, 255, 114, 1) 100%
   );
 }
-
-/* main page main content */
-/* .main_page_container{
-    height: 300px;
-    position: relative;
-    margin-top: 15px;
-    margin-left: 60px;
-    margin-right: 60px;
-}
-
-.main_page_cv_job{
-    display: flex;
-    
-}
-
-
-.main_page_help_but{
-    padding-left: 140px;
-    height: 300px;
-
-}
-.main_page_help_but div{
-    border-radius: 10%;
-    height: 150px;
-    border-width: 7px;
-    border-color: #000000;
-
-}
-.main_page_help_but button{
-    height: 100%;
-    width: 100%;
-    font-size: larger;
-    font-style: unset;
-    background-color: white;
-    color: #000000;
-    border-width: 4px;
-    border-color:#06ff6a;
-}
-.main_page_second_level{
-    padding-top: 15px;
-    height: 700px;
-  } 
-
-.main_page_company_day{
-    width: 755.99px;
-}
-.main_page_articles{
-    display:flexbox;
-    width: 760px;
-}
-.search-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .search-icon {
-    cursor: pointer;
-  }
-  
-  #search-input {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 200px;
-    padding: 5px;
-    display: none;
-  } */
-/*  */

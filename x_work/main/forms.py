@@ -8,9 +8,10 @@ from job_seekers.models import JobSeeker
 from django.contrib.gis.db import models
 
 class RegistrationForm(UserCreationForm):
+    '''User registration form'''
     email = forms.EmailField(required=True)
     phone_number = forms.CharField(max_length=20)
-    # user_type=forms.CharField(max_length=20)
+    
     class Meta:
         model = User
         fields = ('email', 'password1', 'password2')
@@ -18,11 +19,13 @@ class RegistrationForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
+    '''User log in form'''
     username = forms.EmailField(label='Email')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
 
 class ProfilePhotoMixin:
+    '''muxin to upload a profile photo'''
     def generate_filename(self, filename):
         extension = filename.split('.')[-1]  # получаем расширение файла
         filename = f'{uuid4().hex}.{extension}'  # генерируем новое имя файла
@@ -45,12 +48,14 @@ class ProfilePhotoMixin:
             return cleaned_data
         else:pass
 class UpdateEmployerForm(ProfilePhotoMixin,forms.ModelForm):
+    '''Form for updating Employer'''
     class Meta:
         model = Employer
         fields = ('company_name', 'industry', 'phone_number','website','company_info','profile_photo')
 
 class UpdateJobseekerForm(ProfilePhotoMixin,forms.ModelForm):
-    
+    '''Form for updating Job seeker'''
     class Meta:
         model = JobSeeker
         fields = ('phone_number','first_name','last_name','profile_photo')
+        

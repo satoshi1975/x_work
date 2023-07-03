@@ -1,4 +1,7 @@
-{% include 'base.html' %} {% block content %}
+{% include 'base.html' %} {%block title%}
+<title>create account</title>
+{%endblock%} {% block content %}
+
 <section class="vh-100" style="background-color: #eee">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -10,7 +13,12 @@
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                   Sign up
                 </p>
-                <form method="post" class="mx-1 mx-md-4", id='registration-form'>
+                <form
+                  method="post"
+                  class="mx-1 mx-md-4"
+                  ,
+                  id="registration-form"
+                >
                   {% csrf_token %}
                   <div class="form-group">
                     <label for="user_type">User Type:</label>
@@ -19,38 +27,53 @@
                       <option value="jobseeker">Job Seeker</option>
                     </select>
                   </div>
-                  <div class="form-group" id="company-fields" style="display: none;">
+                  <div
+                    class="form-group"
+                    id="company-fields"
+                    style="display: none"
+                  >
                     <label for="company-name">Company Name:</label>
-                    <input type="text" id="company-name" name="company_name">
-                    {% comment %} <input type="hidden" name="user_type" value="company"> {% endcomment %}
+                    <input type="text" id="company-name" name="company_name" />
+                    {% comment %}
+                    <input type="hidden" name="user_type" value="company" /> {%
+                    endcomment %}
                   </div>
-                  
-                  <!-- Поля для соискателей -->
-                  <div class="form-group" id="jobseeker-fields" style="display: none;">
-                    {% comment %} <input type="hidden" name="user_type" value="jobseeker"> {% endcomment %}
+
+                  <div
+                    class="form-group"
+                    id="jobseeker-fields"
+                    style="display: none"
+                  >
+                    {% comment %}
+                    <input type="hidden" name="user_type" value="jobseeker" />
+                    {% endcomment %}
                     <label for="first_name">First name</label>
-                    <input type="text" id="first_name" name="first_name">
+                    <input type="text" id="first_name" name="first_name" />
                     <label for="last_name">Last name</label>
-                    <input type="text" id="last_name" name="last_name">
+                    <input type="text" id="last_name" name="last_name" />
                   </div>
-                  <div class="form-group">
-                    {{ form.as_p }}
-                  </div>
+                  <div class="form-group">{{ form.as_p }}</div>
                   <div id="autocomplete" class="autocomplete mb-3">
-                    <label  class="form-label">City</label>
-                    <input name="city" class="autocomplete-input" value={{user_fields.city.city}} />
-                    <input  id="city_id"type="hidden" name="city_id" value={{user_fields.city.id}}>
+                    <label class="form-label">City</label>
+                    <input
+                      name="city"
+                      class="autocomplete-input"
+                      value="{{user_fields.city.city}}"
+                    />
+                    <input
+                      id="city_id"
+                      type="hidden"
+                      name="city_id"
+                      value="{{user_fields.city.id}}"
+                    />
                     <ul class="autocomplete-result-list"></ul>
-                </div>
-                  
-                  <!-- Переключатель для выбора типа пользователя -->
-                    
-                    
-                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                          Register
-                        </button>
-                      </div> 
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                      Register
+                    </button>
+                  </div>
                 </form>
               </div>
               <div
@@ -70,72 +93,72 @@
   </div>
 </section>
 <script>
-  const userTypeSelect = document.getElementById('user_type');
-  const companyFields = document.getElementById('company-fields');
-  const jobseekerFields = document.getElementById('jobseeker-fields');
+  const userTypeSelect = document.getElementById("user_type");
+  const companyFields = document.getElementById("company-fields");
+  const jobseekerFields = document.getElementById("jobseeker-fields");
 
-  userTypeSelect.addEventListener('change', function() {
-    if (userTypeSelect.value === 'company') {
-      companyFields.style.display = 'block';
-      jobseekerFields.style.display = 'none';
-    } else if (userTypeSelect.value === 'jobseeker') {
-      companyFields.style.display = 'none';
-      jobseekerFields.style.display = 'block';
+  userTypeSelect.addEventListener("change", function () {
+    if (userTypeSelect.value === "company") {
+      companyFields.style.display = "block";
+      jobseekerFields.style.display = "none";
+    } else if (userTypeSelect.value === "jobseeker") {
+      companyFields.style.display = "none";
+      jobseekerFields.style.display = "block";
     } else {
-      companyFields.style.display = 'none';
-      jobseekerFields.style.display = 'none';
+      companyFields.style.display = "none";
+      jobseekerFields.style.display = "none";
     }
   });
 </script>
 <script>
-  new Autocomplete('#autocomplete',{
-  search : input => {
-      console.log(input)
-      const url = `/get_city/?search=${input}`
-      return new Promise(resolve => {
-          fetch(url)
-          .then(response=>response.json())
-          .then(data =>{
-              console.log(data.payload)
-              resolve(data.payload)
-          })
-      })
-  },
-  
-  renderResult : (result, props)=>{
-      console.log(props)
-      let group=''
-      if(result % 3 == 0){
-          group=`<li class="group">Group</li>`
+  new Autocomplete("#autocomplete", {
+    search: (input) => {
+      console.log(input);
+      const url = `/get_city/?search=${input}`;
+      return new Promise((resolve) => {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.payload);
+            resolve(data.payload);
+          });
+      });
+    },
+
+    renderResult: (result, props) => {
+      console.log(props);
+      let group = "";
+      if (result % 3 == 0) {
+        group = `<li class="group">Group</li>`;
       }
-      const listItem = document.createElement('li');
+      const listItem = document.createElement("li");
       listItem.innerHTML = `
           ${group}
           <div class="wiki-title">
               ${result.state} / ${result.city}
           </div>
       `;
-      listItem.addEventListener('click', () => {
-          const input = document.querySelector('#autocomplete input');
-          input.value = result.city;
-          const hidden_input=document.querySelector('#autocomplete #city_id')
-          hidden_input.value = result.id
-          closeAutocomplete(); // Закрыть список автодополнения
+      listItem.addEventListener("click", () => {
+        const input = document.querySelector("#autocomplete input");
+        input.value = result.city;
+        const hidden_input = document.querySelector("#autocomplete #city_id");
+        hidden_input.value = result.id;
+        closeAutocomplete();
       });
-      listItem.addEventListener('mouseenter', () => {
-          listItem.classList.add('highlight');
+      listItem.addEventListener("mouseenter", () => {
+        listItem.classList.add("highlight");
       });
-      listItem.addEventListener('mouseleave', () => {
-          listItem.classList.remove('highlight');
+      listItem.addEventListener("mouseleave", () => {
+        listItem.classList.remove("highlight");
       });
-      
-      return listItem;
-  }
-});
 
-function closeAutocomplete() {
-  const list = document.querySelector('#autocomplete').querySelector('ul');
-  list.classList.remove('autocomplete-result-list'); // Скрыть список автодополнения
-}
+      return listItem;
+    },
+  });
+
+  function closeAutocomplete() {
+    const list = document.querySelector("#autocomplete").querySelector("ul");
+    list.classList.remove("autocomplete-result-list");
+  }
 </script>
 {% endblock %}

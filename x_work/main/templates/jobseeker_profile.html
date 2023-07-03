@@ -1,106 +1,91 @@
-{%include 'base.html'%}
-{%load static%}
+{%include 'base.html'%} {%load static%}
 <link
-href="{%static 'css/styles_main.css'%}"
-type="text/css"
-rel="stylesheet"
+  href="{%static 'css/styles_main.css'%}"
+  type="text/css"
+  rel="stylesheet"
 />
-{%block content%}
-<div class="d-flex" style="position: relative;" id="jobseeker-profile">
-<div id="main-user-info">
+{%block title%}
+<title>{{jobseeker.first_name}} {{jobseeker.last_name}}</title>
+{%endblock%} {%block content%}
+<div class="d-flex" style="position: relative" id="jobseeker-profile">
+  <div id="main-user-info">
     <div id="profile-photo">
-        <img style="height: 220px; width: 220px;"
-    src="{{jobseeker.profile_photo.url}}" alt="">
+      <img
+        style="height: 220px; width: 220px"
+        src="{{jobseeker.profile_photo.url}}"
+        alt=""
+      />
     </div>
     <div id="jobseeker-buttons">
-        <a href="/chat/user/{{jobseeker.user.id}}" id="to-profile-button">
-            to profile
-        </a>
-        <a href="/chat/user/{{jobseeker.user.id}}">
-            message
-        </a>
+      <a href="/chat/user/{{jobseeker.user.id}}" id="to-profile-button">
+        to profile
+      </a>
+      <a href="/chat/user/{{jobseeker.user.id}}"> message </a>
     </div>
-    <div style="position: absolute;" id="profile-info">
-        <ul>
-            <li class="d-flex">
-                <h2 style="padding-right: 20px; font-size: 50px;">{{jobseeker.first_name}}</h2> 
-                
-                <h2 style="padding-right: 20px; font-size: 50px;">{{jobseeker.last_name}}</h2> 
+    <div style="position: absolute" id="profile-info">
+      <ul>
+        <li class="d-flex">
+          <h2 style="padding-right: 20px; font-size: 50px">
+            {{jobseeker.first_name}}
+          </h2>
 
-            </li>
-            <hr>
-            <li class="d-flex" style="padding-top: 20px;">
-                <h3 style="padding-right: 15px;">{{jobseeker_age}}</h3>
-                <h3>years</h3>
-            </li>
-            <hr>
-            <li class="d-flex" style="padding-top: 20px;">
-                <h3 style="padding-right: 15px;">Email</h3>
-                <h3 >{{jobseeker.user.email}}</h3>
-
-
-            </li>
-            <hr>
-            <li class="d-flex" style="padding-top: 20px;">
-                <h3 style="padding-right: 15px;">City</h3>
-                <h3>{{jobseeker.city.state_name}}</h3>
-                <h3>/</h3>
-                <h3>{{jobseeker.city.city}}</h3>
-
-
-            </li>
-
-
-        </ul>
-        
-    
+          <h2 style="padding-right: 20px; font-size: 50px">
+            {{jobseeker.last_name}}
+          </h2>
+        </li>
+        <hr />
+        <li class="d-flex" style="padding-top: 20px">
+          <h3 style="padding-right: 15px">{{jobseeker_age}}</h3>
+          <h3>years</h3>
+        </li>
+        <hr />
+        <li class="d-flex" style="padding-top: 20px">
+          <h3 style="padding-right: 15px">Email</h3>
+          <h3>{{jobseeker.user.email}}</h3>
+        </li>
+        <hr />
+        <li class="d-flex" style="padding-top: 20px">
+          <h3 style="padding-right: 15px">City</h3>
+          <h3>{{jobseeker.city.state_name}}</h3>
+          <h3>/</h3>
+          <h3>{{jobseeker.city.city}}</h3>
+        </li>
+      </ul>
     </div>
+  </div>
+  <div id="cv-list">
+    <h1>Resumes</h1>
+    {% for cv in cv_list %}
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{cv.occupation}}</h4>
+        <p class="card-text">{{cv.bio}}</p>
+        <p>desired salary: {{cv.salary}}$</p>
+        <a href="/CV/show/{{cv.id}}" class="card-link btn-primary">Go to CV</a>
+      </div>
     </div>
-    <div id="cv-list">
-        <h1>Resumes</h1>
-        {% for cv in cv_list %}
-        <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">{{cv.occupation}}</h4>
-              <p class="card-text">{{cv.bio}}</p>
-              <p>desired salary: {{cv.salary}}$</p>
-              <a href="/CV/show/{{cv.id}}" class="card-link btn-primary">Go to CV</a>
-            </div>
-          </div>
-        {%endfor%}
-    </div>
-            
-            
-    
+    {%endfor%}
+  </div>
 </div>
 {%endblock%}
 <script>
-    var element = document.getElementById('main-user-info');
- //    var companyName = document.getElementById('company-name');
-    
-    function setScrollTrigger(element, distance) {
-        // Get the element's offset from the top of the window.
-   var offset = element.getBoundingClientRect().top;
-   
-   // Set a scroll listener for the window.
-   window.addEventListener('scroll', function() {
-     // Check if the scroll position is greater than the distance.
-     if (window.scrollY > offset) {
-     
-       element.style.position = 'fixed';
-       element.style.top = 0;
-     //   companyName.style.position = 'fixed';
-     //   companyName.style.left = 0;
-     //   companyName.style.top = 0;
-     } else {
-         console.log(window.scrollY)
- 
-       element.style.position = 'relative';
-     //   element.style.top = '';
-       element.style.top = 0 + 'px';
-     }
-   });
- }
- 
-   setScrollTrigger(element, 0);
- </script>
+  var element = document.getElementById("main-user-info");
+
+  function setScrollTrigger(element, distance) {
+    var offset = element.getBoundingClientRect().top;
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > offset) {
+        element.style.position = "fixed";
+        element.style.top = 0;
+      } else {
+        console.log(window.scrollY);
+
+        element.style.position = "relative";
+        element.style.top = 0 + "px";
+      }
+    });
+  }
+
+  setScrollTrigger(element, 0);
+</script>

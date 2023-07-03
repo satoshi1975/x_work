@@ -1,14 +1,9 @@
-/* body {
-  height: 2000px;
-  background-color: #eee;
-} */
-
 .autocomplete {
   position: relative;
+  width: 100%;
   display: inline-block;
 }
 .autocomplete input {
-  /* width: 300px; */
   width: 100%;
   padding: 5px;
 }
@@ -43,18 +38,6 @@
   background-color: currentcolor;
   opacity: 0.25;
 }
-/* 
-#div-open-user-chat{
-  position:absolute;
-  padding-top: 30px;
-  right: 20px;
-  height: 50px;
-  width: 50px;
-  display: flex;
-  flex-wrap:wrap;
-  align-content: center;
-  justify-content: center;
-} */
 
 #open-user-chat {
   position: absolute;
@@ -110,22 +93,11 @@
   border-width: 3px;
   border-color: black;
   border-radius: 29px;
-  /* background: linear-gradient(
-    0deg,
-    rgba(149, 254, 224, 1) 0%,
-    rgba(123, 255, 204, 1) 15%,
-    rgba(99, 255, 186, 1) 33%,
-    rgba(74, 255, 167, 1) 52%,
-    rgba(53, 255, 151, 1) 67%,
-    rgba(30, 255, 133, 1) 83%,
-    rgba(6, 255, 114, 1) 100%
-  ); */
 }
 
 #employer-card #profile-photo {
   position: absolute;
   top: 8.8%;
-  /* margin-left: 8.8%; */
   height: 160px;
   width: 240px;
   border-style: double;
@@ -166,8 +138,6 @@
     rgba(30, 255, 133, 1) 83%,
     rgba(6, 255, 114, 1) 100%
   );
-
-  /* transition: background-color 0.3s ease */
 }
 #chat-user-link {
   border-bottom-right-radius: 30px;
@@ -240,7 +210,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* top: 3px; */
   text-decoration: none;
   background-color: #06ff6a;
 }
@@ -267,7 +236,6 @@
   position: absolute;
   display: flex;
   color: black;
-  /* background-color: black; */
   background: linear-gradient(
     0deg,
     rgba(149, 254, 224, 1) 0%,
@@ -338,6 +306,11 @@
   border-width: 2px;
 }
 
+#reply-counter{
+  position: absolute;
+  right: 117px;
+}
+
 #cv-filters {
   position: absolute;
   left: 25px;
@@ -360,7 +333,20 @@
   align-content: center;
   align-items: center;
 }
+#reset-filters-button a{
+  color: black;
+  text-decoration: none;
+  font-family: 'Red hat';
+  font-size: x-large;
 
+}
+#reset-filters-button{
+  width: 100%;
+    border-style: solid;
+    padding-left: 40%;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
 #search-area {
   position: relative;
   width: 77%;
@@ -447,68 +433,6 @@
   border-radius: 5px;
 }
 
-/* #create-vacancy-button a{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-} */
-/* pagination */
-/* .pagination {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
-.pagination span {
-  font-size: xx-large;
-}
-.pagination a {
-  color: black;
-}
-.pagination #previous {
-  color: black;
-  width: 80px;
-  height: 60px;
-  background: linear-gradient(
-    163deg,
-    rgba(149, 254, 224, 1) 0%,
-    rgba(123, 255, 204, 1) 15%,
-    rgba(99, 255, 186, 1) 33%,
-    rgba(74, 255, 167, 1) 52%,
-    rgba(53, 255, 151, 1) 67%,
-    rgba(30, 255, 133, 1) 83%,
-    rgba(6, 255, 114, 1) 100%
-  );
-  margin-right: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  border-radius: 30px;
-}
-.pagination #next {
-  
-  width: 80px;
-  height: 60px;
-  background: linear-gradient(
-    163deg,
-    rgba(149, 254, 224, 1) 0%,
-    rgba(123, 255, 204, 1) 15%,
-    rgba(99, 255, 186, 1) 33%,
-    rgba(74, 255, 167, 1) 52%,
-    rgba(53, 255, 151, 1) 67%,
-    rgba(30, 255, 133, 1) 83%,
-    rgba(6, 255, 114, 1) 100%
-  );
-  margin-left: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  border-radius: 30px;
-} */
 #list-of-pages {
   display: flex;
   flex-wrap: wrap;
@@ -535,4 +459,27 @@
   margin-left: 20px;
   border-radius: 20px;
   align-content: center;
+}
+
+#feedback{
+  width: 243px;
+    position: absolute;
+    top: 500px;
+    left: 40px;
+}
+#list-of-feedback a{
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
 }
