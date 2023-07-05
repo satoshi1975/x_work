@@ -7,7 +7,7 @@ from uuid import uuid4
 
 class Employer(models.Model):
     '''model for the type of user - employer'''
-    def image_upload_to(instance, filename):
+    def image_upload_to(self, instance, filename):
         '''create profile photo path'''
         ext = filename.split('.')[-1]
         filename = f'{uuid4()}.{ext}'

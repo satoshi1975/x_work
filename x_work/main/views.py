@@ -85,7 +85,6 @@ def get_occupation(request):
     payload=[]
     if search:
         objs=Occupation.objects.filter(Q(occupation__startswith = search) | Q(occupation__contains = search))[:3]
-        
         for obj in objs:
             payload.append({
                 'id' : obj.id,
@@ -113,4 +112,3 @@ def show_articles_list(request,article_id):
         return render(request, 'articles.html',context={'articles_list':articles_list})
     else:
         return render(request, 'articles.html',context={'articles_list':articles_list,'article_id':article_id})
-

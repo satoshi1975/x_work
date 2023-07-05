@@ -1,6 +1,6 @@
-from django.db import models
 from uuid import uuid4
-from main.models import User,Cities,Occupation
+from django.db import models
+from main.models import User,Cities
 from employers.models import Employer
 from django.contrib.postgres.fields import DateTimeRangeField
 
@@ -9,8 +9,8 @@ from django.contrib.postgres.fields import DateTimeRangeField
 
 class JobSeeker(models.Model):
     '''applicant model'''
-    def image_upload_to(instance, filename):
-    # Generating a unique file name
+    def image_upload_to(self, instance, filename):
+        '''create profile photo path'''
         ext = filename.split('.')[-1]
         filename = f'{uuid4()}.{ext}'
         return f'job_seekers_photos/{filename}'

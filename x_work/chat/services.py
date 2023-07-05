@@ -1,9 +1,9 @@
+'''chat management services'''
+from uuid import uuid4
 from main.models import User
 from employers.models import Employer
 from job_seekers.models import JobSeeker
 from chat.models import ChatRoom, BlockList
-from django.db.models import Q
-from uuid import uuid4
 
 class ChatManager:
     '''a class for chat management'''
@@ -13,8 +13,8 @@ class ChatManager:
         if ChatRoom.objects.filter(jobseeker=jobseeker,employer=employer).exists():
             return ChatRoom.objects.get(jobseeker=jobseeker,employer=employer).chat_id
         else:
-            chat_id=ChatRoom.objects.create(employer=employer,jobseeker=jobseeker,chat_id=uuid4().int).chat_id
-        
+            chat_id=ChatRoom.objects.create(employer=employer,jobseeker=jobseeker,
+                                            chat_id=uuid4().int).chat_id
         return chat_id
 
     @staticmethod
@@ -43,7 +43,7 @@ class ChatManager:
     def get_sender_context(user_id):
         '''get senders data'''
         return User.objects.get(id=user_id)
-    
+
     @staticmethod
     def get_chat_list(user_id):
         '''get list of chats'''
@@ -52,7 +52,7 @@ class ChatManager:
             return ChatRoom.objects.filter(employer=Employer.objects.get(user=user))
         else:
             return ChatRoom.objects.filter(jobseeker=JobSeeker.objects.get(user=user))
-    
+
     @staticmethod
     def get_sender_name(sender):
         '''get name of sender'''
@@ -62,7 +62,7 @@ class ChatManager:
         else:
             sender_name = Employer.objects.get(user_id=sender).company_name
         return sender_name
-    
+
     @staticmethod
     def block_user(request, user_id):
         '''add user to block list'''
@@ -76,7 +76,7 @@ class ChatManager:
         else:
             block_list = BlockList.objects.create(user=user)
             block_list.blocked_user.set([blocked_user])
-    
+
     @staticmethod
     def unblock_user(request, user_id):
         '''delete user from block list'''

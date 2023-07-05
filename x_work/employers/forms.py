@@ -1,5 +1,6 @@
+'''employer forms'''
 from django import forms
-from employers.models import Employer, Vacancy
+from employers.models import Vacancy
 
 class VacancyForm(forms.ModelForm):
     '''form for create or edit vacancy data'''
@@ -9,6 +10,7 @@ class VacancyForm(forms.ModelForm):
 
 
 class VacancySearchForm(forms.Form):
+    '''form for vacancy searching'''
     occupation = forms.CharField(label='Occupation', required=False)
     city = forms.CharField(label='City', required=False)
     schedule = forms.ChoiceField(label='Schedule', choices=Vacancy.SCHEDULE, required=False)
