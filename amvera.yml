@@ -8,4 +8,4 @@ build:
 run:
   command: python x_work/manage.py runserver
   persistenceMount: /data
-  containerPort: 8000
+  containerPort: 80
