@@ -98,19 +98,31 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        "ENGINE": "django.db.backends.postgresql",
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'x_work',
-        'USER': 'x_work_admin',
+        'USER': 'root',
         'PASSWORD': 'barselona1933',
         'HOST': 'localhost',
-        'PORT': '5432',
-        "TEST": {
-            "NAME": "mytestdatabase",
-        },
-        
+        'PORT': '3306',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         "ENGINE": "django.db.backends.postgresql",
+#         'NAME': 'x_work',
+#         'USER': 'x_work_admin',
+#         'PASSWORD': 'barselona1933',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#         "TEST": {
+#             "NAME": "mytestdatabase",
+#         },
+        
+#     }
+# }
 
 
 

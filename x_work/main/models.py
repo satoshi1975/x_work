@@ -3,7 +3,7 @@ from django.db import models
 
 class User(AbstractUser):
     '''Main user model'''
-    username=models.CharField(unique=False)
+    username=models.CharField(unique=False, max_length=100)
     email = models.EmailField(unique=True)
     user_type=models.CharField(max_length=20)
     
@@ -13,8 +13,8 @@ class User(AbstractUser):
 class Cities(models.Model):
     '''City model'''
     id=models.BigAutoField(primary_key=True,default=None)
-    city = models.CharField(blank=True, null=True)
-    state_name = models.CharField(blank=True, null=True)
+    city = models.CharField(blank=True, null=True, max_length=100)
+    state_name = models.CharField(blank=True, null=True, max_length=100)
 
     class Meta:
         db_table = 'cities'
