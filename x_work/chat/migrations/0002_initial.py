@@ -9,14 +9,14 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('chat', '0002_initial'),
-        ('job_seekers', '0001_initial'),
+        ('chat', '0001_initial'),
+        ('employers', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='chatroom',
-            name='jobseeker',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='chatrooms_user2', to='job_seekers.jobseeker'),
+            name='employer',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='chatrooms_user1', to='employers.employer'),
         ),
     ]

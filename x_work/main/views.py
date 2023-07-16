@@ -33,6 +33,8 @@ def profile(request):
 def register(request):
     '''display the registration page and accept data for registration'''
     if request.method == 'POST':
+        print('POST')
+        print(request.POST)
         if UserService().register_user(request, request.POST): #accept data and create a user 
             return render(request, 'main_page.html')
         else:
@@ -67,7 +69,8 @@ def get_city(request):
     payload=[]
     if search:
         objs=Cities.objects.filter(city__startswith = search)[:3]
-        
+        print('OBJ')
+        print(Cities.objects.all()[:3])
         for obj in objs:
             payload.append({
                 'city' : obj.city,

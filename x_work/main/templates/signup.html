@@ -1,6 +1,14 @@
-{% include 'base.html' %} {%block title%}
+{% include 'base.html' %} 
+{%load static%}
+{%block title%}
 <title>create account</title>
-{%endblock%} {% block content %}
+{%endblock%} 
+<link
+href="{%static 'css/styles_main.css'%}"
+type="text/css"
+rel="stylesheet"
+/>
+{% block content %}
 
 <section class="vh-100" style="background-color: #eee">
   <div class="container h-100">
@@ -27,16 +35,15 @@
                       <option value="jobseeker">Job Seeker</option>
                     </select>
                   </div>
+                  <!-- <input type="hidden" name="user_type" value="company" id="user_type"> -->
                   <div
                     class="form-group"
                     id="company-fields"
-                    style="display: none"
+                    
                   >
                     <label for="company-name">Company Name:</label>
                     <input type="text" id="company-name" name="company_name" />
-                    {% comment %}
-                    <input type="hidden" name="user_type" value="company" /> {%
-                    endcomment %}
+                    <!-- <input type="hidden" name="user_type" value="company" />  -->
                   </div>
 
                   <div
@@ -44,9 +51,7 @@
                     id="jobseeker-fields"
                     style="display: none"
                   >
-                    {% comment %}
-                    <input type="hidden" name="user_type" value="jobseeker" />
-                    {% endcomment %}
+                    <!--<input type="hidden" name="user_type" value="jobseeker" />-->
                     <label for="first_name">First name</label>
                     <input type="text" id="first_name" name="first_name" />
                     <label for="last_name">Last name</label>
@@ -70,7 +75,7 @@
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg">
+                    <button id="register-button" type="submit" class="btn btn-primary btn-lg">
                       Register
                     </button>
                   </div>
@@ -96,18 +101,22 @@
   const userTypeSelect = document.getElementById("user_type");
   const companyFields = document.getElementById("company-fields");
   const jobseekerFields = document.getElementById("jobseeker-fields");
+  // const user_type = document.getElementById('user_type');
 
   userTypeSelect.addEventListener("change", function () {
     if (userTypeSelect.value === "company") {
+      // user_type.value = 'jobseeker'
       companyFields.style.display = "block";
       jobseekerFields.style.display = "none";
     } else if (userTypeSelect.value === "jobseeker") {
+      // user_type.value = 'company'
       companyFields.style.display = "none";
       jobseekerFields.style.display = "block";
-    } else {
-      companyFields.style.display = "none";
-      jobseekerFields.style.display = "none";
     }
+    // else {
+    //   companyFields.style.display = "none";
+    //   jobseekerFields.style.display = "none";
+    // }
   });
 </script>
 <script>
@@ -126,7 +135,7 @@
     },
 
     renderResult: (result, props) => {
-      console.log(props);
+      console.log(result);
       let group = "";
       if (result % 3 == 0) {
         group = `<li class="group">Group</li>`;

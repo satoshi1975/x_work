@@ -651,3 +651,16 @@
 }
 
 /*  */
+#register-button{
+  background: linear-gradient(
+    163deg,
+    rgba(149, 254, 224, 1) 0%,
+    rgba(123, 255, 204, 1) 15%,
+    rgba(99, 255, 186, 1) 33%,
+    rgba(74, 255, 167, 1) 52%,
+    rgba(53, 255, 151, 1) 67%,
+    rgba(30, 255, 133, 1) 83%,
+    rgba(6, 255, 114, 1) 100%
+  );
+  color: black;
+}

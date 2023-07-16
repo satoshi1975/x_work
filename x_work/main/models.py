@@ -21,10 +21,13 @@ class Cities(models.Model):
 
 class Occupation(models.Model):
     '''Occupation model'''
+    id=models.BigAutoField(primary_key=True,default=None)
     occupation=models.CharField(max_length=100)
     
-    def __str__(self):
-        return self.occupation
+    class Meta:
+        db_table = 'occupations'
+    # def __str__(self):
+    #     return self.occupation
         
 
 class Articles(models.Model):
